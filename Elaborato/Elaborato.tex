@@ -1,0 +1,73 @@
+\documentclass[12pt, twoside, letterpaper]{article}
+\usepackage[top=2cm,bottom=4cm,left=3cm,right=3cm,asymmetric]{geometry}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\usepackage[utf8x]{inputenc}
+%\usepackage[table]{xcolor}
+\usepackage[english]{babel}
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage[breakable]{tcolorbox}
+\usepackage{floatrow}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+\usepackage{titling}
+\usepackage{caption}
+\usepackage[nouppercase]{frontespizio}
+\newtcolorbox{dati}[1][]{colback=green!30!white, bottomtitle=1.5mm,breakable,#1}
+\newtcolorbox{variabili}[1][]{colback=red!30!white, bottomtitle=1.5mm,breakable,#1}
+\newtcolorbox{vincoli}[1][]{colback=orange!30!white, bottomtitle=1.5mm,breakable,#1}
+\newtcolorbox{obiettivo}[1][]{colback=yellow!30!white, bottomtitle=1.5mm,breakable,#1}
+\newenvironment{rcases}
+  {\left.\begin{aligned}}
+  {\end{aligned}\right\rbrace}
+
+\pretitle{
+	\begin{center}
+	\LARGE
+	\includegraphics{tesiSCIENZE_TECNOLOGIE.jpg}\\
+	Corso di laurea in informatica\\
+	
+}
+\posttitle{\end{center}}
+\title{Uso di reti neurali per la classificazione di dati in problemi di medicina legale}
+\author{Mario Petruccelli \cr Università degli studi di Milano}
+\date{A.A. 2019/2020}
+
+\addto\captionsenglish{% Replace "english" with the language you use
+  \renewcommand{\contentsname}%
+    {Sommario}%
+}
+
+\begin{document}
+
+	\begin{titlepage}
+		\maketitle
+		\newpage
+		\tableofcontents
+	\end{titlepage}
+
+
+	\section{Reti neurali}
+		\subsection{Che cos'è una rete neurale?}
+		\subsection{Apprendimento supervisionato}
+		\subsection{Componenti principali di una rete neurale}
+		\subsection{Rete neurale feedforward.}
+		\subsection{Discesa del gradiente e back propagation.}
+	\section{Tecniche utilizzate}
+		\subsection{Cross validation}
+		\subsection{Grid search CV}
+		\subsection{Standard Scaler}
+		\subsection{PCA}
+		\subsection{TSNE}
+		\subsection{SMOTE}
+	\section{Esperimenti fatti}
+		\subsection{Iris dataset}
+		\subsection{Dataset incidenti}
+		\subsection{Vari esperimenti fatti sul dataset degli incidenti}
+		\subsection{Tecniche usate per aumentare i dati}
+
+				
+\end{document}
+
+
+
