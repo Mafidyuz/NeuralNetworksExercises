@@ -1,18 +1,451 @@
-08/07/2020 12:56:02: PM - INFO: 	File di logging inizializzato.
-08/07/2020 12:56:02: PM - DEBUG: 	Loaded backend module://ipykernel.pylab.backend_inline version unknown.
-08/07/2020 12:56:50: PM - INFO: 	Started augmentation excluding: None, n_elements: 140
-08/07/2020 12:56:51: PM - INFO: 	Finished augmentation excluding: None, n_elements: 140
-08/07/2020 12:57:34: PM - INFO: 	Started augmentation excluding: None, n_elements: 150
-08/07/2020 12:57:34: PM - INFO: 	Finished augmentation excluding: None, n_elements: 150
-08/07/2020 12:58:25: PM - INFO: 	Started augmentation excluding: None, n_elements: 160
-08/07/2020 12:58:25: PM - INFO: 	Finished augmentation excluding: None, n_elements: 160
-08/07/2020 12:59:13: PM - INFO: 	Started augmentation excluding: None, n_elements: 170
-08/07/2020 12:59:14: PM - INFO: 	Finished augmentation excluding: None, n_elements: 170
-08/07/2020 01:00:00: PM - INFO: 	Started augmentation excluding: None, n_elements: 180
-08/07/2020 01:00:00: PM - INFO: 	Finished augmentation excluding: None, n_elements: 180
-08/07/2020 01:00:48: PM - INFO: 	Started augmentation excluding: None, n_elements: 190
-08/07/2020 01:00:48: PM - INFO: 	Finished augmentation excluding: None, n_elements: 190
-08/07/2020 01:03:28: PM - ERROR: 	Invalid alias: The name clear can't be aliased because it is another magic command.
-08/07/2020 01:03:28: PM - ERROR: 	Invalid alias: The name more can't be aliased because it is another magic command.
-08/07/2020 01:03:28: PM - ERROR: 	Invalid alias: The name less can't be aliased because it is another magic command.
-08/07/2020 01:03:28: PM - ERROR: 	Invalid alias: The name man can't be aliased because it is another magic command.
+08/07/2020 02:48:53: PM - INFO: 	File di logging inizializzato.
+08/07/2020 02:48:53: PM - INFO: 	Started augmenting data excluding NONE
+08/07/2020 02:52:49: PM - INFO: 	Started augmentation excluding: None, n_elements: 140
+08/07/2020 02:52:49: PM - INFO: 	Finished augmentation excluding: None, n_elements: 140
+08/07/2020 02:56:49: PM - INFO: 	Started augmentation excluding: None, n_elements: 160
+08/07/2020 02:56:50: PM - INFO: 	Finished augmentation excluding: None, n_elements: 160
+08/07/2020 03:01:04: PM - INFO: 	Started augmentation excluding: None, n_elements: 180
+08/07/2020 03:01:05: PM - INFO: 	Finished augmentation excluding: None, n_elements: 180
+08/07/2020 03:05:14: PM - INFO: 	Started augmentation excluding: None, n_elements: 200
+08/07/2020 03:05:15: PM - INFO: 	Finished augmentation excluding: None, n_elements: 200
+08/07/2020 03:09:35: PM - INFO: 	Started augmentation excluding: None, n_elements: 400
+08/07/2020 03:09:39: PM - INFO: 	Finished augmentation excluding: None, n_elements: 400
+08/07/2020 03:17:17: PM - INFO: 	Started augmentation excluding: None, n_elements: 600
+08/07/2020 03:17:24: PM - INFO: 	Finished augmentation excluding: None, n_elements: 600
+08/07/2020 03:27:58: PM - INFO: 	Started augmentation excluding: None, n_elements: 800
+08/07/2020 03:28:08: PM - INFO: 	Finished augmentation excluding: None, n_elements: 800
+08/07/2020 03:41:49: PM - INFO: 	Started augmentation excluding: None, n_elements: 1000
+08/07/2020 03:42:03: PM - INFO: 	Finished augmentation excluding: None, n_elements: 1000
+08/07/2020 03:55:36: PM - INFO: 	Started augmentation excluding: None, n_elements: 1200
+08/07/2020 03:55:52: PM - INFO: 	Finished augmentation excluding: None, n_elements: 1200
+08/07/2020 04:13:13: PM - INFO: 	Started augmentation excluding: None, n_elements: 1400
+08/07/2020 04:13:33: PM - INFO: 	Finished augmentation excluding: None, n_elements: 1400
+08/07/2020 04:33:05: PM - INFO: 	Started augmentation excluding: None, n_elements: 1600
+08/07/2020 04:33:28: PM - INFO: 	Finished augmentation excluding: None, n_elements: 1600
+08/07/2020 04:56:40: PM - INFO: 	Started augmentation excluding: None, n_elements: 1800
+08/07/2020 04:57:06: PM - INFO: 	Finished augmentation excluding: None, n_elements: 1800
+08/07/2020 05:26:49: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 140
+08/07/2020 05:26:49: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 140
+08/07/2020 05:30:33: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 160
+08/07/2020 05:30:34: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 160
+08/07/2020 05:34:16: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 180
+08/07/2020 05:34:17: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 180
+08/07/2020 05:37:56: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 200
+08/07/2020 05:37:57: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 200
+08/07/2020 05:41:36: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 400
+08/07/2020 05:41:40: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 400
+08/07/2020 05:48:26: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 600
+08/07/2020 05:48:32: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 600
+08/07/2020 05:57:48: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 800
+08/07/2020 05:57:57: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 800
+08/07/2020 06:10:42: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1000
+08/07/2020 06:10:55: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1000
+08/07/2020 06:23:45: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1200
+08/07/2020 06:24:01: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1200
+08/07/2020 06:41:13: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1400
+08/07/2020 06:41:32: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1400
+08/07/2020 06:59:32: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1600
+08/07/2020 06:59:54: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1600
+08/07/2020 07:21:28: PM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1800
+08/07/2020 07:21:53: PM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1800
+08/07/2020 07:49:59: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 140
+08/07/2020 07:49:59: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 140
+08/07/2020 07:53:45: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 160
+08/07/2020 07:53:45: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 160
+08/07/2020 07:57:27: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 180
+08/07/2020 07:57:27: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 180
+08/07/2020 08:01:20: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 200
+08/07/2020 08:01:21: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 200
+08/07/2020 08:05:04: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 400
+08/07/2020 08:05:08: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 400
+08/07/2020 08:11:49: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 600
+08/07/2020 08:11:56: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 600
+08/07/2020 08:21:21: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 800
+08/07/2020 08:21:30: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 800
+08/07/2020 08:33:08: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1000
+08/07/2020 08:33:21: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1000
+08/07/2020 08:45:03: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1200
+08/07/2020 08:45:19: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1200
+08/07/2020 09:01:37: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1400
+08/07/2020 09:01:56: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1400
+08/07/2020 09:20:26: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1600
+08/07/2020 09:20:48: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1600
+08/07/2020 09:41:16: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1800
+08/07/2020 09:41:42: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1800
+08/07/2020 10:10:06: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 140
+08/07/2020 10:10:06: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 140
+08/07/2020 10:14:04: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 160
+08/07/2020 10:14:05: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 160
+08/07/2020 10:18:04: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 180
+08/07/2020 10:18:04: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 180
+08/07/2020 10:22:13: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 200
+08/07/2020 10:22:14: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 200
+08/07/2020 10:26:16: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 400
+08/07/2020 10:26:21: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 400
+08/07/2020 10:33:31: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 600
+08/07/2020 10:33:41: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 600
+08/07/2020 10:43:52: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 800
+08/07/2020 10:44:07: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 800
+08/07/2020 10:57:17: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1000
+08/07/2020 10:57:40: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1000
+08/07/2020 11:11:30: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1200
+08/07/2020 11:12:02: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1200
+08/07/2020 11:28:05: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1400
+08/07/2020 11:28:50: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1400
+08/07/2020 11:47:46: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1600
+08/07/2020 11:48:50: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1600
+09/07/2020 12:11:42: AM - INFO: 	Started augmentation excluding: PESO, n_elements: 1800
+09/07/2020 12:13:06: AM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1800
+09/07/2020 12:42:04: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 140
+09/07/2020 12:42:04: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 140
+09/07/2020 12:46:12: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 160
+09/07/2020 12:46:13: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 160
+09/07/2020 12:50:22: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 180
+09/07/2020 12:50:22: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 180
+09/07/2020 12:54:25: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 200
+09/07/2020 12:54:26: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 200
+09/07/2020 12:58:51: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 400
+09/07/2020 12:58:54: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 400
+09/07/2020 01:07:16: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 600
+09/07/2020 01:07:23: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 600
+09/07/2020 01:18:39: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 800
+09/07/2020 01:18:49: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 800
+09/07/2020 01:32:47: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1000
+09/07/2020 01:33:00: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1000
+09/07/2020 01:48:52: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1200
+09/07/2020 01:49:08: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1200
+09/07/2020 02:07:10: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1400
+09/07/2020 02:07:29: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1400
+09/07/2020 02:28:23: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1600
+09/07/2020 02:28:45: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1600
+09/07/2020 02:53:27: AM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1800
+09/07/2020 02:53:53: AM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1800
+09/07/2020 03:26:01: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 140
+09/07/2020 03:26:01: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 140
+09/07/2020 03:30:06: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 160
+09/07/2020 03:30:06: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 160
+09/07/2020 03:34:22: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 180
+09/07/2020 03:34:23: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 180
+09/07/2020 03:38:29: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 200
+09/07/2020 03:38:30: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 200
+09/07/2020 03:42:37: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 400
+09/07/2020 03:42:41: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 400
+09/07/2020 03:50:05: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 600
+09/07/2020 03:50:12: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 600
+09/07/2020 03:59:44: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 800
+09/07/2020 03:59:54: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 800
+09/07/2020 04:13:19: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 1000
+09/07/2020 04:13:32: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1000
+09/07/2020 04:27:11: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 1200
+09/07/2020 04:27:27: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1200
+09/07/2020 04:44:35: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 1400
+09/07/2020 04:44:54: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1400
+09/07/2020 05:02:59: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 1600
+09/07/2020 05:03:21: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1600
+09/07/2020 05:25:29: AM - INFO: 	Started augmentation excluding: BMI, n_elements: 1800
+09/07/2020 05:25:54: AM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1800
+09/07/2020 05:55:36: AM - INFO: 	Started augmentation excluding: None, n_elements: 140
+09/07/2020 05:55:37: AM - INFO: 	Finished augmentation excluding: None, n_elements: 140
+09/07/2020 05:59:35: AM - INFO: 	Started augmentation excluding: None, n_elements: 160
+09/07/2020 05:59:35: AM - INFO: 	Finished augmentation excluding: None, n_elements: 160
+09/07/2020 06:03:48: AM - INFO: 	Started augmentation excluding: None, n_elements: 180
+09/07/2020 06:03:49: AM - INFO: 	Finished augmentation excluding: None, n_elements: 180
+09/07/2020 06:08:00: AM - INFO: 	Started augmentation excluding: None, n_elements: 200
+09/07/2020 06:08:01: AM - INFO: 	Finished augmentation excluding: None, n_elements: 200
+09/07/2020 06:12:09: AM - INFO: 	Started augmentation excluding: None, n_elements: 400
+09/07/2020 06:12:14: AM - INFO: 	Finished augmentation excluding: None, n_elements: 400
+09/07/2020 06:18:49: AM - INFO: 	Started augmentation excluding: None, n_elements: 600
+09/07/2020 06:18:56: AM - INFO: 	Finished augmentation excluding: None, n_elements: 600
+09/07/2020 06:29:16: AM - INFO: 	Started augmentation excluding: None, n_elements: 800
+09/07/2020 06:29:27: AM - INFO: 	Finished augmentation excluding: None, n_elements: 800
+09/07/2020 06:41:46: AM - INFO: 	Started augmentation excluding: None, n_elements: 1000
+09/07/2020 06:42:00: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1000
+09/07/2020 06:53:02: AM - INFO: 	Started augmentation excluding: None, n_elements: 1200
+09/07/2020 06:53:19: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1200
+09/07/2020 07:07:42: AM - INFO: 	Started augmentation excluding: None, n_elements: 1400
+09/07/2020 07:08:02: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1400
+09/07/2020 07:25:01: AM - INFO: 	Started augmentation excluding: None, n_elements: 1600
+09/07/2020 07:25:25: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1600
+09/07/2020 07:44:42: AM - INFO: 	Started augmentation excluding: None, n_elements: 1800
+09/07/2020 07:45:10: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1800
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'cmr10' (cmr10.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif Display' (DejaVuSerifDisplay.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymReg.ttf) normal normal regular normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneral.ttf) normal normal regular normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Bold.ttf) normal normal bold normal>) = 10.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'cmex10' (cmex10.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymBol.ttf) normal normal bold normal>) = 10.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'cmss10' (cmss10.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'cmsy10' (cmsy10.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFiveSym' (STIXSizFiveSymReg.ttf) normal normal regular normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymBol.ttf) normal normal bold normal>) = 10.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBol.ttf) normal normal bold normal>) = 10.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Oblique.ttf) oblique normal 400 normal>) = 1.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Bold.ttf) normal normal bold normal>) = 0.33499999999999996
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymReg.ttf) normal normal regular normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymReg.ttf) normal normal regular normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'cmtt10' (cmtt10.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymBol.ttf) normal normal bold normal>) = 10.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymBol.ttf) normal normal bold normal>) = 10.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralBol.ttf) normal normal bold normal>) = 10.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralItalic.ttf) italic normal 400 normal>) = 11.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-BoldOblique.ttf) oblique normal bold normal>) = 11.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-BoldItalic.ttf) italic normal bold normal>) = 11.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'cmmi10' (cmmi10.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'cmb10' (cmb10.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Italic.ttf) italic normal 400 normal>) = 11.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBolIta.ttf) italic normal bold normal>) = 11.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-BoldOblique.ttf) oblique normal bold normal>) = 1.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Bold.ttf) normal normal bold normal>) = 10.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans.ttf) normal normal 400 normal>) = 0.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Oblique.ttf) oblique normal 400 normal>) = 11.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniIta.ttf) italic normal 400 normal>) = 11.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralBolIta.ttf) italic normal bold normal>) = 11.335
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Display' (DejaVuSansDisplay.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'Noto Mono' (NotoMono-Regular.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: score(<Font 'Droid Sans Fallback' (DroidSansFallbackFull.ttf) normal normal 400 normal>) = 10.05
+09/07/2020 07:53:57: AM - DEBUG: 	findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/opt/conda/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=0:stretch=normal:size=12.0.
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmr10' (cmr10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif Display' (DejaVuSerifDisplay.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneral.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Bold.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmex10' (cmex10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmss10' (cmss10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmsy10' (cmsy10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFiveSym' (STIXSizFiveSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Oblique.ttf) oblique normal 400 normal>) = 1.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Bold.ttf) normal normal bold normal>) = 0.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmtt10' (cmtt10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralItalic.ttf) italic normal 400 normal>) = 11.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-BoldOblique.ttf) oblique normal bold normal>) = 11.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-BoldItalic.ttf) italic normal bold normal>) = 11.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmmi10' (cmmi10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmb10' (cmb10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Italic.ttf) italic normal 400 normal>) = 11.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBolIta.ttf) italic normal bold normal>) = 11.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-BoldOblique.ttf) oblique normal bold normal>) = 1.7149999999999999
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Bold.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans.ttf) normal normal 400 normal>) = 0.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Oblique.ttf) oblique normal 400 normal>) = 11.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniIta.ttf) italic normal 400 normal>) = 11.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralBolIta.ttf) italic normal bold normal>) = 11.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Display' (DejaVuSansDisplay.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'Noto Mono' (NotoMono-Regular.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'Droid Sans Fallback' (DroidSansFallbackFull.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=0:stretch=normal:size=12.0 to DejaVu Sans ('/opt/conda/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.430000.
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=0:stretch=normal:size=13.0.
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmr10' (cmr10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif Display' (DejaVuSerifDisplay.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneral.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Bold.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmex10' (cmex10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmss10' (cmss10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmsy10' (cmsy10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFiveSym' (STIXSizFiveSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeTwoSym' (STIXSizTwoSymBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Oblique.ttf) oblique normal 400 normal>) = 1.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-Bold.ttf) normal normal bold normal>) = 0.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeFourSym' (STIXSizFourSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmtt10' (cmtt10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeOneSym' (STIXSizOneSymBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralBol.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXSizeThreeSym' (STIXSizThreeSymReg.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralItalic.ttf) italic normal 400 normal>) = 11.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-BoldOblique.ttf) oblique normal bold normal>) = 11.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUni.ttf) normal normal regular normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-BoldItalic.ttf) italic normal bold normal>) = 11.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmmi10' (cmmi10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'cmb10' (cmb10.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Italic.ttf) italic normal 400 normal>) = 11.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniBolIta.ttf) italic normal bold normal>) = 11.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans-BoldOblique.ttf) oblique normal bold normal>) = 1.7149999999999999
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Serif' (DejaVuSerif-Bold.ttf) normal normal bold normal>) = 10.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans' (DejaVuSans.ttf) normal normal 400 normal>) = 0.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Mono' (DejaVuSansMono-Oblique.ttf) oblique normal 400 normal>) = 11.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXNonUnicode' (STIXNonUniIta.ttf) italic normal 400 normal>) = 11.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'STIXGeneral' (STIXGeneralBolIta.ttf) italic normal bold normal>) = 11.715
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'DejaVu Sans Display' (DejaVuSansDisplay.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'Noto Mono' (NotoMono-Regular.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: score(<Font 'Droid Sans Fallback' (DroidSansFallbackFull.ttf) normal normal 400 normal>) = 10.43
+09/07/2020 07:54:03: AM - DEBUG: 	findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=0:stretch=normal:size=13.0 to DejaVu Sans ('/opt/conda/lib/python3.7/site-packages/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.430000.
+09/07/2020 07:56:08: AM - INFO: 	Started augmenting data excluding NONE (body parts)
+09/07/2020 08:00:05: AM - INFO: 	Started augmentation excluding: None, n_elements: 140
+09/07/2020 08:00:05: AM - INFO: 	Finished augmentation excluding: None, n_elements: 140
+09/07/2020 08:04:12: AM - INFO: 	Started augmentation excluding: None, n_elements: 160
+09/07/2020 08:04:13: AM - INFO: 	Finished augmentation excluding: None, n_elements: 160
+09/07/2020 08:08:21: AM - INFO: 	Started augmentation excluding: None, n_elements: 180
+09/07/2020 08:08:22: AM - INFO: 	Finished augmentation excluding: None, n_elements: 180
+09/07/2020 08:12:13: AM - INFO: 	Started augmentation excluding: None, n_elements: 200
+09/07/2020 08:12:14: AM - INFO: 	Finished augmentation excluding: None, n_elements: 200
+09/07/2020 08:16:11: AM - INFO: 	Started augmentation excluding: None, n_elements: 400
+09/07/2020 08:16:15: AM - INFO: 	Finished augmentation excluding: None, n_elements: 400
+09/07/2020 08:23:10: AM - INFO: 	Started augmentation excluding: None, n_elements: 600
+09/07/2020 08:23:17: AM - INFO: 	Finished augmentation excluding: None, n_elements: 600
+09/07/2020 08:32:03: AM - INFO: 	Started augmentation excluding: None, n_elements: 800
+09/07/2020 08:32:14: AM - INFO: 	Finished augmentation excluding: None, n_elements: 800
+09/07/2020 08:44:08: AM - INFO: 	Started augmentation excluding: None, n_elements: 1000
+09/07/2020 08:44:22: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1000
+09/07/2020 08:55:44: AM - INFO: 	Started augmentation excluding: None, n_elements: 1200
+09/07/2020 08:56:02: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1200
+09/07/2020 09:08:08: AM - INFO: 	Started augmentation excluding: None, n_elements: 1400
+09/07/2020 09:08:28: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1400
+09/07/2020 09:24:34: AM - INFO: 	Started augmentation excluding: None, n_elements: 1600
+09/07/2020 09:24:59: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1600
+09/07/2020 09:43:03: AM - INFO: 	Started augmentation excluding: None, n_elements: 1800
+09/07/2020 09:43:31: AM - INFO: 	Finished augmentation excluding: None, n_elements: 1800
+09/07/2020 10:03:00: AM - INFO: 	Started augmenting data excluding SESSO
+09/07/2020 10:06:44: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 140
+09/07/2020 10:06:44: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 140
+09/07/2020 10:10:23: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 160
+09/07/2020 10:10:23: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 160
+09/07/2020 10:13:57: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 180
+09/07/2020 10:13:58: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 180
+09/07/2020 10:17:48: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 200
+09/07/2020 10:17:49: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 200
+09/07/2020 10:21:35: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 400
+09/07/2020 10:21:39: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 400
+09/07/2020 10:28:21: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 600
+09/07/2020 10:28:29: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 600
+09/07/2020 10:36:44: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 800
+09/07/2020 10:36:54: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 800
+09/07/2020 10:46:50: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1000
+09/07/2020 10:47:04: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1000
+09/07/2020 10:56:44: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1200
+09/07/2020 10:57:01: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1200
+09/07/2020 11:08:18: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1400
+09/07/2020 11:08:38: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1400
+09/07/2020 11:21:21: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1600
+09/07/2020 11:21:44: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1600
+09/07/2020 11:35:25: AM - INFO: 	Started augmentation excluding: SESSO, n_elements: 1800
+09/07/2020 11:35:52: AM - INFO: 	Finished augmentation excluding: SESSO, n_elements: 1800
+09/07/2020 11:51:52: AM - INFO: 	Started augmenting data excluding ANNI
+09/07/2020 11:55:35: AM - INFO: 	Started augmentation excluding: ANNI, n_elements: 140
+09/07/2020 11:55:35: AM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 140
+09/07/2020 11:59:19: AM - INFO: 	Started augmentation excluding: ANNI, n_elements: 160
+09/07/2020 11:59:20: AM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 160
+09/07/2020 12:03:01: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 180
+09/07/2020 12:03:02: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 180
+09/07/2020 12:06:39: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 200
+09/07/2020 12:06:40: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 200
+09/07/2020 12:10:13: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 400
+09/07/2020 12:10:17: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 400
+09/07/2020 12:16:30: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 600
+09/07/2020 12:16:38: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 600
+09/07/2020 12:24:34: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 800
+09/07/2020 12:24:45: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 800
+09/07/2020 12:34:50: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1000
+09/07/2020 12:35:04: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1000
+09/07/2020 12:44:48: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1200
+09/07/2020 12:45:05: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1200
+09/07/2020 12:57:26: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1400
+09/07/2020 12:57:46: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1400
+09/07/2020 01:09:25: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1600
+09/07/2020 01:09:49: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1600
+09/07/2020 01:25:17: PM - INFO: 	Started augmentation excluding: ANNI, n_elements: 1800
+09/07/2020 01:25:44: PM - INFO: 	Finished augmentation excluding: ANNI, n_elements: 1800
+09/07/2020 01:44:47: PM - INFO: 	Started augmenting data excluding PESO
+09/07/2020 01:48:49: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 140
+09/07/2020 01:48:49: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 140
+09/07/2020 01:52:48: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 160
+09/07/2020 01:52:48: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 160
+09/07/2020 01:57:01: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 180
+09/07/2020 01:57:02: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 180
+09/07/2020 02:01:09: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 200
+09/07/2020 02:01:10: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 200
+09/07/2020 02:05:10: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 400
+09/07/2020 02:05:14: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 400
+09/07/2020 02:11:43: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 600
+09/07/2020 02:11:50: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 600
+09/07/2020 02:22:01: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 800
+09/07/2020 02:22:12: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 800
+09/07/2020 02:33:13: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1000
+09/07/2020 02:33:27: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1000
+09/07/2020 02:44:10: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1200
+09/07/2020 02:44:27: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1200
+09/07/2020 02:57:53: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1400
+09/07/2020 02:58:14: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1400
+09/07/2020 03:14:00: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1600
+09/07/2020 03:14:24: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1600
+09/07/2020 03:31:17: PM - INFO: 	Started augmentation excluding: PESO, n_elements: 1800
+09/07/2020 03:31:44: PM - INFO: 	Finished augmentation excluding: PESO, n_elements: 1800
+09/07/2020 03:54:21: PM - INFO: 	Started augmenting data excluding ALTEZZA
+09/07/2020 03:58:26: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 140
+09/07/2020 03:58:26: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 140
+09/07/2020 04:02:37: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 160
+09/07/2020 04:02:38: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 160
+09/07/2020 04:06:32: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 180
+09/07/2020 04:06:33: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 180
+09/07/2020 04:10:33: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 200
+09/07/2020 04:10:34: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 200
+09/07/2020 04:14:40: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 400
+09/07/2020 04:14:44: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 400
+09/07/2020 04:22:14: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 600
+09/07/2020 04:22:22: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 600
+09/07/2020 04:31:20: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 800
+09/07/2020 04:31:31: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 800
+09/07/2020 04:42:34: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1000
+09/07/2020 04:42:47: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1000
+09/07/2020 04:55:05: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1200
+09/07/2020 04:55:22: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1200
+09/07/2020 05:11:40: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1400
+09/07/2020 05:12:00: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1400
+09/07/2020 05:28:21: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1600
+09/07/2020 05:28:45: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1600
+09/07/2020 05:49:20: PM - INFO: 	Started augmentation excluding: ALTEZZA, n_elements: 1800
+09/07/2020 05:49:46: PM - INFO: 	Finished augmentation excluding: ALTEZZA, n_elements: 1800
+09/07/2020 06:12:22: PM - INFO: 	Started augmenting data excluding BMI
+09/07/2020 06:16:16: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 140
+09/07/2020 06:16:17: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 140
+09/07/2020 06:20:14: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 160
+09/07/2020 06:20:14: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 160
+09/07/2020 06:24:11: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 180
+09/07/2020 06:24:12: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 180
+09/07/2020 06:28:21: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 200
+09/07/2020 06:28:22: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 200
+09/07/2020 06:32:26: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 400
+09/07/2020 06:32:31: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 400
+09/07/2020 06:39:17: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 600
+09/07/2020 06:39:24: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 600
+09/07/2020 06:48:42: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 800
+09/07/2020 06:48:52: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 800
+09/07/2020 06:58:57: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 1000
+09/07/2020 06:59:11: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1000
+09/07/2020 07:09:35: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 1200
+09/07/2020 07:09:52: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1200
+09/07/2020 07:22:50: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 1400
+09/07/2020 07:23:10: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1400
+09/07/2020 07:37:43: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 1600
+09/07/2020 07:38:06: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1600
+09/07/2020 07:53:42: PM - INFO: 	Started augmentation excluding: BMI, n_elements: 1800
+09/07/2020 07:54:09: PM - INFO: 	Finished augmentation excluding: BMI, n_elements: 1800
+10/07/2020 06:44:44: AM - DEBUG: 	diff parser start
+10/07/2020 06:44:44: AM - DEBUG: 	line_lengths old: 1; new: 1
+10/07/2020 06:44:44: AM - DEBUG: 	-> code[replace] old[1:1] new[1:1]
+10/07/2020 06:44:44: AM - DEBUG: 	parse_part from 1 to 1 (to 0 in part parser)
+10/07/2020 06:44:44: AM - DEBUG: 	diff parser end
