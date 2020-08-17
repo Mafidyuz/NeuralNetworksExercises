@@ -1,76 +1,73 @@
-\documentclass[12pt, twoside, letterpaper]{article}
+\documentclass[12pt, twoside, letterpaper]{report}
 \usepackage[top=2cm,bottom=4cm,left=3cm,right=3cm,asymmetric]{geometry}
-\usepackage{color}   %May be necessary if you want to color links
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[C]{}    
+\fancyfoot[LE,RO]{\thepage}        
+\fancyhead[RO]{\slshape \rightmark}        
+\fancyhead[LE]{\slshape\leftmark}      
+\fancyhead[RE,LO]{}  
+
+\usepackage{color}   
 \usepackage{hyperref}
 \usepackage[utf8x]{inputenc}
-%\usepackage[table]{xcolor}
 \usepackage[english]{babel}
 \usepackage{amsmath, amsthm, amssymb, amsfonts}
 \usepackage[breakable]{tcolorbox}
-\usepackage{floatrow}
+\usepackage{pdfpages}
 \usepackage{graphicx}
 \graphicspath{ {./img/} }
-\usepackage{titling}
-\usepackage{caption}
-\usepackage[nouppercase]{frontespizio}
-\newtcolorbox{dati}[1][]{colback=green!30!white, bottomtitle=1.5mm,breakable,#1}
-\newtcolorbox{variabili}[1][]{colback=red!30!white, bottomtitle=1.5mm,breakable,#1}
-\newtcolorbox{vincoli}[1][]{colback=orange!30!white, bottomtitle=1.5mm,breakable,#1}
-\newtcolorbox{obiettivo}[1][]{colback=yellow!30!white, bottomtitle=1.5mm,breakable,#1}
-\newenvironment{rcases}
-  {\left.\begin{aligned}}
-  {\end{aligned}\right\rbrace}
 
-\pretitle{
-	\begin{center}
-	\LARGE
-	\includegraphics{tesiSCIENZE_TECNOLOGIE.jpg}\\
-	Corso di laurea in informatica\\
-	
-}
-\posttitle{\end{center}}
 \title{Uso di reti neurali per la classificazione di dati in problemi di medicina legale}
 \author{Mario Petruccelli \cr Università degli studi di Milano}
 \date{A.A. 2019/2020}
 
-\addto\captionsenglish{% Replace "english" with the language you use
-  \renewcommand{\contentsname}%
-    {Sommario}%
+\addto\captionsenglish{
+	\renewcommand{\contentsname}{Sommario}
+	\renewcommand{\chaptername}{Capitolo}
 }
+\addto\captionsenglish{}
 
 \begin{document}
 
 	\begin{titlepage}
-		\maketitle
+		%\includepdf{img/FRONTESPIZIO.pdf}
 		\newpage
 		\tableofcontents
 	\end{titlepage}
 
-	\section*{Introduzione}
+	\section*{Introduzione} \markboth{Introduzione}{}
+		Qua ci andrà l'introduzione...
 
-	\section{Reti neurali}
-		\subsection{Paradigma del machine learning}
-		\subsection{Che cos'è una rete neurale?}
-		\subsection{Componenti principali di una rete neurale}
-		\subsection{Rete neurale feedforward}
-		\subsection{Discesa del gradiente e back propagation}
+		\newpage		
+	\chapter{Reti neurali}
+		Le \textit{reti neurali artificiali} sono un campo molto importante del \textit{machine learning}. Consistono in un modello matematico che prende ispirazione dalle reti neurali biologiche, presenti nel cervello animale. In questo capitolo ne vedremo le loro componenti e il loro funzionamento.
+
+		\section{Paradigma del machine learning}
+%			Innanzitutto, vale la pena vedere prima cosa sia il \textbf{Machine Learning}. Il Machine Learning è una disciplina scientifica dell'ambito dell'intelligenza artificiale  
+			
+		\section{Che cos'è una rete neurale?}
+		\section{Componenti principali di una rete neurale}
+		\section{Rete neurale feedforward}
+		\section{Discesa del gradiente e back propagation}
 		
-	\section{Tecniche utilizzate}
-		\subsection{Preprocessing}
-			\subsubsection{Cross validation}
-			\subsubsection{Grid search CV}
-			\subsubsection{Scalatura dei dati}
-		\subsection{Model Selection}			
-			\subsubsection{PCA - Principal Component Analysis}
-			\subsubsection{TSNE - T-distributed Stochastic Neighbor Embedding}
-		\subsection{Over-sampling}
-			\subsubsection{SMOTE - Synthetic Minority Over-sampling Technique}
+	\chapter{Tecniche utilizzate}
+		\section{Preprocessing}
+			\subsection{Cross validation}
+			\subsection{Grid search CV}
+			\subsection{Scalatura dei dati}
+		\section{Model Selection}			
+			\subsection{Analisi delle componenti principali}
+			\subsection{t-distributed Stochastic Neighbor Embedding}
+		\section{Over-sampling}
+			\subsection{Synthetic Minority Over-sampling Technique}
 		
-	\section{Esperimenti}
-		\subsection{Introduzione dataset}
-		\subsection{Esperimenti di classificazione}
-		\subsection{Tecniche di preprocessing utilizzate}
-		\subsection{Data augmentation}
+	\chapter{Esperimenti}
+		\section{Dataset}
+		\section{Esperimenti di classificazione}
+		\section{Reingegnerizzazione dei dati}
+		\section{Data augmentation}
 
 	\section*{Conclusione}	
 	
