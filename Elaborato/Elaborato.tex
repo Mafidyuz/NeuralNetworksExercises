@@ -16,6 +16,7 @@
 \usepackage{amsmath, amsthm, amssymb, amsfonts}
 \usepackage[breakable]{tcolorbox}
 \usepackage{pdfpages}
+\usepackage{enumitem}
 \usepackage{graphicx}
 \graphicspath{ {./img/} }
 
@@ -45,8 +46,19 @@
 		Le \textbf{reti neurali artificiali} sono un campo molto importante del \textit{machine learning}. Consistono in un modello matematico che prende ispirazione dalle reti neurali biologiche, presenti nel cervello animale. In questo capitolo ne vedremo le loro componenti e il loro funzionamento. Ma cos'è il machine learning?
 
 		\section{Paradigma del machine learning}
-			Il machine learning è una disciplina scientifica dell'ambito dell'intelligenza artificiale ed è una di quelle in più rapida espansione. Lo scopo di tale disciplina è quello di individuare dei pattern significativi nei dati. Negli ultimi decenni è diventato di uso comune in moltissime applicazioni che richiedono l'estrazione di informazioni da dati su larga scala.
-			 
+			Il machine learning è una disciplina scientifica dell'ambito dell'intelligenza artificiale ed è una di quelle in più rapida espansione; negli ultimi decenni è diventato di uso comune in moltissime applicazioni che richiedono l'estrazione di informazioni da dati su larga scala. Lo scopo di tale disciplina è quello di individuare dei pattern significativi nei dati, che difficilmente sarebbero riconoscibili con l'uso tradizionale della programmazione \textit{(e.g. riconoscere la razza di un cane partendo da una foto)}.  
+			
+			Prendendo come esempio noi umani, molte delle nostre abilità vengono acquisite o raffinate dalla nostra esperienza, e così \textit{impariamo}. Immaginiamo di trovarci in un'isola sperduta e di trovare un albero con frutti mai visti prima. Nonostante questo frutto sia nuovo ai nostri occhi, sapremo riconoscere con molta probabilità se è maturo o acerbo. Lo stesso concetto possiamo provare ad applicarlo alle macchine, ma come possono apprendere? 
+			
+			\subsection{Tipi di apprendimento} L'apprendimento è un dominio di ampio spettro e di conseguenza, il machine learning è diviso in diversi sottocampi in cui abbiamo più paradigmi di apprendimento. La principale distinzione che possiamo fare è la differenza tra l'apprendimento \textbf{supervisionato} e \textbf{non supervisionato}.
+			
+				\paragraph{Apprendimento supervisionato} Consideriamo di dover classificare tre specie di fiori leggermente diversi tra loro appartenenti alla stessa famiglia \textit{(esperimento che riprenderemo più avanti)}. Per imparare a riconoscerli, chi impara può ricevere un insieme di dati \textit{(e.g. larghezza dei petali, lunghezza del gambo, ecc...)} appartenenti  fiori di cui conosce già l'etichetta. Dopo questa fase di \textbf{allenamento}, l'allievo dovrebbe essere in grado di trovare un pattern tra i dati per etichettare nuovi fiori, questa volta senza etichetta e non appartenenti all'insieme dato in precedenza. 
+				
+				In maniera più astratta, possiamo vedere questo come un processo di \textit{utilizzo dell'esperienza passata per acquisire competenza}. L'apprendimento supervisionato descrive uno scenario in cui l'esperienza, nel nostro caso un insieme di \textbf{training}, contiene delle etichette che non sono presenti nell'insieme di \textbf{test}, a cui dobbiamo applicare l'esperienza acquisita in modo da \textbf{predire} l'informazione mancante.
+				
+				\paragraph{Apprendimento non supervisionato} 
+												
+			
 			
 		\section{Che cos'è una rete neurale?}
 		\section{Componenti principali di una rete neurale}
@@ -71,6 +83,11 @@
 		\section{Data augmentation}
 
 	\chapter*{Conclusione}	
+	\chapter*{Bibliografia}
+		\begin{enumerate}[label={[\arabic*]}]
+			\item David Kriesel. \textit{A Brief Introduction to Neural Networks}. University of Bonn, 2005.
+			\item Shai Shalev-Shwartz, Shai Ben-David. \textit{Understanding Machine Learning: From Theory to Algorithms.} Cambridge University Press, 2014.
+		\end{enumerate}
 	
 \end{document}
 
