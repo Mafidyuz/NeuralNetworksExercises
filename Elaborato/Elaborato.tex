@@ -52,15 +52,16 @@
 			
 			\subsection{Tipi di apprendimento} L'apprendimento è un dominio di ampio spettro e di conseguenza, il machine learning è diviso in diversi sottocampi in cui abbiamo più paradigmi di apprendimento. La principale distinzione che possiamo fare è la differenza tra l'apprendimento \textbf{supervisionato} e \textbf{non supervisionato}.
 			
-				\paragraph{Apprendimento supervisionato} Consideriamo di dover classificare tre specie di fiori leggermente diversi tra loro appartenenti alla stessa famiglia \textit{(esperimento che riprenderemo più avanti)}. Per imparare a riconoscerli, chi impara può ricevere un insieme di dati \textit{(e.g. larghezza dei petali, lunghezza del gambo, ecc...)} appartenenti  fiori di cui conosce già l'etichetta. Dopo questa fase di \textbf{allenamento}, l'allievo dovrebbe essere in grado di trovare un pattern tra i dati per etichettare nuovi fiori, questa volta senza etichetta e non appartenenti all'insieme dato in precedenza. 
+				\paragraph{Apprendimento supervisionato} Consideriamo di dover classificare tre specie di fiori leggermente diversi tra loro, appartenenti alla stessa famiglia \textit{(esperimento che riprenderemo più avanti)}. Per imparare a riconoscerli, potremmo ricevere un insieme di dati \textit{(e.g. larghezza dei petali, lunghezza del gambo, ecc...)} appartenenti ai fiori di cui conosciamo già l'etichetta. Dopo questa fase di \textbf{allenamento}, dovremmo essere in grado di trovare un pattern tra i dati per etichettare nuovi fiori, questa volta privi di etichetta e non appartenenti all'insieme dato in precedenza. 
 				
-				In maniera più astratta, possiamo vedere questo come un processo di \textit{utilizzo dell'esperienza passata per acquisire competenza}. L'apprendimento supervisionato descrive uno scenario in cui l'esperienza, nel nostro caso un insieme di \textbf{training}, contiene delle etichette che non sono presenti nell'insieme di \textbf{test}, a cui dobbiamo applicare l'esperienza acquisita in modo da \textbf{predire} l'informazione mancante.
+					In maniera più astratta, possiamo vedere questo come un processo di \textit{utilizzo dell'esperienza passata per acquisire competenza}. L'apprendimento supervisionato descrive uno scenario in cui l'esperienza, nel nostro caso un insieme di \textbf{training}, contiene delle etichette che non sono presenti nell'insieme di \textbf{test}, a cui dobbiamo applicare l'esperienza acquisita in modo da \textbf{predire} l'informazione mancante.
 				
-				\paragraph{Apprendimento non supervisionato} 
-												
-			
+				\paragraph{Apprendimento non supervisionato}  Nell'apprendimento non supervisionato non c'è distinzione tra i dati di training e di test. Vengono processati i dati con lo scopo di tirare fuori una versione compressa, o un "riassunto" di essi. Il raggruppamento dei dati in sottoinsiemi con caratteristiche simili è una delle pratiche più usate in questo campo.\\\\
+				Il modello di cui ci occuperemo noi, ovvero le reti neurali artificiali, utilizzano un'apprendimento di tipo supervisionato. Andiamo a vederle più nel dettaglio.
 			
 		\section{Che cos'è una rete neurale?}
+			
+			
 		\section{Componenti principali di una rete neurale}
 		\section{Rete neurale feedforward}
 		\section{Discesa del gradiente e back propagation}
