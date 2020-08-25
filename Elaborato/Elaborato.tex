@@ -12,23 +12,24 @@
 \usepackage{color}   
 \usepackage{hyperref}
 \usepackage[utf8x]{inputenc}
-\usepackage[english]{babel}
+\usepackage[italian]{babel}
 \usepackage{amsmath, amsthm, amssymb, amsfonts}
 \usepackage[breakable]{tcolorbox}
 \usepackage{pdfpages}
 \usepackage{enumitem}
 \usepackage{graphicx}
 \graphicspath{ {./img/} }
+\newcommand{\img}[3] {
+	\begin{figure}[h]
+		\caption{#1}
+		\centering
+		\includegraphics[scale=#2]{#3}\\
+	\end{figure}
+}
 
 \title{Uso di reti neurali per la classificazione di dati in problemi di medicina legale}
 \author{Mario Petruccelli \cr Università degli studi di Milano}
 \date{A.A. 2019/2020}
-
-\addto\captionsenglish{
-	\renewcommand{\contentsname}{Indice}
-	\renewcommand{\chaptername}{Capitolo}
-}
-\addto\captionsenglish{}
 
 \begin{document}
 
@@ -56,13 +57,28 @@
 				
 					In maniera più astratta, possiamo vedere questo come un processo di \textit{utilizzo dell'esperienza passata per acquisire competenza}. L'apprendimento supervisionato descrive uno scenario in cui l'esperienza, nel nostro caso un insieme di \textbf{training}, contiene delle etichette che non sono presenti nell'insieme di \textbf{test}, a cui dobbiamo applicare l'esperienza acquisita in modo da \textbf{predire} l'informazione mancante.
 				
-				\paragraph{Apprendimento non supervisionato}  Nell'apprendimento non supervisionato non c'è distinzione tra i dati di training e di test. Vengono processati i dati con lo scopo di tirare fuori una versione compressa, o un "riassunto" di essi. Il raggruppamento dei dati in sottoinsiemi con caratteristiche simili è una delle pratiche più usate in questo campo.\\\\
+				\paragraph{Apprendimento non supervisionato}  Nell'apprendimento non supervisionato non c'è distinzione tra i dati di training e di test. Vengono processati i dati con lo scopo di tirare fuori una versione compressa, o un "riassunto" di essi. Il raggruppamento dei dati in sottoinsiemi con caratteristiche simili è una delle pratiche più usate in questo campo.\\
+				
 				Il modello di cui ci occuperemo noi, ovvero le reti neurali artificiali, utilizzano un'apprendimento di tipo supervisionato. Andiamo a vederle più nel dettaglio.
 			
 		\section{Che cos'è una rete neurale?}
+			Come abbiamo già anticipato, le reti neurali artificiali cercano di riprendere quello che sono le loro omonime biologiche. Il cervello animale è un meccanismo in grado di apprendere grazie all'esperienza, ed è per questo che si è cercato di emularlo \textit{(in modo molto semplificato)} come modello di machine learning. Probabilmente saprete già che il cervello è composto da \textbf{neuroni}, ed essi sono connessi tra di loro da delle \textbf{sinapsi} in modo da poter comunicare. Ebbene, anche il nostro modello artificiale riprende questa struttura.
 			
+			%\img{Rete Neurale}{0.6}{nn.png}
 			
-		\section{Componenti principali di una rete neurale}
+		\subsection{Componenti principali di una rete neurale}
+			Una rete neurale artificiale può essere vista come un grafo, cioè consiste in un insieme di \textbf{nodi} \textit{(neuroni)} e \textbf{archi orientati pesati} \textit{(sinapsi)}. Più formalmente, una rete neurale è una tripla $(N,V, \omega)$ in cui:
+			\begin{itemize}
+				\item $N$ è l'insieme dei neuroni.
+				\item $V = \{(i,j) | i,j \in N\}$ è l'insieme delle connessioni tra i neuroni $i$ e $j$.
+				\item $\omega: V \rightarrow \mathbb{R}$ è la funzione di peso, dove $\omega_{i,j}$ è il peso della connessione tra i neuroni $i$ e $j$.
+			\end{itemize}
+			Un neurone, per essere definito tale deve essere in grado di elaborare i dati che gli arrivano tramite le sue connessioni. È composto da tre funzioni: funzione di \textbf{propagazione}, funzione di \textbf{attivazione} e funzione di \textbf{output}. 
+			
+			\img{Struttura di un neurone}{0.4}{neurone.png}
+			
+			 \paragraph{Funzione di propagazione} Dato un neurone $j$, la funzione di propagazione riceve gli output $o_{i_1}, \dots, o_{i_n}$ dei neuroni $i_1, \dots, i_n$ connessi a $j$
+			
 		\section{Rete neurale feedforward}
 		\section{Discesa del gradiente e back propagation}
 		
