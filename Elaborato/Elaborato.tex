@@ -77,7 +77,10 @@
 			
 			\img{Struttura di un neurone}{0.4}{neurone.png}
 			
-			 \paragraph{Funzione di propagazione} Dato un neurone $j$, la funzione di propagazione riceve gli output $o_{i_1}, \dots, o_{i_n}$ dei neuroni $i_1, \dots, i_n$ connessi a $j$
+			 \paragraph{Funzione di propagazione} Dato un neurone $j$, la sua funzione di propagazione riceve gli output $o_{i_1}, \dots, o_{i_n}$ dei neuroni $i_1, \dots, i_n$ connessi a $j$ e i corrispettivi pesi $\omega_{i,j}$, restituendo un valore detto \textit{network input} net$_j$ che verrà poi processato dalla \textit{funzione di attivazione}. 
+			 
+			 	Sia $I = \{i_1, i_2, \dots, i_n\}$ l'insieme dei neuroni tale che $\forall z \in \{1, \dots, n\} : \exists w_{i_z,j}$. Allora il network input di $j$ ($net_j$), è calcolato dalla funzione di propagazione $f_{prop}$ come segue: $$net_j = f_{prop}(o_{i_1}, \dots, o_{i_n},w_{i_1,j}, \dots, w_{i_n,j})$$
+			 	La funzione di propagazione più usata è la \textbf{somma pesata}, ovvero la somma delle moltiplicazioni dell'output di ogni neurone $i$ per il corrispettivo peso $\omega_{i,j}$: $$net_j = \sum_{i \in I} o_i w_{i,j}$$
 			
 		\section{Rete neurale feedforward}
 		\section{Discesa del gradiente e back propagation}
