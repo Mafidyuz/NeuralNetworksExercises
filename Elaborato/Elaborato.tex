@@ -17,6 +17,8 @@
 \usepackage[breakable]{tcolorbox}
 \usepackage{pdfpages}
 \usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{graphicx}
 \graphicspath{ {./img/} }
 \newcommand{\img}[3] {
@@ -66,7 +68,9 @@
 			
 			%\img{Rete Neurale}{0.6}{nn.png}
 			
-		\subsection{Componenti principali di una rete neurale}
+		\subsection{Componenti principali di una rete neurale} 
+			\paragraph{Concetto di tempo} Prima di dare una definizione, introduciamo il concetto di tempo in una rete neurale. Ci si riferisce al tempo vigente come $(t)$, al passo successivo come $(t+1)$, al passo precedente come $(t-1)$, e così via.
+			\paragraph{Rete neurale artificiale}
 			Una rete neurale artificiale può essere vista come un grafo, cioè consiste in un insieme di \textbf{nodi} \textit{(neuroni)} e \textbf{archi orientati pesati} \textit{(sinapsi)}. Più formalmente, una rete neurale è una tripla $(N,V, \omega)$ in cui:
 			\begin{itemize}
 				\item $N$ è l'insieme dei neuroni.
@@ -81,6 +85,62 @@
 			 
 			 	Sia $I = \{i_1, i_2, \dots, i_n\}$ l'insieme dei neuroni tale che $\forall z \in \{1, \dots, n\} : \exists w_{i_z,j}$. Allora il network input di $j$ ($net_j$), è calcolato dalla funzione di propagazione $f_{prop}$ come segue: $$net_j = f_{prop}(o_{i_1}, \dots, o_{i_n},w_{i_1,j}, \dots, w_{i_n,j})$$
 			 	La funzione di propagazione più usata è la \textbf{somma pesata}, ovvero la somma delle moltiplicazioni dell'output di ogni neurone $i$ per il corrispettivo peso $\omega_{i,j}$: $$net_j = \sum_{i \in I} o_i w_{i,j}$$
+			 	
+			 \paragraph{Stato di attivazione e valore di soglia} Così come in natura, un neurone può essere \textit{attivo} o meno. Lo \textbf{stato di attivazione} \textit{(o attivazione)} è una reazione ai valori che abbiamo ricevuto in input, e il neurone viene attivato quando il \textit{network input} supera il \textbf{valore di soglia} di quel neurone. Sia $j$ un neurone. Il \textbf{valore di soglia} $\Theta_j$ è assegnato unicamente a $j$ e indica la posizione del valore massimo del gradiente della funzione di attivazione.
+			 
+			 \paragraph{Funzione di attivazione} Sia $j$ un neurone. La funzione di attivazione è così definita: $$a_j(t) = f_{act}(net_j(t),a_j(t-1), \Theta_j)$$
+			 	Trasforma il \textit{network input} net$_j$, il precedente stato di attivazione $a_j(t-1)$, e il valore di soglia $\Theta_j$ in un nuovo stato di attivazione $a_j(t)$ 
+			 	A differenza di molte delle variabili definite prima, la funzione di attivazione viene definita \textit{globalmente} per tutti i neuroni. Esistono diverse funzioni di attivazione, alcune tra le più usate sono: 
+			 	\begin{itemize}
+			 		\item La funzione logistica: $f(x) = \frac{1}{1+e^{-x}}$
+			 		\item La funzione tangente iperbolica: $f(x) = tanh(x)$
+			 		\item La funzione ReLU: $f(x) = max(0,x)$
+			 		\item La funzione identità: $f(x) = x$
+			 	\end{itemize}
+			 	
+			 \begin{figure}
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=\linewidth]{logistic.png}
+					\caption{Funzione logistica}
+					\label{fig:logistic}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=\linewidth]{tanh.png}
+					\caption{Funzione tangente iperbolica}
+					\label{fig:tanh}
+				\end{subfigure}
+				
+				\bigskip  
+				
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=\linewidth]{relu.png}
+					\caption{Funzione ReLU}
+					\label{fig:relu}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=\linewidth]{identity.png}
+					\caption{Funzione di identità}
+					\label{fig:identity}
+				\end{subfigure}
+				
+				\caption{Funzioni di attivazione}
+				\label{fig:funzioni di attivazione}
+			\end{figure}	
+			 	
+			 \paragraph{Funzione di output} La funzione di output di un neurone $j$ calcola i valori che verranno trasmessi agli altri neuroni connessi a $j$. 
+			 
+			 	Sia $j$ un neurone. La funzione di output calcola il valore di output $o_j$ del neurone $j$ in funzione dell'attivazione $a_j$. $$f_{out}(a_j) = o_j$$  
+			 	
+			 	Anche in questo caso, solitamente la funzione è definita globalmente. Spesso viene usata come funzione di output la \textit{funzione di identità}, mandando in output direttamente l'attivazione $a_j$. $$f_{out}(a_j) = a_j, \text{ quindi } o_j = a_j$$
+			 	
+			
+			
 			
 		\section{Rete neurale feedforward}
 		\section{Discesa del gradiente e back propagation}
