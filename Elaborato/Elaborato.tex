@@ -90,7 +90,7 @@
 			 
 			 \paragraph{Funzione di attivazione} Sia $j$ un neurone. La funzione di attivazione è così definita: $$a_j(t) = f_{act}(net_j(t),a_j(t-1), \Theta_j)$$
 			 	Trasforma il \textit{network input} net$_j$, il precedente stato di attivazione $a_j(t-1)$, e il valore di soglia $\Theta_j$ in un nuovo stato di attivazione $a_j(t)$ 
-			 	A differenza di molte delle variabili definite prima, la funzione di attivazione viene definita \textit{globalmente} per tutti i neuroni. Esistono diverse funzioni di attivazione, alcune tra le più usate sono: 
+			 	A differenza di molte delle variabili definite prima, la funzione di attivazione viene definita \textit{globalmente} per tutti i neuroni. Esistono diverse funzioni di attivazione, alcune tra le più usate, come possiamo vedere in figura~\ref{fig:funzioni di attivazione} sono: 
 			 	\begin{itemize}
 			 		\item La funzione logistica: $f(x) = \frac{1}{1+e^{-x}}$
 			 		\item La funzione tangente iperbolica: $f(x) = tanh(x)$
@@ -101,14 +101,14 @@
 			 \begin{figure}
 				\begin{subfigure}[]{.5\textwidth}
 					\centering
-					\includegraphics[width=\linewidth]{logistic.png}
+					\includegraphics[width=0.7\linewidth]{logistic.png}
 					\caption{Funzione logistica}
 					\label{fig:logistic}
 				\end{subfigure}
 				\hfill
 				\begin{subfigure}[]{.5\textwidth}
 					\centering
-					\includegraphics[width=\linewidth]{tanh.png}
+					\includegraphics[width=0.7\linewidth]{tanh.png}
 					\caption{Funzione tangente iperbolica}
 					\label{fig:tanh}
 				\end{subfigure}
@@ -117,14 +117,14 @@
 				
 				\begin{subfigure}[]{.5\textwidth}
 					\centering
-					\includegraphics[width=\linewidth]{relu.png}
+					\includegraphics[width=0.7\linewidth]{relu.png}
 					\caption{Funzione ReLU}
 					\label{fig:relu}
 				\end{subfigure}
 				\hfill
 				\begin{subfigure}[]{.5\textwidth}
 					\centering
-					\includegraphics[width=\linewidth]{identity.png}
+					\includegraphics[width=0.7\linewidth]{identity.png}
 					\caption{Funzione di identità}
 					\label{fig:identity}
 				\end{subfigure}
@@ -139,10 +139,13 @@
 			 	
 			 	Anche in questo caso, solitamente la funzione è definita globalmente. Spesso viene usata come funzione di output la \textit{funzione di identità}, mandando in output direttamente l'attivazione $a_j$. $$f_{out}(a_j) = a_j, \text{ quindi } o_j = a_j$$
 			 	
-			
-			
-			
-		\section{Rete neurale feedforward}
+			 \paragraph{Neurone bias} Come abbiamo visto, il valore di soglia (che ci dice quando un neurone viene considerato attivo) è un parametro della funzione di attivazione. Siccome sarebbe complicato accedere alla funzione di attivazione a \textit{runtime} per modificare dato valore, i valori di soglia $\Theta_{j_1}, \dots, \Theta_{j_n}$ dei neuroni $j_1, \dots, j_n$ possono essere realizzati come pesi di un neurone sempre attivo. Aggiungiamo quindi un neurone \textit{bias} il cui \textit{output} è fisso a 1, connesso ai neuroni $j_1, \dots, j_n$ il cui peso delle connessioni è pari a $-\Theta_{j_1}, \dots, -\Theta_{j_n}$
+			 
+			 	\img{Due reti equivalenti, a destra con neurone bias e a sinistra senza.}{0.5}{bias-neuron.png}
+			 
+		\section{Rete neurale feed-forward}
+			Come possiamo immaginare, esistono diverse topologie di rete, ma noi ci concentreremo sulle \textbf{reti neurali feed-forward} \textit{(o in italiano, reti neurali con flusso in avanti)}. In queste reti, i neuroni sono raggruppati nei seguenti \textit{livelli}: \textit{un input layer, $n$ hidden layer} e \textit{un output layer}. In una rete feed-forward ogni neurone ha connessioni dirette solo con il livello successivo al suo (in direzione dell'output layer). Una rete in cui ogni neurone è connesso a tutti i neuroni del livello successivo, viene detta rete \textit{completamente connessa}.
+			\img{Rete neurale feed-forward}{0.4}{nn-feed-forward.png}
 		\section{Discesa del gradiente e back propagation}
 		
 	\chapter{Tecniche utilizzate}
