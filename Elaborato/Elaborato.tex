@@ -21,11 +21,12 @@
 \usepackage{subcaption}
 \usepackage{graphicx}
 \graphicspath{ {./img/} }
-\newcommand{\img}[3] {
+\newcommand{\img}[4] {
 	\begin{figure}[h]
 		\caption{#1}
 		\centering
 		\includegraphics[scale=#2]{#3}\\
+		\label{#4}
 	\end{figure}
 }
 
@@ -79,7 +80,7 @@
 			\end{itemize}
 			Un neurone, per essere definito tale deve essere in grado di elaborare i dati che gli arrivano tramite le sue connessioni. È composto da tre funzioni: funzione di \textbf{propagazione}, funzione di \textbf{attivazione} e funzione di \textbf{output}. 
 			
-			\img{Struttura di un neurone}{0.4}{neurone.png}
+			\img{Struttura di un neurone}{0.4}{neurone.png}{neurone}
 			
 			 \paragraph{Funzione di propagazione} Dato un neurone $j$, la sua funzione di propagazione riceve gli output $o_{i_1}, \dots, o_{i_n}$ dei neuroni $i_1, \dots, i_n$ connessi a $j$ e i corrispettivi pesi $\omega_{i,j}$, restituendo un valore detto \textit{network input} net$_j$ che verrà poi processato dalla \textit{funzione di attivazione}. 
 			 
@@ -141,11 +142,14 @@
 			 	
 			 \paragraph{Neurone bias} Come abbiamo visto, il valore di soglia (che ci dice quando un neurone viene considerato attivo) è un parametro della funzione di attivazione. Siccome sarebbe complicato accedere alla funzione di attivazione a \textit{runtime} per modificare dato valore, i valori di soglia $\Theta_{j_1}, \dots, \Theta_{j_n}$ dei neuroni $j_1, \dots, j_n$ possono essere realizzati come pesi di un neurone sempre attivo. Aggiungiamo quindi un neurone \textit{bias} il cui \textit{output} è fisso a 1, connesso ai neuroni $j_1, \dots, j_n$ il cui peso delle connessioni è pari a $-\Theta_{j_1}, \dots, -\Theta_{j_n}$
 			 
-			 	\img{Due reti equivalenti, a destra con neurone bias e a sinistra senza.}{0.5}{bias-neuron.png}
-			 
+			 	\img{Due reti equivalenti, a destra con neurone bias e a sinistra senza.}{0.5}{bias-neuron.png}{bias}
+			 	
+			 \paragraph{Vettore di input e vettore di output} Le reti neurali che andremo a vedere \textit{(i.e. le reti neurali feed-forward)}, fanno parte di quella categoria di reti che processano dei dati in input, per poi produrre un output. Una rete con $n$ neuroni di input, necessita di un \textbf{vettore di input} $x = (x_1, x_2, \dots, x_n)$ che gli verrà dato in pasto, e dati $m$ neuroni di output fornisce un \textbf{vettore di output} $y = (y_1, y_2, \dots, y_m)$. 	 			 
 		\section{Rete neurale feed-forward}
 			Come possiamo immaginare, esistono diverse topologie di rete, ma noi ci concentreremo sulle \textbf{reti neurali feed-forward} \textit{(o in italiano, reti neurali con flusso in avanti)}. In queste reti, i neuroni sono raggruppati nei seguenti \textit{livelli}: \textit{un input layer, $n$ hidden layer} e \textit{un output layer}. In una rete feed-forward ogni neurone ha connessioni dirette solo con il livello successivo al suo (in direzione dell'output layer). Una rete in cui ogni neurone è connesso a tutti i neuroni del livello successivo, viene detta rete \textit{completamente connessa}.
-			\img{Rete neurale feed-forward}{0.4}{nn-feed-forward.png}
+			\img{Rete neurale feed-forward completamente connessa}{0.4}{nn-feed-forward.png}{feedforward}
+			
+		
 		\section{Discesa del gradiente e back propagation}
 		
 	\chapter{Tecniche utilizzate}
