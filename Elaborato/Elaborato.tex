@@ -144,11 +144,19 @@
 			 
 			 	\img{Due reti equivalenti, a destra con neurone bias e a sinistra senza.}{0.5}{bias-neuron.png}{bias}
 			 	
-			 \paragraph{Vettore di input e vettore di output} Le reti neurali che andremo a vedere \textit{(i.e. le reti neurali feed-forward)}, fanno parte di quella categoria di reti che processano dei dati in input, per poi produrre un output. Una rete con $n$ neuroni di input, necessita di un \textbf{vettore di input} $x = (x_1, x_2, \dots, x_n)$ che gli verrà dato in pasto, e dati $m$ neuroni di output fornisce un \textbf{vettore di output} $y = (y_1, y_2, \dots, y_m)$. 	 			 
-		\section{Rete neurale feed-forward}
-			Come possiamo immaginare, esistono diverse topologie di rete, ma noi ci concentreremo sulle \textbf{reti neurali feed-forward} \textit{(o in italiano, reti neurali con flusso in avanti)}. In queste reti, i neuroni sono raggruppati nei seguenti \textit{livelli}: \textit{un input layer, $n$ hidden layer} e \textit{un output layer}. In una rete feed-forward ogni neurone ha connessioni dirette solo con il livello successivo al suo (in direzione dell'output layer). Una rete in cui ogni neurone è connesso a tutti i neuroni del livello successivo, viene detta rete \textit{completamente connessa}.
-			\img{Rete neurale feed-forward completamente connessa}{0.4}{nn-feed-forward.png}{feedforward}
+			 \paragraph{Vettore di input e vettore di output} Le reti neurali che andremo a vedere \textit{(i.e. le reti neurali feed-forward)}, fanno parte di quella categoria di reti che processano dei dati in input, per poi produrre un output. Una rete con $n$ neuroni di input, necessita di un \textbf{vettore di input} $x = (x_1, x_2, \dots, x_n)$ che gli verrà dato in pasto, e dati $m$ neuroni di output fornisce un \textbf{vettore di output} $y = (y_1, y_2, \dots, y_m)$. 
+			 
+			 	 			 
+		\section{Reti neurali feed-forward}
+			Come possiamo immaginare, esistono diverse topologie di rete, ma noi ci concentreremo sulle \textbf{reti neurali feed-forward} \textit{(o in italiano, reti neurali con flusso in avanti)}. In queste reti, i neuroni sono raggruppati nei seguenti \textit{strati}: \textit{un input layer, $n$ hidden layer} e \textit{un output layer}. In una rete feed-forward ogni neurone ha connessioni dirette solo con lo strato successivo al suo (in direzione dell'output layer), evitando così l'esistenza di cicli. Una rete in cui ogni neurone è connesso a tutti i neuroni dello strato successivo, viene detta rete \textit{completamente connessa}.
 			
+			\paragraph{Percettrone} Un percettrone è una rete feed-forward completamente connessa costituita da un input layer in cui i neuroni di input non fanno altro che propagare l'informazione ricevuta \textit{(neuroni identità)}, seguito  da almeno uno strato di pesi addestrabili.
+			
+			\paragraph{Percettrone a singolo strato} Un percettrone a singolo strato è la rete feed-forward più semplice che si possa fare. Esso è costituito semplicemente da uno strato di input e uno di output. 
+				\img{Percettrone a singolo strato con 3 neuroni di output}{0.5}{slp.png}{slp}
+				
+			\paragraph{Percettrone multistrato} Un percettrone multistrato è una rete feed-forward che ha più di uno strato di pesi addestrabili. Si può dimostrare che i percettroni a singolo strato siano in grado di rappresentare solo dati separabili \textbf{linearmente}, mentre i percettroni multistrato ci permettono di ovviare questa limitazione. 
+				\img{percettrone multistrato}{0.5}{nn-feed-forward.png}{feedforward}
 		
 		\section{Discesa del gradiente e back propagation}
 		
