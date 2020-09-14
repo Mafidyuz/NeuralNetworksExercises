@@ -5,7 +5,7 @@
 \pagestyle{fancy}
 \fancyfoot[C]{}    
 \fancyfoot[LE,RO]{\thepage}        
-\fancyhead[RO]{\slshape \rightmark}        
+\fancyhead[RO]{\slshape \rightmark}
 \fancyhead[LE]{\slshape\leftmark}      
 \fancyhead[RE,LO]{}  
 
@@ -51,9 +51,9 @@
 		Le \textbf{reti neurali artificiali} sono un campo molto importante del \textit{machine learning}. Consistono in un modello matematico che prende ispirazione dalle reti neurali biologiche presenti nel cervello animale. In questo capitolo ne vedremo le loro componenti e il loro funzionamento. Ma cos'è il machine learning?
 
 		\section{Paradigma del machine learning}
-			Il machine learning è una disciplina scientifica dell'ambito dell'intelligenza artificiale ed è una di quelle in più rapida espansione; negli ultimi decenni è diventato di uso comune in moltissime applicazioni che richiedono l'estrazione di informazioni da dati su larga scala. Lo scopo di tale disciplina è quello di individuare dei pattern significativi nei dati, che difficilmente sarebbero riconoscibili con l'uso tradizionale della programmazione \textit{(e.g. riconoscere la razza di un cane partendo da una foto)}.  
+			Il machine learning è una disciplina scientifica dell'ambito dell'intelligenza artificiale ed è una di quelle in più rapida espansione; negli ultimi decenni è diventato di uso comune in moltissime applicazioni che richiedono l'estrazione di informazioni dai dati. Lo scopo di tale disciplina è quello di individuare dei pattern significativi nei dati, che difficilmente sarebbero riconoscibili con l'uso tradizionale della programmazione \textit{(e.g. riconoscere la razza di un cane partendo da una foto)}.  
 			
-			Prendendo come esempio noi umani, molte delle nostre abilità vengono acquisite o raffinate dalla nostra esperienza, e così \textit{impariamo}. Immaginiamo di trovarci in un'isola sperduta e di trovare un albero con frutti mai visti prima. Nonostante questo frutto sia nuovo ai nostri occhi, sapremo riconoscere con molta probabilità se è maturo o acerbo. Lo stesso concetto possiamo provare ad applicarlo alle macchine, ma come possono apprendere? 
+			Prendendo come esempio noi umani, molte delle nostre abilità vengono acquisite o raffinate dalla nostra esperienza, e così \textit{apprendiamo}. Immaginiamo di trovarci davanti un essere vivente che non abbiamo mai visto prima. Nonostante questo essere sia nuovo ai nostri occhi, sapremo riconoscere con molta probabilità se questo si tratta di un insetto, di un mammifero o di una pianta. Lo stesso concetto possiamo provare ad applicarlo alle macchine, ma come possono apprendere? 
 			
 			\subsection{Tipi di apprendimento} L'apprendimento è un dominio di ampio spettro e di conseguenza, il machine learning è diviso in diversi sottocampi in cui abbiamo più paradigmi di apprendimento. La principale distinzione che possiamo fare è la differenza tra l'apprendimento \textbf{supervisionato} e \textbf{non supervisionato}.
 			
@@ -182,7 +182,7 @@
 
 				Siano $\Omega$ i neuroni di uscita e $O$ l'insieme dei neuroni di uscita. Il valore efficace si calcola così: $$Err_p = \sqrt{\frac{\sum_{\Omega \in O} (t_{\Omega} - y_{\Omega})^2}{|O|}}$$
 				Per quanto riguarda l'apprendimento offline, l'\textbf{errore totale} di un'epoca si calcola nel seguente modo: $$Err = \sum_{p \in P} Err_p$$
-				La curva di apprendimento va tracciata per i due insiemi di training e validation, in questo modo possiamo accorgerci se siamo in un caso di overfitting guardando solo l'andamento delle due curve: se la curva di training decresce velocemente mentre quella di validation comincia a risalire siamo chiaramente in un caso in cui stiamo perdendo la generalizzazione dei dati che avevamo acquisito. C'è da specificare però che solitamente, la curva di training avrà un errore minore rispetto quella di validation.
+				La curva di apprendimento va tracciata per i due insiemi di training e validation, in questo modo possiamo accorgerci se siamo in un caso di overfitting guardando solo l'andamento delle due curve: se la curva di training decresce velocemente mentre quella di validation comincia a risalire siamo chiaramente in un caso in cui stiamo perdendo la generalizzazione dei dati che avevamo acquisito, l'ideale sarebbe fermarsi appena prima che la curva di validation cominci a risalire (\textbf{early stopping}). Solitamente la curva di training avrà comunque un errore minore rispetto quella di validation.
 
 				\begin{figure}[h]
 				\begin{subfigure}[]{.5\textwidth}
@@ -204,9 +204,24 @@
 				\end{figure}
 				
 			
-			\subsection{Quando smettere di apprendere}
+			\subsection{Discesa del gradiente}
+				Ora ci dovrebbe venire spontaneo chiederci: quando smettiamo di apprendere? Non è una domanda dalla risposta facile, e per capire questo fondamentale passaggio bisogna avere un'idea di cosa sia la discesa del gradiente. È una tecnica utilizzata per massimizzare o minimizzare una funzione. Il gradiente è un vettore $g$ definito in ogni punto derivabile di una funzione che punta verso la salita più ripida. Di conseguenza $-g$ punterà verso il la discesa più ripida.
+				\img{Discesa del gradiente}{0.5}{gradient_descent_2d.png}{gradient_descent}
+
+				\paragraph{Gradiente} Sia $g$ un gradiente. Allora $g$ è il vettore con $n$ componenti che è definito in ogni punto derivabile di una funzione a $n$ dimensioni $f(x_1, x_2, \dots, x_n)$. L'operatore gradiente è definito come $$g(x_1, x_2, \dots, x_n) = \triangledown f(x_1, x_2, \dots, x_n).$$
+					$g$ punta da ogni punto derivabile di $f$ verso la salita più ripida, con una pendenza pari a $|g|$. \cite{kriesel}
 				
+				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ dimensioni e $s=(s_1, s_2, \dots, s_n)$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(s)$ in direzione di $-g$, con passi della grandezza di $|g|$ verso valori sempre minori di $f$. \cite{kriesel}
 				
+				\img{Discesa del gradiente}{0.5}{gradient_descent.png}{gradient_descent}
+				
+				Questa tecnica purtroppo non è priva di problemi, potremmo cadere in diverse "trappole" senza accorgercene. Alcuni esempi sono: 
+				\begin{itemize}
+				 	\item Incagliarsi su un minimo locale non soddisfacente (Figura \ref{gradient_descent}a).
+				 	\item Rallentare la ricerca del minimo a causa di un \textit{plateau} (Figura \ref{gradient_descent}b).
+				 	\item Trovare un canyon "stretto" e continuare ad oscillare a causa dell'elevato contrasto tra i gradienti (Figura \ref{gradient_descent}c).
+				 	\item Saltare un buon minimo a causa di una pendenza elevata (Figura \ref{gradient_descent}d).
+				 \end{itemize} 
 				
 	\chapter{Tecniche utilizzate}
 		\section{Preprocessing}
