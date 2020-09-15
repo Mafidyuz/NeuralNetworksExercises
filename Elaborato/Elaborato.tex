@@ -206,10 +206,10 @@
 				
 			
 			\subsection{Discesa del gradiente}
-				Ora ci dovrebbe venire spontaneo chiederci: quando smettiamo di apprendere? Non è una domanda dalla risposta facile, e per capire questo fondamentale passaggio bisogna avere un'idea di cosa sia la discesa del gradiente. È una tecnica utilizzata per massimizzare o minimizzare una funzione. Il gradiente è un vettore $g$ definito in ogni punto derivabile di una funzione che punta verso la salita più ripida. Di conseguenza $-g$ punterà verso il la discesa più ripida.
+				Ora ci dovrebbe venire spontaneo chiederci: quando smettiamo di apprendere? Non è una domanda dalla risposta facile, e per capire questo fondamentale passaggio bisogna avere un'idea di cosa sia la discesa del gradiente. È una procedura che viene utilizzata per massimizzare o minimizzare una funzione. Il gradiente è un vettore $g$ definito in ogni punto derivabile di una funzione ed esso punta verso la salita più ripida. Di conseguenza $-g$ punterà verso la discesa più ripida.
 				\img{Discesa del gradiente di una funzione a due dimensioni}{0.5}{gradient_descent_2d.png}{gradient_descent}
 
-				\paragraph{Gradiente} Sia $g$ un gradiente. Allora $g$ è il vettore con $n$ componenti che è definito in ogni punto derivabile di una funzione a $n$ dimensioni $f(x_1, x_2, \dots, x_n)$. L'operatore gradiente è definito come $$g(x_1, x_2, \dots, x_n) = \triangledown f(x_1, x_2, \dots, x_n).$$
+				\paragraph{Gradiente} Sia $g$ un gradiente. Allora $g$ è il vettore con $n$ componenti che è definito in ogni punto derivabile di una funzione a $n$ dimensioni $f(x_1, x_2, \dots, x_n)$. L'operatore gradiente è definito come $$g(x_1, x_2, \dots, x_n) = \triangledown f(x_1, x_2, \dots, x_n)$$
 					$g$ punta da ogni punto derivabile di $f$ verso la salita più ripida, con una pendenza pari a $|g|$. \cite{kriesel}
 				
 				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ dimensioni e $s=(s_1, s_2, \dots, s_n)$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(s)$ in direzione di $-g$, con passi della grandezza di $|g|$ verso valori sempre minori di $f$. \cite{kriesel}
@@ -247,9 +247,9 @@
 	\chapter*{Conclusione}	
 	
 	\begin{thebibliography}{9}
-		\bibitem{kriesel} David Kriesel. \textit{A Brief Introduction to Neural Networks}. University of Bonn, 2005.
+		\bibitem{kriesel} David Kriesel, 2007, \textit{A Brief Introduction to Neural Networks}, available at \texttt{http://www.dkriesel.com}.
 
-		\bibitem{shwartz} Shai Shalev-Shwartz, Shai Ben-David. \textit{Understanding Machine Learning: From Theory to Algorithms.} Cambridge University Press, 2014.
+		\bibitem{shwartz} Shai Shalev-Shwartz, Shai Ben-David, 2014, \textit{Understanding Machine Learning: From Theory to Algorithms}, Cambridge University Press.
 
 	\end{thebibliography}
 	
