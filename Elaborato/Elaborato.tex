@@ -26,9 +26,9 @@
 \graphicspath{ {./img/} }
 \newcommand{\img}[4] {
 	\begin{figure}
-		\caption{#1}
 		\centering
 		\includegraphics[scale=#2]{#3}\\
+		\caption{#1}
 		\label{#4}
 	\end{figure}
 }
@@ -54,20 +54,17 @@
 		Le \textbf{reti neurali artificiali} sono un modello matematico molto importante del \textit{machine learning} che prende ispirazione dalle reti neurali biologiche presenti nel cervello animale. In questo capitolo vedremo le componenti e il funzionamento delle reti neurali artificiali, ma prima facciamo un'overview su cosa sia il machine learning.
 
 		\section{Paradigma del machine learning}
-			Il machine learning è una branca dell'intelligenza artificiale ed è una di quelle in più rapida espansione; negli ultimi decenni è diventato di uso comune in moltissime applicazioni che richiedono l'estrazione di informazioni dai dati. Lo scopo del machine learning è quello di sunteggiare tante istanze di un problema, che difficilmente sarebbero riconoscibili con l'uso tradizionale della programmazione \textit{(per esempio riconoscere la razza di un cane partendo da una foto)}.   
+			Il machine learning è una branca dell'intelligenza artificiale ed è una di quelle in più rapida espansione; negli ultimi decenni è diventato di uso comune in moltissime applicazioni che richiedono l'estrazione di informazioni dai dati. Lo scopo del machine learning è quello di riassumere tante istanze di un problema, che difficilmente sarebbero riconoscibili con l'uso tradizionale della programmazione \textit{(per esempio riconoscere la razza di un cane partendo da una foto)}.   
 			
 			Prendendo come esempio noi umani, molte delle nostre abilità vengono acquisite o raffinate dalla nostra esperienza, e così \textit{apprendiamo}. Immaginiamo di trovarci davanti un essere vivente che non abbiamo mai visto prima. Nonostante questo essere sia nuovo ai nostri occhi, sapremo riconoscere con molta probabilità se questo si tratti di un insetto, di un mammifero o di una pianta. Lo stesso concetto possiamo provare ad applicarlo alle macchine, ma come possono apprendere? 
 			
 			\subsection{Tipi di apprendimento} Il machine learning è diviso in diversi sottocampi in cui abbiamo più paradigmi di apprendimento. La principale distinzione che si può fare è la differenza tra l'apprendimento \textbf{supervisionato}, \textbf{non supervisionato} e \textbf{per rinforzo}. Per quanto riguarda ciò che vedremo nei prossimi capitoli, possiamo concentrarci solo sulla differenza tra l'apprendimento supervisionato e non supervisionato.
 			
 				\paragraph{Apprendimento supervisionato} Consideriamo di dover classificare tre specie di fiori leggermente diversi tra loro appartenenti alla stessa famiglia \textit{(esperimento che riprenderemo più avanti)}. Per imparare a riconoscerli, potremmo ricevere un insieme di dati \textit{(per esempio la larghezza dei petali, lunghezza del gambo, ecc...)} che descrivono i fiori e cercare di indovinare la specie. Una figura d'insegnante (\textit{teacher}) ci da una \textbf{risposta d'apprendimento} per ogni tentativo che facciamo di indovinare l'\textbf{etichetta}, ovvero la classe di cui fanno parte. Dopo questa fase di \textbf{allenamento}, dovremmo essere in grado di trovare un pattern tra i dati per etichettare nuovi fiori, questa volta privi di etichetta e non appartenenti all'insieme dato in precedenza. 
-				%definire QUA training e test set
+										
+					In maniera più astratta, possiamo vedere questo come un processo di \textit{utilizzo dell'esperienza passata per acquisire competenza}. L'apprendimento supervisionato descrive uno scenario in cui dobbiamo utilizzare l'esperienza acquisita tramite il processo di apprendimento con un insieme di dati (\textbf{insieme di training}) per \textbf{predire} un'informazione mancante. La bontà di questo processo la si può testare con un altro insieme (\textbf{insieme di test}) calcolando l'errore in base a quante etichette vengono predette in modo corretto. 
 				
-					In maniera più astratta, possiamo vedere questo come un processo di \textit{utilizzo dell'esperienza passata per acquisire competenza}. L'apprendimento supervisionato descrive uno scenario in cui l'esperienza, nel nostro caso un insieme di \textbf{training}, contiene delle etichette che non sono presenti nell'insieme di \textbf{test}, a cui dobbiamo applicare l'esperienza acquisita in modo da \textbf{predire} l'informazione mancante.
-					%riscrivere: etichette  sono rappresentate nel training set, nel test set ci sono coppie non contenute nel training
-				
-				\paragraph{Apprendimento non supervisionato}  Nell'apprendimento non supervisionato non c'è distinzione tra i dati di training e di test. Vengono processati i dati con lo scopo di produrre una versione compressa, o un \say{riassunto} di essi. Il raggruppamento dei dati in sottoinsiemi con caratteristiche simili è una delle pratiche più usate in questo campo.\\\\
-				%fare esempio clustering, concetto di errore e non ci sono etichette 
+				\paragraph{Apprendimento non supervisionato}  Nell'apprendimento non supervisionato non c'è distinzione tra i dati di training e di test. Vengono processati i dati con lo scopo di produrre una versione compressa, o un \say{riassunto} di essi. Il clustering, overro il raggruppamento dei dati in sottoinsiemi con caratteristiche simili è una delle pratiche più usate in questo campo.\\\\
 				Il modello di cui ci occuperemo noi, ovvero le reti neurali artificiali, utilizzano un'apprendimento di tipo supervisionato.
 				
 				
@@ -77,44 +74,39 @@
 		\subsection{Componenti principali di una rete neurale} 
 			\paragraph{Concetto di tempo} Prima di dare una definizione, introduciamo il concetto di tempo in una rete neurale. Ci si riferisce al tempo vigente come $(t)$, al passo successivo come $(t+1)$, al passo precedente come $(t-1)$, e così via. $t$ assume solo valori discreti.
 			
-			\paragraph{Rete neurale artificiale}
-			Una rete neurale artificiale può essere vista come un grafo, cioè consiste in un insieme di \textbf{nodi} \textit{(neuroni)} e \textbf{archi orientati pesati} \textit{(sinapsi)}. Più formalmente, una rete neurale è una tripla $(N,V, \omega)$ in cui:
+			\paragraph{Rete neurale artificiale} Una rete neurale artificiale è formata da un insieme di \textbf{nodi} \textit{(neuroni)}, che elaborano le informazioni ricevute e trasmettono il risultato ai nodi successivi, e da \textbf{archi orientati pesati} \textit{(sinapsi)}. Più formalmente, una rete neurale è una tripla $(N,V, \omega)$ in cui:
 			\begin{itemize}
-				\item $N$ è l'insieme dei neuroni.
-				\item $V = \{(i,j) | i,j \in N\}$ è l'insieme delle connessioni tra i neuroni $i$ e $j$. %i e j sono numeri: insieme di connessioni tra i neuroni
+				\item $N$ è l'insieme dei neuroni,
+				\item $V = \{(i,j) | i,j \in N\}$ è l'insieme delle connessioni tra i neuroni $i$ e $j$, %i e j sono numeri: insieme di connessioni tra i neuroni
 				\item $\omega: V \rightarrow \mathbb{R}$ è la funzione di peso, dove $\omega_{i,j}$ è il peso della connessione tra i neuroni $i$ e $j$. %W insieme non funzione 
-			\end{itemize}%virgola dopo elenco puntato
+				\item $W$ è l'insieme dei pesi ....(?).
+			\end{itemize}
 			Un neurone elabora i dati che gli arrivano tramite le sue connessioni. Questo accade attraverso tre funzioni: funzione di \textbf{propagazione}, funzione di \textbf{attivazione} e funzione di \textbf{uscita}.
-			%TOGLIERE PRIMA FRASE: rielabora con parole chiave (riceve, elabora e trasmette)
 			
-			\img{Struttura di un neurone}{0.4}{neurone.png}{neurone}
-			%guardare se fonti permettono 
+			\img{Struttura di un neurone \cite{kriesel}}{0.4}{neurone.png}{neurone} 
 			
-			 \paragraph{Funzione di propagazione} Dato un neurone $j$, la sua funzione di propagazione riceve gli output $o_{i_1}, \dots, o_{i_n}$ dei neuroni $i_1, \dots, i_n$ connessi a $j$ e i corrispettivi pesi $\omega_{i,j}$, restituendo un valore detto \textit{network input} net$_j$ che verrà poi processato dalla \textit{funzione di attivazione}. 
-			 	%per ogni i \in I esiste omega_{i,j} \in W (insieme al posto della funzione)
-			 	%aggiungere diverso da zero
-			 	Sia $I = \{i_1, i_2, \dots, i_n\}$ l'insieme dei neuroni tale che $\forall z \in \{1, \dots, n\} : \exists w_{i_z,j}$. Allora il network input di $j$ ($net_j$), è calcolato dalla funzione di propagazione $f_{prop}$ come segue: $$net_j = f_{prop}(o_{i_1}, \dots, o_{i_n},w_{i_1,j}, \dots, w_{i_n,j})$$
+			 \paragraph{Funzione di propagazione} Dato un neurone $j$, la sua funzione di propagazione riceve gli output $o_{i_1}, \dots, o_{i_k}$ dei neuroni $i_1, \dots, i_k$ connessi a $j$ e i corrispettivi pesi $\omega_{i,j}$, restituendo un valore detto \textit{network input} net$_j$ che verrà poi processato dalla \textit{funzione di attivazione}. 
+			 	%utilizzare la definizione di insieme
+			 	
+			 	Sia $I = \{i_1, i_2, \dots, i_k\}$ l'insieme dei neuroni connessi a $j$ tale che $I \neq \O, (\forall z \in \{1, \dots, k\} : \exists w_{i_z,j})$. Allora il network input di $j$ ($net_j$), è calcolato dalla funzione di propagazione $f_{prop}$ come segue: $$net_j = f_{prop}(o_{i_1}, \dots, o_{i_k},w_{i_1,j}, \dots, w_{i_k,j})$$
 			 	La funzione di propagazione più usata è la \textbf{somma pesata}, ovvero la somma delle moltiplicazioni dell'output di ogni neurone $i$ per il corrispettivo peso $\omega_{i,j}$: $$net_j = \sum_{i \in I} o_i w_{i,j}$$
 			 	
-			 \paragraph{Stato di attivazione e valore di soglia} Così come in natura, un neurone può essere \textit{attivo} o meno. Lo \textbf{stato di attivazione} \textit{(o attivazione)} è una reazione ai valori che abbiamo ricevuto in input, e il neurone viene attivato quando il \textit{network input} supera il \textbf{valore di soglia} di quel neurone. Sia $j$ un neurone. Il \textbf{valore di soglia} $\Theta_j$ è assegnato unicamente a $j$ e indica la posizione del valore massimo del gradiente della funzione di attivazione.
-			 %così come in natura non va bene 
-			 %ad ogni istante un neurone può essere attivo o meno
-			 %rivedere definizione di valore di soglia: stato neurone discreto, output attivazione continuo -> soglia dice quando è attivo 
+			 \paragraph{Stato di attivazione e valore di soglia} Ad ogni istante un neurone può essere \textit{attivo} o meno. Lo \textbf{stato di attivazione} \textit{(o attivazione)} è una reazione ai valori ricevuti in input, e il neurone viene attivato quando il \textit{network input} supera il \textbf{valore di soglia} di quel neurone. 
+			 
+			 Sia $j$ un neurone. L'ouput della funzione di attivazione di $j$ è un valore continuo, mentre lo stato di attivazione è un valore discreto. Il \textbf{valore di soglia} $\Theta_j$ è assegnato unicamente a $j$ e rappresenta il punto di massima pendenza della funzione di attivazione, oltre il quale si considera $j$ attivo.
 			 
 			 
-			 \paragraph{Funzione di attivazione} Sia $j$ un neurone. La funzione di attivazione è così definita: $$a_j(t) = f_{act}(net_j(t),a_j(t-1), \Theta_j)$$ %levare a_k(t-1) ma mettere una nota che dice che esiste con a_j(t-1) ma non si sposa con quello che faremo dopo
-			 %punto dopo le formule se c'è la maiuscola o punto e virgola
-			 	Trasforma il \textit{network input} net$_j$, il precedente stato di attivazione $a_j(t-1)$, e il valore di soglia $\Theta_j$ in un nuovo stato di attivazione $a_j(t)$ %è funzione del network input e della soglia theta
-			 	A differenza di molte delle variabili definite prima, la funzione di attivazione viene definita \textit{globalmente} per tutti i neuroni. Esistono diverse funzioni di attivazione, alcune tra le più usate, come possiamo vedere in figura~\ref{fig:funzioni di attivazione} sono: 
+			 \paragraph{Funzione di attivazione} Sia $j$ un neurone. La funzione di attivazione è così definita: $$a_j(t) = f_{act}(net_j(t), \Theta_j)\footnote{In alcune reti neurali ricorsive è presente come parametro della funzione anche il precedente stato di attivazione $a_j(t-1)$.}.$$ 
+			 
+			 	In funzione del \textit{network input} net$_j$ e dell valore di soglia $\Theta_j$ ricava un nuovo stato di attivazione $a_j(t)$
+			 	A differenza di molte delle variabili definite prima, la funzione di attivazione viene definita \textit{globalmente} per ogni strato di neuroni. Esistono diverse funzioni di attivazione, alcune tra le più usate, come possiamo vedere in figura~\ref{fig:funzioni di attivazione} sono: 
 			 	\begin{itemize}
-			 		\item La funzione logistica: $f(x) = \frac{1}{1+e^{-x}}$
-			 		\item La funzione tangente iperbolica: $f(x) = tanh(x)$
-			 		\item La funzione ReLU: $f(x) = max(0,x)$ %\mathrm nelle funzioni
-			 		\item La funzione identità: $f(x) = x$
+			 		\item la funzione logistica: $f(x) = \frac{1}{1+e^{-x}}$,
+			 		\item la funzione tangente iperbolica: $f(x) = \tanh(x)$,
+			 		\item la funzione ReLU: $f(x) = \max(0,x)$,
+			 		\item la funzione identità: $f(x) = x$.
 			 	\end{itemize}
-			 	%non globalmente: in ciò che useremo noi globalmente per strato
-			 	%anche qua virgole e lettere iniziale 
-			 \begin{figure}[h]
+			 \begin{figure}
 				\begin{subfigure}[]{.5\textwidth}
 					\centering
 					\includegraphics[width=.9\linewidth]{logistic.png}
@@ -151,72 +143,82 @@
 			 	
 			 \paragraph{Funzione di uscita} La funzione di uscita di un neurone $j$ calcola i valori che verranno trasmessi agli altri neuroni connessi a $j$. 
 			 
-			 	Sia $j$ un neurone. La funzione di uscita calcola il valore di output $o_j$ del neurone $j$ in funzione dell'attivazione $a_j$. $$f_{out}(a_j) = o_j$$  %oj a sinistra
+			 	Sia $j$ un neurone. La funzione di uscita calcola il valore di output $o_j$ del neurone $j$ in funzione dell'attivazione $a_j$. $$f_{out}(a_j) = o_j$$  
+			 	%oj a sinistra (perchè?)
 			 	
 			 	Anche in questo caso, solitamente la funzione è definita globalmente. Spesso viene usata come funzione di uscita la \textit{funzione di identità}, mandando in output direttamente l'attivazione $a_j$. $$f_{out}(a_j) = a_j, \text{ quindi } o_j = a_j$$
 			 	
-			 \paragraph{Neurone bias} Come abbiamo visto, il valore di soglia (che ci dice quando un neurone viene considerato attivo) è un parametro della funzione di attivazione. Siccome sarebbe complicato accedere alla funzione di attivazione a \textit{runtime} per modificare dato valore, i valori di soglia $\Theta_{j_1}, \dots, \Theta_{j_n}$ dei neuroni $j_1, \dots, j_n$ possono essere realizzati come pesi di un neurone sempre attivo. Aggiungiamo quindi un neurone \textit{bias} il cui \textit{output} è fisso a 1, connesso ai neuroni $j_1, \dots, j_n$ il cui peso delle connessioni è pari a $-\Theta_{j_1}, \dots, -\Theta_{j_n}$
-			 %non parlare della roba runtime, più efficiente del codice e in più questa cosa permette acne di semplificare i conti quando si derivano delle proprietà formali del modello (tipo nella backpropagation)
+			 \paragraph{Neurone bias} I valori di soglia $\Theta_{j_1}, \dots, \Theta_{j_n}$ dei neuroni $j_1, \dots, j_n$ possono essere realizzati come pesi di un neurone sempre attivo. Aggiungiamo quindi un neurone \textit{bias} il cui \textit{output} è fisso a 1, connesso ai neuroni $j_1, \dots, j_n$ il cui peso delle connessioni è pari a $-\Theta_{j_1}, \dots, -\Theta_{j_n}$. Questa semplificazione permette di semplificare i conti quando si derivano delle proprietà formali del modello e rendono il codice più efficiente.
 			 
 			 	\img{Due reti equivalenti, a destra con neurone bias e a sinistra senza.}{0.5}{bias-neuron.png}{bias}
 			 	
-			 \paragraph{Vettore d'ingresso e vettore di uscita} Le reti neurali che andremo a vedere \textit{(i.e. le reti neurali feed-forward)}, fanno parte di quella categoria di reti che processano dei dati in input, per poi produrre un output. Una rete con $n$ neuroni di input, necessita di un \textbf{vettore d'ingresso} $x = (x_1, x_2, \dots, x_n)$ che gli verrà dato in pasto, e dati $m$ neuroni di uscita fornisce un \textbf{vettore di uscita} $y = (y_1, y_2, \dots, y_m)$.  
-			 %pasto non va bene: input
-			 %togliere dati m neuroni di uscita		
-			 %cambiare n PRIMA (funz di propagazione) 
-			 
+			 \paragraph{Vettore d'ingresso e vettore di uscita} Le reti neurali che andremo a vedere \textit{(cioè le reti neurali feed-forward)} fanno parte di quella categoria di reti che processano dei dati in input per poi produrre un output. Una rete con $n$ neuroni di ingresso, necessita di un \textbf{vettore d'ingresso} $x = (x_1, x_2, \dots, x_n)$ che gli verrà dato in input e fornisce un \textbf{vettore di uscita} $y = (y_1, y_2, \dots, y_m)$.  
 			 	 			 
 		\section{Reti neurali feed-forward}
-			Esistono diverse topologie di rete, ma noi ci concentreremo sulle \textbf{reti neurali feed-forward} \textit{(o in italiano, reti neurali con flusso in avanti)}. In queste reti, i neuroni sono raggruppati in diversi \textbf{strati}: \textit{uno strato di ingresso, $k$ strati nascosti} e \textit{uno strato di uscita}. In una rete feed-forward ogni neurone ha connessioni dirette solo con lo strato successivo a quelli in cui è contenuto (in direzione dello strato di uscita), evitando così l'esistenza di cicli. Una rete in cui ogni neurone è connesso a tutti i neuroni dello strato successivo viene detta rete \textbf{completamente connessa}.
-			%k invece che n
-			%specificare feedforward
-			\paragraph{Percettrone} Un percettrone è una rete feed-forward completamente connessa costituita da uno strato d'ingresso in cui i neuroni di input non fanno altro che propagare l'informazione ricevuta \textit{(neuroni identità)}, seguito  da almeno uno strato di pesi addestrabili.% non fanno altro che ... troppo colloquiale, più tecnico
-			%specificare funzione di uscita: 
-			%funzione di ouput dice cosa viene trasmesso dal neurone
+			Esistono diverse topologie di rete, ma noi ci concentreremo sulle \textbf{reti neurali feed-forward} \textit{(o in italiano, reti neurali con flusso in avanti)}. In queste reti, i neuroni sono raggruppati in diversi \textbf{strati}: \textit{uno strato di ingresso, $k$ strati nascosti} e \textit{uno strato di uscita}. In una rete feed-forward ogni neurone ha connessioni dirette solo con lo strato successivo a quelli in cui è contenuto (in direzione dello strato di uscita), evitando così l'esistenza di cicli. Una rete feed-forward in cui ogni neurone è connesso a tutti i neuroni dello strato successivo viene detta rete \textbf{completamente connessa}.
+
+			\paragraph{Percettrone} Un percettrone è una rete feed-forward completamente connessa costituita da uno strato d'ingresso in cui i neuroni di input propagano l'informazione ricevuta \textit{(cioè le funzioni di propagazione, attivazione e uscita del primo strato di neuroni sono la funzione identità)}, seguito da almeno uno strato di pesi addestrabili.
 			
 			\paragraph{Percettrone a singolo strato} Un percettrone a singolo strato è la rete feed-forward più semplice che si possa fare. Esso è costituito semplicemente da uno strato d'ingresso e uno di uscita. 
 				\img{Percettrone a singolo strato con 5 neuroni di ingresso e 3 neuroni di uscita}{0.5}{slp.png}{slp} 
 				
-			\paragraph{Percettrone multistrato} Un percettrone multistrato è una rete feed-forward che ha più di uno strato di pesi addestrabili. Si può dimostrare che i percettroni a singolo strato siano in grado di rappresentare solo dati separabili \textbf{linearmente}, mentre i percettroni multistrato ci permettono di aggirare questa limitazione. 
+			\paragraph{Separabilità lineare} Siano $X$ e $Y$ due insiemi $\in \mathbb{R}^b$. Essi sono linearmente separabili se e solo se esiste un iperpiano $P$ di $\mathbb{R}^b$ tale che gli elementi di $X$ e $Y$ sono divisi da $P$. 
+			
+			\begin{figure}
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=.9\linewidth]{linearly_separable.png}
+					\caption{Dati separabili linearmente}
+					\label{fig:linearly_separable}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=.9\linewidth]{not_linearly_separable.png}
+					\caption{Dati \textbf{non} separabili linearmente}
+					\label{fig:not_linearly_separable}
+				\end{subfigure}
+				
+				\caption{Separabilità lineare}
+			\end{figure}	
+
+				
+				 
+			\paragraph{Percettrone multistrato} Un percettrone multistrato è una rete feed-forward che ha più di uno strato di pesi addestrabili. M. Minsky e S. Papert nel 1969 dimostrarono in \textit{Perceptrons: an introduction to computational geometry} che i percettroni a singolo strato sono in grado di approssimare solo funzioni che separano i dati \textbf{linearmente}, mentre i percettroni multistrato ci permettono di aggirare questa limitazione. 
 				\img{percettrone multistrato}{0.5}{nn-feed-forward.png}{feedforward}
-				%calcolare funzioni che separano dati linearmente
-				%specificare prima di qua cosa vuol dire separare dati linearmente
-				%rappresentare NON va bene
-				%TOGLIERE h dalle fig
 		
 		\section{Apprendimento di una rete neurale}
 			Abbiamo visto la struttura delle reti neurali ma ancora non sappiamo niente su come esse apprendano. Sappiamo che in una rete feed-forward ogni neurone è collegato tramite degli archi pesati a tutti i neuroni dello strato successivo, ma non sappiamo come i pesi vengano inizializzati e in base a cosa vengano modificati. In realtà il processo di apprendimento può essere descritto in pochi passi: 
 			\begin{itemize}
-				\item Dare in pasto alla nostra rete un vettore d'ingresso $p$ di cui sappiamo l'output desiderato. %dare in pasto NO, usare etichette che devo aver citato prima
-				\item Propagare in avanti l'input attraverso le tre funzioni viste prima.
-				\item Comparare il vettore di uscita $y$ ottenuto con il vettore di uscita desiderato $t$: sottraendo i due vettori otteniamo un \textbf{vettore di errore} $E_p = t - y$. %precisare t, altrimenti sembra tempo (etichetta t)
-				\item Correggere i pesi con lo scopo di ridurre al minimo $E_p$. %
-			\end{itemize} %minuscole e virgole
-			Questo processo, nonostante la differenza del vettore di errore sia minima, non ci dice esattamente se la nostra rete abbia appreso il pattern che c'è dietro ai dati, o se ha semplicemente imparato a riprodurre l'output dei dati che gli abbiamo dato in ingresso. Questo fenomeno è chiamato \textbf{overfitting}, e per accorgerci di questo problema è una buona prassi dividere in due insiemi i dati che usiamo per allenare la rete neurale in: %specificare che è un processo iterativo su due dimensioni (dati, e poi di nuovo tutti i dati ancora)
-			%se l'errore converge a un valore basso (meglio)
-			%non da garanzie 
-			%fondere crva di apprendimento e altro (in monitorare) e aggiungere la parte qua sopra dopo che ci si pone il problema se ha generalizzato
-			\begin{itemize}
-				\item Un insieme di \textbf{training} utilizzato per allenare la rete.
-				\item Un insieme di \textbf{validation} utilizzato per valutare la bontà della rete.%test non validation
+				\item dare in input alla nostra rete un vettore d'ingresso $p$ di cui sappiamo l'etichetta,
+				\item propagare in avanti l'input attraverso le tre funzioni viste prima, %virgola o punto?
+				\item siano $y$ il vettore di uscita ottenuto e $t$ il vettore di uscita desiderato: sottraendo i due vettori otteniamo un \textbf{vettore di errore} $E_p = t - y$,
+				\item correggere i pesi con lo scopo di ridurre al minimo $E_p$,
+				\item reiterare finchè non si raggiunge un errore soddisfacente.
 			\end{itemize}
-			La divisione deve essere casuale in modo tale che i dati siano influenzati il meno possibile da fattori esterni (e.g. prendere i primi dati in un dataset in cui essi sono ordinati in ordine crescente potrebbe influire negativamente l'apprendimento) e solitamente si tiene una proporzione in cui l'insieme di training ha un numero di dati maggiore rispetto all'insieme di validation (almeno 3/4 dei dati totali). 
-			%è buona prassi
+			Questo è un processo iterativo su due dimensioni. Si itera più volte (finchè non consideriamo l'errore soddisfacente) su tutti i dati. Nonostante la differenza del vettore di errore converga a un valore basso, questo non ci garantisce che la rete abbia appreso il pattern che c'è dietro ai dati, anzi, potrebbe aver imparato a riprodurre l'output dei dati che gli abbiamo dato in ingresso. Questo fenomeno è chiamato \textbf{overfitting} e per accorgerci di questo problema è buona prassi dividere in due insiemi i dati che usiamo per allenare la rete neurale in: 
+			%fondere curva di apprendimento e altro (in monitorare) e aggiungere la parte qua sopra dopo che ci si pone il problema se ha generalizzato
+			\begin{itemize}
+				\item un insieme di \textbf{training} utilizzato per allenare la rete,
+				\item un insieme di \textbf{test} utilizzato per valutare la bontà della rete.
+			\end{itemize}
+			Una \textit{best practice} è quella di dividere in modo casuale i dati tale che siano influenzati il meno possibile da fattori esterni (e.g. prendere i primi dati in un dataset in cui essi sono ordinati in ordine crescente potrebbe influire negativamente l'apprendimento) e solitamente si tiene una proporzione in cui l'insieme di training ha un numero di dati maggiore rispetto all'insieme di validation (almeno 3/4 dei dati totali). 
+
 			\paragraph{Apprendimento online e offline} Oltre alla principale distinzione vista in precedenza tra i tipi di apprendimento (supervisionato e non supervisionato), c'è un'altra distinzione su come ci approcciamo alla modifica dei pesi. L'apprendimento può essere: 
 				\begin{itemize}
 					\item \textbf{Online:} i dati di training vengono inseriti uno a uno, la rete calcola l'errore del singolo dato e modifica i pesi di conseguenza.
-					\item \textbf{Offline:} diversi dati di training vengono inseriti nella rete insieme, la rete accumula gli errori e modifica i pesi di conseguenza. Ogni lotto di dati viene detto \textbf{batch}, e tutta la procedura di apprendimento di un batch viene detta \textbf{epoca}.
+					\item \textbf{Offline:} Tutti i dati di training vengono inseriti nella rete insieme, la rete accumula gli errori e modifica i pesi di conseguenza. Ogni lotto di dati viene detto \textbf{batch}, e tutta la procedura di apprendimento di un batch viene detta \textbf{epoca}.
 				\end{itemize}
-				%citare mini batch (via di mezzo) è più veloce e aggiungere nella sezione della bp
-				
-			\subsection{Curva di apprendimento}
-				La curva di apprendimento traccia il progresso dell'errore e ci aiuta a capire se la nostra rete stia facendo progressi o meno. Per questo scopo dobbiamo normalizzare l'errore. Il modo più comune per fare ciò è quello di calcolare il valore efficace tra il vettore di uscita desiderato $t$ e il vettore di uscita $y$.  %NON dobbiamo : normalizziamo per ricadere in un intervallo
+				Esiste anche una via di mezzo in cui i dati vengono divisi in \textbf{mini-batch}, ovvero sottoinsiemi dell'insieme di training. Dati $h$ dati di training e una dimensione di batch $b$, in ogni epoca i pesi vengono ricalcolati $\lceil h/b \rceil$ volte.
+			
+			\subsection{Monitorare l'apprendimento di una rete neurale}
+				La curva di apprendimento traccia il progresso dell'errore e ci aiuta a capire se la nostra rete stia facendo progressi o meno. Per questo scopo normalizziamo l'errore in modo tale che sia sempre un valore positivo. Il modo più comune è quello di calcolare il valore efficace tra il vettore di uscita desiderato $t$ e il vettore di uscita $y$. 
 
-				Siano $\Omega$ i neuroni di uscita e $O$ l'insieme dei neuroni di uscita. Il valore efficace si calcola così: $$Err_p = \sqrt{\frac{\sum_{\Omega \in O} (t_{\Omega} - y_{\Omega})^2}{|O|}}$$
-				Per quanto riguarda l'apprendimento offline, l'\textbf{errore totale} di un'epoca si calcola nel seguente modo: $$Err = \sum_{p \in P} Err_p$$ %normalizzare anche Err dividendo per numero di p (è detta male)
+				Siano $\Omega$ i neuroni di uscita, $O$ l'insieme dei neuroni di uscita e $P$ l'insieme di training. Il valore efficace si calcola così: $$Err_p = \sqrt{\frac{\sum_{\Omega \in O} (t_{\Omega} - y_{\Omega})^2}{|O|}}$$
+				Per quanto riguarda l'apprendimento offline, l'\textbf{errore totale} di un'epoca si calcola nel seguente modo: $$Err = \sum_{p \in P} \frac{Err_p}{|P|}$$ 
 				La curva di apprendimento va tracciata per i due insiemi di training e validation, in questo modo possiamo accorgerci se siamo in un caso di overfitting guardando solo l'andamento delle due curve: se la curva di training decresce velocemente mentre quella di validation comincia a risalire siamo chiaramente in un caso in cui stiamo perdendo la generalizzazione dei dati che avevamo acquisito, l'ideale sarebbe fermarsi appena prima che la curva di validation cominci a risalire (\textbf{early stopping}). Solitamente la curva di training avrà comunque un errore minore rispetto quella di validation.
 
-				\begin{figure}[h]
+				\begin{figure}
 				\begin{subfigure}[]{.5\textwidth}
 					\centering
 					\includegraphics[width=\linewidth]{learning_curve.png}
@@ -227,7 +229,7 @@
 				\begin{subfigure}[]{.5\textwidth}
 					\centering
 					\includegraphics[width=\linewidth]{overfitting.png}
-					\caption{Corva di apprendimento con overfitting}
+					\caption{Curva di apprendimento con overfitting}
 					\label{fig:overfitting}
 				\end{subfigure}
 				
