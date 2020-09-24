@@ -60,7 +60,7 @@
 			
 			\subsection{Tipi di apprendimento} Il machine learning è diviso in diversi sottocampi in cui abbiamo più paradigmi di apprendimento. La principale distinzione che si può fare è la differenza tra l'apprendimento \textbf{supervisionato}, \textbf{non supervisionato} e \textbf{per rinforzo}. Per quanto riguarda ciò che vedremo nei prossimi capitoli, possiamo concentrarci solo sulla differenza tra l'apprendimento supervisionato e non supervisionato.
 			
-				\paragraph{Apprendimento supervisionato} Consideriamo di dover classificare tre specie di fiori leggermente diversi tra loro appartenenti alla stessa famiglia \textit{(esperimento che riprenderemo più avanti)}. Per imparare a riconoscerli, potremmo ricevere un insieme di dati \textit{(per esempio la larghezza dei petali, lunghezza del gambo, ecc...)} che descrivono i fiori e cercare di indovinare la specie. Una figura d'insegnante (\textit{teacher}) ci da una \textbf{risposta d'apprendimento} per ogni tentativo che facciamo di indovinare l'\textbf{etichetta}, ovvero la classe di cui fanno parte. Dopo questa fase di \textbf{allenamento}, dovremmo essere in grado di trovare un pattern tra i dati per etichettare nuovi fiori, questa volta privi di etichetta e non appartenenti all'insieme dato in precedenza. 
+				\paragraph{Apprendimento supervisionato} Consideriamo di dover classificare tre specie di fiori leggermente diversi tra loro appartenenti alla stessa famiglia \textit{(esperimento che riprenderemo più avanti)}. Per imparare a riconoscerli, potremmo ricevere un insieme di dati \textit{(per esempio la larghezza dei petali, lunghezza del gambo, ecc...)} che descrivono i fiori e cercare di predire la specie. Una figura d'insegnante (\textit{teacher}) ci da una \textbf{risposta d'apprendimento} per ogni tentativo che facciamo di indovinare l'\textbf{etichetta}, ovvero la classe di cui fanno parte. Dopo questa fase di \textbf{allenamento}, dovremmo essere stati in grado di aver trovato un pattern tra i dati per etichettare nuovi fiori, questa volta privi di etichetta e non appartenenti all'insieme dato in precedenza. 
 										
 					In maniera più astratta, possiamo vedere questo come un processo di \textit{utilizzo dell'esperienza passata per acquisire competenza}. L'apprendimento supervisionato descrive uno scenario in cui dobbiamo utilizzare l'esperienza acquisita tramite il processo di apprendimento con un insieme di dati (\textbf{insieme di training}) per \textbf{predire} un'informazione mancante. La bontà di questo processo la si può testare con un altro insieme (\textbf{insieme di test}) calcolando l'errore in base a quante etichette vengono predette in modo corretto. 
 				
@@ -69,7 +69,7 @@
 				
 				
 		\section{Che cos'è una rete neurale?}
-			Il cervello animale è un meccanismo in grado di apprendere grazie all'esperienza, ed è per questo che si è cercato di emularlo \textit{(in modo molto semplificato)} come modello di machine learning. Il nucleo di tale organo sono i \textbf{neuroni}, ed essi sono connessi tra di loro da delle \textbf{sinapsi} in modo da poter comunicare. Ebbene, anche il modello artificiale riprende questa forma. L'archetipo matematico di neurone è stato ideato da McCulloch e Pitts nell'articolo \textit{A logical calculus of the ideas immanent in nervous activity} del 1943. Lo descrivono come un modello contenente una soglia che ne determina lo stato di attivazione e una funzione non lineare detta \textbf{funzione di attivazione} che riceve uno o più input \textbf{pesati} e produce un unico output.
+			Il cervello animale è un meccanismo in grado di apprendere grazie all'esperienza, ed è per questo che si è cercato di emularlo \textit{(in modo molto semplificato)} come modello di machine learning. Il nucleo di tale organo sono i \textbf{neuroni}, ed essi sono connessi tra di loro tramite delle \textbf{sinapsi} in modo da poter comunicare. Ebbene, anche il modello artificiale riprende questa forma. L'archetipo matematico di neurone è stato ideato da McCulloch e Pitts nel 1943 \cite{mcculloch_pitts}. Lo descrivono come un modello contenente una soglia che ne determina lo stato di attivazione e una funzione non lineare detta \textbf{funzione di attivazione} che riceve uno o più input \textbf{pesati} e produce un unico output.
 			
 		\subsection{Componenti principali di una rete neurale} 
 			\paragraph{Concetto di tempo} Prima di dare una definizione, introduciamo il concetto di tempo in una rete neurale. Ci si riferisce al tempo vigente come $(t)$, al passo successivo come $(t+1)$, al passo precedente come $(t-1)$, e così via. $t$ assume solo valori discreti.
@@ -78,24 +78,21 @@
 			\begin{itemize}
 				\item $N$ è l'insieme dei neuroni,
 				\item $V = \{(i,j) | i,j \in N\}$ è l'insieme delle connessioni tra i neuroni $i$ e $j$, 
-				\item $\omega: V \rightarrow \mathbb{R}$ è la funzione di peso, dove $\omega_{i,j}$ è il peso della connessione tra i neuroni $i$ e $j$.  
+				\item $\omega: V \rightarrow \mathbb{R}$ è la funzione di peso, dove $\omega(i,j)$ è il peso della connessione tra i neuroni $i$ e $j$.  
 			\end{itemize}
 			Un neurone elabora i dati che gli arrivano tramite le sue connessioni. Questo accade attraverso tre funzioni: funzione di \textbf{propagazione}, funzione di \textbf{attivazione} e funzione di \textbf{uscita}.
 			
 			\img{Struttura di un neurone \cite{kriesel}}{0.4}{neurone.png}{neurone} 
 			
-			 \paragraph{Funzione di propagazione} Dato un neurone $j$, la sua funzione di propagazione riceve gli output $o_{i_1}, \dots, o_{i_k}$ dei neuroni $i_1, \dots, i_k$ connessi a $j$ e i corrispettivi pesi $\omega_{i,j}$, restituendo un valore detto \textit{network input} net$_j$ che verrà poi processato dalla \textit{funzione di attivazione}. 
+			 \paragraph{Funzione di propagazione} Dato un neurone $j$, sia $I = i_1, \dots, i_k$ l'insieme dei neuroni ad esso connessi. L'output $o_{i_1}, \dots, o_{i_k}$ di questi neuroni viene preelaborato producendo un valore detto \textit{network input} net$_j$  che verrà poi elaborato dalla funzione di attivazione. Più precisamente il network input è calcolato come segue: $$net_j = f_{prop}(o_{i_1}, \dots, o_{i_k}, \omega(i_1,j), \dots, \omega(i_k,j))$$
+			 	La funzione di propagazione più usata è la \textbf{somma pesata}, ovvero la somma delle moltiplicazioni dell'output di ogni neurone $i$ per il corrispettivo peso $\omega(i,j)$: $$net_j = \sum_{i \in I} o_i \omega(i,j)$$
 			 	
-			 	Sia $I = \{i_1, i_2, \dots, i_k\}$ l'insieme dei neuroni connessi a $j$ tale che $I \neq \O, (\forall z \in \{1, \dots, k\} : \exists w_{i_z,j})$. Allora il network input di $j$ ($net_j$), è calcolato dalla funzione di propagazione $f_{prop}$ come segue: $$net_j = f_{prop}(o_{i_1}, \dots, o_{i_k},w_{i_1,j}, \dots, w_{i_k,j})$$
-			 	La funzione di propagazione più usata è la \textbf{somma pesata}, ovvero la somma delle moltiplicazioni dell'output di ogni neurone $i$ per il corrispettivo peso $\omega_{i,j}$: $$net_j = \sum_{i \in I} o_i w_{i,j}$$
-			 	
-			 \paragraph{Stato di attivazione e valore di soglia} Ad ogni istante un neurone può essere \textit{attivo} o meno. Lo \textbf{stato di attivazione} \textit{(o attivazione)} è una reazione ai valori ricevuti in input, e il neurone viene attivato quando il \textit{network input} supera il \textbf{valore di soglia} di quel neurone. 
+			 \paragraph{Stato di attivazione e valore di soglia} Ad ogni istante un neurone può essere \textit{attivo} o meno. Lo \textbf{stato di attivazione} \textit{(o attivazione)} è una reazione ai valori ricevuti in input, e il neurone viene attivato quando il network input supera il \textbf{valore di soglia} di quel neurone. 
 			 
-			 Sia $j$ un neurone. L'ouput della funzione di attivazione di $j$ è un valore continuo, mentre lo stato di attivazione è un valore discreto. Il \textbf{valore di soglia} $\Theta_j$ è assegnato unicamente a $j$ e rappresenta il punto di massima pendenza della funzione di attivazione, oltre il quale si considera $j$ attivo.
+			 Sia $j$ un neurone. Il \textbf{valore di soglia} $\Theta_j$ è assegnato unicamente a $j$ e rappresenta il punto di massima pendenza della funzione di attivazione, oltre il quale si considera $j$ attivo.
 			 
 			 
-			 \paragraph{Funzione di attivazione} Sia $j$ un neurone. La funzione di attivazione è così definita: $$a_j(t) = f_{act}(net_j(t), \Theta_j)\footnote{In alcune reti neurali ricorsive è presente come parametro della funzione anche il precedente stato di attivazione $a_j(t-1)$.}.$$ 
-			 
+			 \paragraph{Funzione di attivazione} Sia $j$ un neurone. La funzione di attivazione è così definita: $$a_j(t) = f_{act}(net_j(t), \Theta_j)\footnote{In alcune reti neurali ricorsive è presente come parametro della funzione di attivazione anche il precedente stato di attivazione $a_j(t-1)$.}.$$ 
 			 	In funzione del \textit{network input} net$_j$ e dell valore di soglia $\Theta_j$ ricava un nuovo stato di attivazione $a_j(t)$
 			 	A differenza di molte delle variabili definite prima, la funzione di attivazione viene definita \textit{globalmente} per ogni strato di neuroni. Esistono diverse funzioni di attivazione, alcune tra le più usate, come possiamo vedere in figura~\ref{fig:funzioni di attivazione} sono: 
 			 	\begin{itemize}
@@ -142,10 +139,9 @@
 			 \paragraph{Funzione di uscita} La funzione di uscita di un neurone $j$ calcola i valori che verranno trasmessi agli altri neuroni connessi a $j$. 
 			 
 			 	Sia $j$ un neurone. La funzione di uscita calcola il valore di output $o_j$ del neurone $j$ in funzione dell'attivazione $a_j$. $$o_j = f_{out}(a_j)$$  
+			 	Anche in questo caso, solitamente la funzione è definita per ogni strato di neuroni. Spesso viene usata come funzione di uscita la \textit{funzione di identità}, mandando in output direttamente l'attivazione $a_j$. $$f_{out}(a_j) = a_j, \text{ quindi } o_j = a_j$$
 			 	
-			 	Anche in questo caso, solitamente la funzione è definita globalmente. Spesso viene usata come funzione di uscita la \textit{funzione di identità}, mandando in output direttamente l'attivazione $a_j$. $$f_{out}(a_j) = a_j, \text{ quindi } o_j = a_j$$
-			 	
-			 \paragraph{Neurone bias} I valori di soglia $\Theta_{j_1}, \dots, \Theta_{j_n}$ dei neuroni $j_1, \dots, j_n$ possono essere realizzati come pesi di un neurone sempre attivo. Aggiungiamo quindi un neurone \textit{bias} il cui \textit{output} è fisso a 1, connesso ai neuroni $j_1, \dots, j_n$ il cui peso delle connessioni è pari a $-\Theta_{j_1}, \dots, -\Theta_{j_n}$. Questa semplificazione permette di semplificare i conti quando si derivano delle proprietà formali del modello e rendono il codice più efficiente.
+			 \paragraph{Neurone bias} I valori di soglia $\Theta_{j_1}, \dots, \Theta_{j_n}$ dei neuroni $j_1, \dots, j_n$ possono essere realizzati come pesi di un neurone sempre attivo. Aggiungiamo quindi un neurone \textit{bias} il cui \textit{output} è fisso a 1, connesso ai neuroni $j_1, \dots, j_n$ il cui peso delle connessioni è pari a $-\Theta_{j_1}, \dots, -\Theta_{j_n}$. Questa semplificazione permette di facilitare i conti quando si derivano delle proprietà formali del modello.
 			 
 			 	\img{Due reti equivalenti, a destra con neurone bias e a sinistra senza. \cite{kriesel}}{0.5}{bias-neuron.png}{bias}
 			 	
@@ -181,25 +177,26 @@
 
 				
 				 
-			\paragraph{Percettrone multistrato} Un percettrone multistrato è una rete feed-forward che ha più di uno strato di pesi addestrabili. M. Minsky e S. Papert nel 1969 dimostrarono in \textit{Perceptrons: an introduction to computational geometry} che i percettroni a singolo strato sono in grado di approssimare solo funzioni che separano i dati \textbf{linearmente}; i percettroni multistrato ci permettono di aggirare questa limitazione. 
+			\paragraph{Percettrone multistrato} Un percettrone multistrato è un percettrone con più di uno strato di pesi addestrabili. M. Minsky e S. Papert nel 1969 \cite{minsky_papert} dimostrarono che i percettroni a singolo strato sono in grado di approssimare solo funzioni che separano i dati \textbf{linearmente}; i percettroni multistrato ci permettono di aggirare questa limitazione. 
 				\img{Percettrone multistrato. \cite{kriesel}}{0.5}{nn-feed-forward.png}{feedforward}
 		
 		\section{Apprendimento di una rete neurale}
 			Abbiamo visto la struttura delle reti neurali ma ancora non sappiamo niente su come esse apprendano. Sappiamo che in una rete feed-forward ogni neurone è collegato tramite degli archi pesati a tutti i neuroni dello strato successivo, ma non sappiamo come i pesi vengano inizializzati e in base a cosa vengano modificati. In realtà il processo di apprendimento può essere descritto in pochi passi: 
-			\begin{itemize}
+			\begin{enumerate}
+				\item inizializzare i pesi della rete neurale in modo casuale,
 				\item dare in input alla nostra rete un vettore d'ingresso $p$ di cui sappiamo l'etichetta,
-				\item propagare in avanti l'input attraverso le tre funzioni viste prima, %virgola o punto?
+				\item propagare in avanti l'input fino ai neuroni di uscita attraverso le tre funzioni viste prima, 
 				\item siano $y$ il vettore di uscita ottenuto e $t$ il vettore di uscita desiderato: sottraendo i due vettori otteniamo un \textbf{vettore di errore} $E_p = t - y$,
 				\item correggere i pesi con lo scopo di ridurre al minimo $E_p$,
-				\item reiterare finchè non si raggiunge un errore soddisfacente.
-			\end{itemize}
+				\item reiterare 2-5 finchè non si raggiunge un errore soddisfacente.
+			\end{enumerate}
 			Questo è un processo iterativo su due dimensioni. Si itera più volte (finchè non consideriamo l'errore soddisfacente) su tutti i dati. Nonostante la differenza del vettore di errore converga verso un valore basso, questo non ci garantisce che la rete abbia appreso il pattern che c'è dietro ai dati, anzi, potrebbe aver imparato a riprodurre l'output dei dati che gli abbiamo dato in ingresso. Questo fenomeno è chiamato \textbf{overfitting} e per accorgerci di questo problema è buona prassi dividere in due insiemi i dati che usiamo per allenare la rete neurale in: 
 			%fondere curva di apprendimento e altro (in monitorare) e aggiungere la parte qua sopra dopo che ci si pone il problema se ha generalizzato
 			\begin{itemize}
 				\item un insieme di \textbf{training} utilizzato per allenare la rete,
 				\item un insieme di \textbf{test} utilizzato per valutare la bontà della rete.
 			\end{itemize}
-			Una \textit{best practice} è quella di dividere in modo casuale i dati talché siano influenzati il meno possibile da fattori esterni \textit{(per esempio prendere i primi dati in un dataset in cui essi sono ordinati in ordine crescente potrebbe influire negativamente sull'apprendimento)} e solitamente si tiene una proporzione in cui l'insieme di training ha un numero di dati maggiore rispetto all'insieme di validation (almeno 3/4 dei dati totali). 
+			Una \textit{best practice} è quella di dividere in modo casuale i dati talché siano influenzati il meno possibile da fattori esterni \textit{(per esempio prendere i primi dati in un dataset in cui essi sono ordinati in ordine crescente potrebbe influire negativamente sull'apprendimento)} e solitamente si tiene una proporzione in cui l'insieme di training ha un numero di dati maggiore rispetto all'insieme di test (almeno 3/4 dei dati totali). 
 
 			\paragraph{Apprendimento online e offline} Oltre alla principale distinzione vista in precedenza tra i tipi di apprendimento (supervisionato e non supervisionato), c'è un'altra distinzione importante sulla frequenza della modifica dei pesi. L'apprendimento può essere: 
 				\begin{itemize}
@@ -211,7 +208,7 @@
 			\subsection{Monitorare l'apprendimento di una rete neurale}
 				Un modo spesso usato per monitorare l'apprendimento di una rete neurale è quello di tracciare \textbf{curva di apprendimento}. Essa traccia il progresso dell'errore e ci aiuta a capire se la nostra rete stia facendo progressi o meno. Per questo scopo normalizziamo l'errore in modo tale che sia sempre un valore positivo. Il modo più comune è quello di calcolare il valore efficace tra il vettore di uscita desiderato $t$ e il vettore di uscita $y$. 
 
-				Siano $\Omega$ i neuroni di uscita, $O$ l'insieme dei neuroni di uscita e $P$ l'insieme di training. Il valore efficace si calcola nel seguente modo: $$Err_p = \sqrt{\frac{\sum_{\Omega \in O} (t_{\Omega} - y_{\Omega})^2}{|O|}}.$$
+				Siano $\Omega$ i neuroni di uscita, $O$ l'insieme dei neuroni di uscita e $P$ l'insieme di training. Il valore efficace del singolo elemento di training $p$ si calcola nel seguente modo: $$Err_p = \sqrt{\frac{\sum_{\Omega \in O} (t_{\Omega} - y_{\Omega})^2}{|O|}}.$$
 				Per quanto riguarda l'apprendimento offline, l'\textbf{errore totale} di un'epoca si calcola nel seguente modo: $$Err = \sum_{p \in P} \frac{Err_p}{|P|}.$$ 
 				La curva di apprendimento va tracciata per i due insiemi di training e test, in questo modo possiamo accorgerci se siamo in un caso di overfitting guardando solo l'andamento delle due curve: se la curva di training decresce velocemente mentre quella di test comincia a risalire siamo chiaramente in un caso in cui stiamo perdendo la generalizzazione dei dati che avevamo acquisito, l'ideale sarebbe fermarsi appena prima che la curva di test cominci a risalire (\textbf{early stopping}). Solitamente la curva di training avrà comunque un errore minore rispetto quella di test.
 
@@ -234,15 +231,14 @@
 				\label{fig:curve_di_apprendimento}
 				\end{figure}
 				
-			
 			\subsection{Discesa del gradiente}
-				Ora dovrebbe venire spontaneo chiederci: quando smettiamo di apprendere? Non è una domanda dalla risposta facile, e per capire questo fondamentale passaggio bisogna avere un'idea di cosa sia la discesa del gradiente. È una procedura che viene utilizzata per massimizzare o minimizzare una funzione. Il gradiente è un vettore $g$ definito in ogni punto derivabile di una funzione ed esso punta verso la salita più ripida. Di conseguenza $-g$ punterà verso la discesa più ripida.
+				Quando smettiamo di apprendere? Non è una domanda dalla risposta facile, e per capire questo fondamentale passaggio bisogna avere un'idea chiara di cosa sia la discesa del gradiente. È una procedura che viene utilizzata per massimizzare o minimizzare una funzione. Il gradiente è un vettore $g$ definito in ogni punto derivabile di una funzione ed esso punta verso la salita più ripida. Di conseguenza $-g$ punterà verso la discesa più ripida.
 				\img{Discesa del gradiente di una funzione a due dimensioni. \cite{kriesel}}{0.5}{gradient_descent_2d.png}{gradient_descent}
 
-				\paragraph{Gradiente} Sia $g$ un gradiente. Allora $g$ è il vettore con $n$ componenti che è definito in ogni punto derivabile di una funzione a $n$ dimensioni $f(x_1, x_2, \dots, x_n)$. L'operatore gradiente è definito come $$g(x_1, x_2, \dots, x_n) = \triangledown f(x_1, x_2, \dots, x_n).$$
-					$g$ punta da ogni punto derivabile di $f$ verso la salita più ripida, con una pendenza pari a $|g|$. \cite{kriesel}
+				\paragraph{Gradiente} Sia $g$ un gradiente. Allora $g$ è il vettore con $n$ componenti che è definito in ogni punto derivabile di una funzione a $n$ dimensioni $f(x_1, x_2, \dots, x_n)$. L'operatore gradiente è definito come $$g(x_1, x_2, \dots, x_n) = \triangledown f(x_1, x_2, \dots, x_n),$$
+					$g$ punta da ogni punto derivabile di $f$ verso la salita più ripida, con una pendenza pari a $||g||$ (norma di $g$). \cite{kriesel}
 				
-				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ dimensioni e $s=(s_1, s_2, \dots, s_n)$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(s)$ in direzione di $-g$, con passi di dimensione $||g||$ (norma di $g$) verso valori sempre minori di $f$. \cite{kriesel}
+				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ dimensioni e $s=(s_1, s_2, \dots, s_n)$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(s)$ in direzione di $-g$, con passi di dimensione $||g||$ verso valori sempre minori di $f$. \cite{kriesel}
 				
 				\img{Problemi della tecnica della discesa del gradiente \cite{kriesel}}{0.4}{gradient_descent.png}{gradient_descent}
 				
@@ -255,8 +251,8 @@
 				 \end{itemize} 
 				 
 				 
-				 \paragraph{Funzione di errore} Ciò che noi vogliamo minimizzare è l'errore totale, ma per come l'abbiamo definito prima non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come cambiamo i pesi, quindi possiamo ridefinirlo come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi $$Err : W \rightarrow \mathbb{R}$$ 
-				 $$\Delta \omega(i,\Omega) = \nu \cdot o_i \cdot \delta_{\Omega}.$$
+				 \paragraph{Funzione di errore} Ciò che noi vogliamo minimizzare è l'errore totale, ma per come l'abbiamo definito prima non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'%errore totale cresce o decresce in base a come cambiamo i pesi, quindi possiamo ridefinirlo come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi $$Err : W \rightarrow \mathbb{R}$$ 
+				 %$$\Delta \omega(i,\Omega) = \nu \cdot o_i \cdot \delta_{\Omega}.$$
 			\subsection{Backpropagation}
 				
 				
@@ -341,13 +337,19 @@
 
 		\bibitem{shwartz} Shai Shalev-Shwartz, Shai Ben-David, 2014, \textit{Understanding Machine Learning: From Theory to Algorithms}, Cambridge University Press.
 		
+		\bibitem{mcculloch_pitts} Warren S. McCulloch, Walter Pitts, 1943, \textit{A logical calculus of the ideas immanent in nervous activity}, The bulletin of mathematical biophysics volume 5, pages 115–133.		
+		
+		\bibitem{minsky_papert} Marvin Minsky, Seymour Papert, 1969,  \textit{Perceptrons: an introduction to computational geometry}, Information and control 17, 501-522- 
+		
 		\bibitem{bitsofdna} Bits of DNA, \texttt{https://liorpachter.wordpress.com/}.
 		
 		\bibitem{maaten_hinton} Laurens van der Maaten, Geoffrey Hinton, 2008, \textit{Visualizing Data using t-SNE}, Journal of Machine Learning Research 9, 2579-2605.
 		
 		\bibitem{sklearn} Scikit-learn, \texttt{https://scikit-learn.org/}.
 		
-		\bibitem{smote} Nitesh V. Chawla, Kevin W. Bowyer, Lawrence O. Hall, W. Philip Kegelmeyer, 2002, \textit{SMOTE: Synthetic Minority Over-sampling Technique}, Journal of Artificial Intelligence Research 16, 321–357
+		\bibitem{smote} Nitesh V. Chawla, Kevin W. Bowyer, Lawrence O. Hall, W. Philip Kegelmeyer, 2002, \textit{SMOTE: Synthetic Minority Over-sampling Technique}, Journal of Artificial Intelligence Research 16, 321–357.
+		
+
 		
 	\end{thebibliography}
 	
