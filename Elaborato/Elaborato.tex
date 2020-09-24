@@ -273,24 +273,22 @@
 			
 			\subsection{Riduzione della dimensionalità} In un dataset la dimensionalità è il numero di feature presenti. Con riduzione della dimensionalità si intende quell'insieme di tecniche che mirano a ridurre questo valore producendo una versione più compressa dei dati o eliminando delle feature. Queste tecniche vengono spesso utilizzate per visualizzare un insieme di dati in dimensionalità comode per noi umani (solitamente 2 o 3 dimensioni) o per aiutare un modello predittivo ad essere più efficiente e ad ignorare informazioni ridondanti o pressoché inutili che non aiutano particolarmente. 
 			
-				\subsubsection{Feature selection} La feature selection è quel sottoinsieme di tecniche di riduzione della dimensionalità che include la completa rimozione di alcune feature dall'intero dataset. I modi in cui scegliere quali feature filtrare sono diversi, variano da analisi statistiche \textit{(ad esempio eliminare la feature con varianza minore)} ad analisi sull'accuratezza del modello predittivo. Una buona feature selection, oltre a rendere più veloce la fase di apprendimento da parte del modello, potrebbe aumentarne l'accuratezza.
+				\subsubsection{Feature selection} La feature selection è quel sottoinsieme di tecniche di riduzione della dimensionalità che include la completa rimozione di alcune feature dall'intero dataset. I modi in cui scegliere quali feature filtrare sono diversi, variano dalle analisi statistiche \textit{(ad esempio eliminare la feature con varianza minore)} ad analisi sull'accuratezza del modello predittivo. Una buona feature selection, oltre a rendere più veloce la fase di apprendimento, potrebbe aumentare l'accuratezza del modello.
 				
-				\subsubsection{Analisi delle componenti principali} L'analisi delle componenti o \textbf{PCA} \textit{(da Principal Component Analysis)} è una tecnica di riduzione della dimensionalità dei dati che punta a ridurre le feature in una loro versione più compressa evidenziandone le componenti principali e massimizzandone la varianza. Il tutto avviene tramite una \textbf{trasformazione lineare} dei dati che vengono proiettati su una dimensione uguale o inferiore.
+				\subsubsection{Analisi delle componenti principali} L'analisi delle componenti o \textbf{PCA} \textit{(da Principal Component Analysis)} è una tecnica di riduzione della dimensionalità dei dati che punta a ridurre le feature in una loro versione più compressa, evidenziandone le componenti principali massimizzandone la varianza. Il tutto avviene tramite una \textbf{trasformazione lineare} dei dati che vengono proiettati su una dimensione uguale o inferiore.
 				\img{Proiezione dei dati da due a una dimensione con PCA \cite{bitsofdna}}{0.3}{pca.jpg}{pca}
 				Sia $X$ una matrice con $n$ righe e $m$ colonne in cui ogni riga $x_i$ corrisponde a una misurazione diversa di un esperimento.  Si calcola la media delle righe 
 				$$\overline{x}= \frac{1}{n} \sum_{j=1}^n x_j$$ 
-				e tramite essa si crea una matrice $\overline{X}$ con $n$ righe in cui ogni riga è $\overline{x}$, si sottraggono le matrici $X$ e $\overline{X}$ ottenendo così una matrice $B$ in cui la media di ogni riga è centrata in zero
-				$$B = X - \overline{X},$$
-					 e si calcola la matrice di covarianza $C$ delle righe di $B$
-					 $$C = B^\top B.$$
-					 da $C$ si ricavano gli autovalori $\lambda_1 , \dots, \lambda_m$  e gli autovettori $e_1, \dots, e_n$ che se ordinati in ordine non crescente in una matrice $E$, si ottengono le direzioni degli assi in cui la varianza è massima. Il prodotto $B \cdot E$ trova le coordinate di ogni punto nel nuovo spazio vettoriale e avendo riordinato $E$, se vogliamo ridurre le dimensioni a un numero fissato $k$, allora dovremo eliminare da $E$ le ultime $m-k$ colonne, ottenendo così una matrice con le $k$ componenti principali.  	 
+				e si crea una matrice $\overline{X}$ con $n$ righe in cui ogni riga è $\overline{x}$, si sottraggono le matrici $X$ e $\overline{X}$ ottenendo così una matrice $B$ in cui la media di ogni riga è centrata in zero
+				$$B = X - \overline{X}.$$
+					 Si calcola la matrice di covarianza $C$ delle righe di $B$
+					 $$C = B^\top B$$
+					 e da $C$ si ricavano gli autovalori e gli autovettori $e_1, \dots, e_n$ che vengono ordinati in ordine non crescente in una matrice $E$; si ottengono così le direzioni degli assi in cui la varianza è massima. Il prodotto $B \cdot E$ trova le coordinate di ogni punto nel nuovo spazio vettoriale e avendo riordinato $E$, se vogliamo ridurre le dimensioni a un numero fissato $k$, allora dovremo eliminare da $E$ le ultime $m-k$ colonne, ottenendo così una matrice con le $k$ componenti principali.  	 
 				
-				\subsubsection{t-Distributed Stochastic Neighbor Embedding} t-Distributed Stochastic Neighbor Embedding (\textbf{t-SNE}) è una tecnica non lineare di riduzione della dimensionalità. È stato presentato per la prima volta nel 2008 da  L.J.P. van der Maaten e G.E. Hinton nel paper \textit{Visualizing Data using t-SNE} \cite{maaten_hinton}. Tale algoritmo permette la visualizzazione di dati su dimensioni ridotte di varietà topologiche non lineari.
-					\img{Visualizzazione di varietà topologiche non lineari con t-SNE utilizando diverse perplessità \cite{sklearn}}{0.35}{tsne.png}{tsne}
+				\subsubsection{t-Distributed Stochastic Neighbor Embedding} t-Distributed Stochastic Neighbor Embedding (\textbf{t-SNE}) è una tecnica non lineare di riduzione della dimensionalità. È stato presentato per la prima volta nel 2008 da  L.J.P. van der Maaten e G.E. Hinton \cite{maaten_hinton}. Tale algoritmo permette la visualizzazione di dati su dimensioni ridotte di varietà topologiche non lineari.
+					\img{Visualizzazione di varietà topologiche non lineari con t-SNE utilizzando diverse perplessità. \cite{sklearn}}{0.35}{tsne.png}{tsne}
 				
-					\paragraph{Come funziona t-SNE} Per ogni punto $x_i$ si centra una distribuzione gaussiana e si misura la densità di ogni punto $x_j$. Questo ci da un insieme di probabilità $P_{i,j}$ per ogni punto che rappresenta la similarità che ha con gli altri punti. La varianza che determina quanto sia grande il range in cui considerare due punti simili è detta \textbf{perplessità}. Si definisce poi una \textbf{distribuzione di Student} da cui ricaviamo un nuovo insieme di probabilità $Q_{i,j}$ nello spazio dimensionale ridotto. Finalmente si misura la differenza tra le due distribuzioni di probabilità  minimizzando la divergenza di Kullback-Liebler tramite la discesa del gradiente. 
-				
-					\paragraph{PCA vs t-SNE} 
+					Dato un insieme di dati $X$, per ogni punto $x_i \in X$ si centra una distribuzione gaussiana e si misura la densità di ogni altro punto $x_j \in X \setminus x_i$. Ricaviamo così un insieme di probabilità $P_{i,j}$ per ogni punto che rappresenta la similarità che ha con gli altri punti. La varianza che determina quanto sia grande il range in cui considerare due punti simili è detta \textbf{perplessità}. Si definisce poi una \textbf{distribuzione di Student} da cui ricaviamo un nuovo insieme di probabilità $Q_{i,j}$ nello spazio dimensionale ridotto. Finalmente si misura la differenza tra le due distribuzioni di probabilità  minimizzando la divergenza di Kullback-Liebler tramite la discesa del gradiente. 
 					
 			\subsection{Feature encoding} 
 				Abbiamo visto che le feature possono essere categoriche o numeriche, però i modelli di machine learning possono elaborare solo dati numerici. Ovviamente, questo porta a una limitazione per tutti quei dataset in cui sono presenti feature categoriche, ed è qui che entra in gioco la \textbf{feature encoding}. Questo processo serve a trasformare le variabili categoriche in variabile numeriche, e anche qua esistono numerose tecniche. Quando si applica questa procedura bisogna essere cauti a come si procede. Nel rendere numeriche delle variabili categoriche si rischia di creare un ordine inesistente, ma che il modello di apprendimento potrebbe comunque interpretare; ad esempio se dovessimo applicare la tecnica di \textbf{label encoding} su un insieme di colori $\{rosso, blu, verde\}$, essi verrebbero trasformati in $\{0,1,2\}$, e di conseguenza rischieremmo di creare un ordine di importanza per il nostro modello che in realtà esiste: $rosso < blu < verde$.
@@ -302,23 +300,34 @@
 				\paragraph{Scalatura min-max} La scalatura min-max viene calcolata per ogni feature $x$ del dataset, scalando i dati in un range compreso tra 0 e 1. $$z = \frac{x - \min(x)}{\max(x) - \min(x)}.$$
 			
 		\section{Model Selection} 
-			Nel machine learning, un iperparametro è un parametro il cui valore è usato per controllare un processo di apprendimento. Alcuni esempi tra quelli che abbiamo visto sono: 
+			Nel machine learning, un iperparametro è un parametro il cui valore viene usato per controllare un processo di apprendimento. Alcuni esempi tra quelli che abbiamo visto sono: 
 			\begin{itemize}
 				\item il numero di neuroni e il numero di strati nascosti in un percettrone multistrato,
 				\item le funzioni di ingresso, attivazione e uscita, 
 				\item il learning rate,
 				\item il numero di epoche.
 			\end{itemize}
-			Quando si affronta un esperimento in cui si utilizza una rete neurale o più in generale un modello di machine learning, non è quasi mai immediato capire quale sia la scelta migliore degli iperparametri, ed è per questo che esiste la \textbf{model selection}. Essa rappresenta tutte quelle tecniche che ci guidano verso la scelta degli iperparametri una volta forniti i dati. Quando la quantità di dati è elevata solitamente si dividono i dati in tre insiemi: \textbf{train}, \textbf{validation} e \textbf{test}. L'insieme di training viene usato per allenare il modello con le diverse combinazioni di iperparametri, che poi vengono valutati con l'insieme di validation. Una volta trovato il miglior modello, lo si allena nuovamente con i dati di training e validation e lo si testa con l'insieme di test. Se la generalizzazione è simile a quella ottenuta con l'insieme di validation, essa si considera buona. La distribuzione dei dati deve essere la stessa per ogni insieme, altrimenti si rischia di compromettere i risultati. Con un insieme di dati sblilanciato si deve far particolarmente attenzione a questo problema, utilizzando tecniche come l'allocazione ottima di Neyman \textit{(stratified sampling)}. 
+			Quando si affronta un esperimento in cui si utilizza una rete neurale o più in generale un modello di machine learning, non è quasi mai immediato capire quale sia la scelta migliore degli iperparametri, ed è per questo che esiste la \textbf{model selection}. Essa rappresenta tutte quelle tecniche che ci guidano verso la scelta degli iperparametri una volta forniti i dati. Quando la quantità di dati è elevata solitamente si dividono i dati in tre insiemi: \textbf{train}, \textbf{validation} e \textbf{test}. L'insieme di training viene usato per allenare il modello con le diverse combinazioni di iperparametri, che poi vengono valutati con l'insieme di validation. Una volta trovato il miglior modello, lo si allena nuovamente con i dati di training e validation e lo si testa con l'insieme di test. Se la generalizzazione è simile a quella ottenuta con l'insieme di validation, essa si considera buona. La distribuzione dei dati deve essere la stessa per ogni insieme, altrimenti si rischia di compromettere i risultati. Con un insieme di dati sblilanciato si deve far particolarmente attenzione a questo problema e risolverlo utilizzando tecniche come l'allocazione ottima di Neyman \textit{(stratified sampling)} o l'oversampling/undersampling. 
 			
 			\subsection{Cross validation}
-				Purtroppo nel mondo reale non sempre si hanno a disposizione un'elevatà quantità di dati, e quindi fare la divisione specificata prima potrebbe pregiudicare la fase di training del nostro modello in quanto avremmo ancora meno dati. 
+				Purtroppo nel mondo reale non sempre si hanno a disposizione un'elevatà quantità di dati \textit{(come vedremo anche nel dataset che utilizzeremo negli esperimenti)}, e quindi fare la divisione introdotta prima potrebbe pregiudicare il nostro modello in quanto avremmo troppi pochi dati per allenarlo e fornire un'accuratezza attendibile. La \textbf{cross validation} ci permette di eludere questo problema in pochi passi; dato un insieme di dati, esso viene diviso in $k$ sottoinsiemi (considerando sempre il giusto bilanciamento dei dati). Iterativamente, si lascia fuori un sottoinsieme alla volta per testare il modello e si utilizzano i $k-1$ sottoinsiemi rimanenti come insieme di training. L'accuratezza viene calcolata facendo una media delle $k$ accuratezze ricavate alla fine di questo processo. 
+				\img{Cross validation con $k = 5$.}{0.5}{cv.png}{cv}
 				
-			\subsection{Grid search CV}
+				\subsubsection{GridSearchCV}
+					La cross validation può essere usata anche per fare model selection. Esiste un tool ideato da sklearn \cite{sklearn} chiamato \texttt{GridSearchCV} che serve proprio per questo scopo: dopo aver fornito un classificatore, il numero $k$ di sottoinsiemi per la cross validation e una serie di iperparametri che si vogliono testare, essi vengono provati in tutte le loro combinazioni utilizzando la cross validation. Una volta finita tale procedura, ci verranno restituiti gli iperparametri che hanno portato l'accuratezza media migliore.
+				
+				\subsubsection{Cross validation annidata}	
+					La cross validation ci consente di avere un'accuratezza più obiettiva in quanto utilizziamo il nostro intero insieme di dati per testare il classificatore. Nel momento in cui la utilizziamo per fare model selection, dobbiamo però fare attenzione. Utilizzare lo stesso insieme di test per scegliere il modello migliore e darne una valutazione, può influenzare la scelta degli iperparametri. Per questo motivo se utilizziamo un insieme di test per regolare i parametri, serve un insieme \textbf{diverso} per avere una valutazione imparziale. La \textbf{cross validation annidata} ci permette di superare questo ostacolo: applichiamo la cross validation su tutto l'insieme; iterativamente lasciamo fuori uno dei $k$ sottoinsiemi e applichiamo la \texttt{GridSearchCV} sui $k-1$ sottoinsiemi rimanenti. Questo ci permette di utilizzare i $k-1$ sottoinsiemi per selezionare il modello migliore, e l'insieme lasciato fuori per darne una valutazione neutrale.
+				
 	
-		\section{Over-sampling}
-			\subsection{Synthetic Minority Over-sampling Technique}
-		
+		\section{Oversampling}
+			L'oversampling è un insieme di tecniche che mira ad aggiustare la distribuzione tra le classi dato un insieme di dati sbilanciato. Quando ci troviamo in una situazione di questo tipo è importante provvedere; immaginiamo di avere un dataset in cui sono presenti i dati dei pazienti di un ospedale. Ci chiedono di predire quando un paziente ha una grave malattia rarissima. Nel dataset, che contiene 10000 dati, sono presenti solo 10 pazienti che presentano questa malattia. Se allenassimo il nostro classificatore a predire la malattia senza preoccuparci di questo squilibrio tra le classi, otterremmo con molta probabilità l'equivalente di una funzione che ritorna sempre \texttt{false}, e nonostante questo, avrebbe un'accuratezza del $99.9\%$. È chiaro che ci sia bisogno di trattare il dataset in qualche modo; un primo approccio potrebbe essere quello di riprodurre più volte i dati \say{rari} finchè non si ottiene un bilanciamento accettabile. Questa pratica porta molto spesso all'\textbf{overfitting}, in quanto il classificatore impara a riconoscere i pochi dati riprodotti più volte.
+			
+			\subsection{Synthetic Minority Oversampling Technique}
+				SMOTE (Synthetic Minority Oversampling Technique) è una tecnica di oversampling che invece di replicare gli stessi dati più volte ne crea di nuovi basandosi sulle feature di dati già esistenti. Preso in modo casuale un dato $x$ appartenente alla classe che si vuole aumentare, gli si applica l'algoritmo \textbf{k-nearest neighbors} che trova i $k$ campioni più vicini a $x$ nello spazio dimensionale. Si ricava il vettore tra $x$ e uno dei $k$ vicini e si produce un nuovo dato sintetico in un punto casuale tra i due punti. \cite{smote}
+				\img{Creazione di un nuovo dato sintetico con SMOTE}{0.3}{smote.png}{smote}
+				
+				
 	\chapter{Esperimenti} \label{chap:esperimenti}
 		\section{Dataset} %ricordarsi di scrivere che nel dataset è presente "DATA" ma è stata lasciata fuori in quanto era il campo che discriminava maggiormente, e ragionevolmente ha poco senso.
 		\section{Esperimenti di classificazione}
@@ -334,9 +343,11 @@
 		
 		\bibitem{bitsofdna} Bits of DNA, \texttt{https://liorpachter.wordpress.com/}.
 		
-		\bibitem{maaten_hinton} Laurens van der Maaten, Geoffrey Hinton, 2008, \textit{Visualizing Data using t-SNE}, Journal of Machine Learning Research 9 2579-2605.
+		\bibitem{maaten_hinton} Laurens van der Maaten, Geoffrey Hinton, 2008, \textit{Visualizing Data using t-SNE}, Journal of Machine Learning Research 9, 2579-2605.
 		
 		\bibitem{sklearn} Scikit-learn, \texttt{https://scikit-learn.org/}.
+		
+		\bibitem{smote} Nitesh V. Chawla, Kevin W. Bowyer, Lawrence O. Hall, W. Philip Kegelmeyer, 2002, \textit{SMOTE: Synthetic Minority Over-sampling Technique}, Journal of Artificial Intelligence Research 16, 321–357
 		
 	\end{thebibliography}
 	
