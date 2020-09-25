@@ -19,6 +19,7 @@
 \usepackage{cite}
 \usepackage[breakable]{tcolorbox}
 \usepackage{pdfpages}
+\usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -251,7 +252,7 @@
 				 \end{itemize} 
 				 
 				 
-				 \paragraph{Funzione di errore} Ciò che noi vogliamo minimizzare è l'errore totale, ma per come l'abbiamo definito prima non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'%errore totale cresce o decresce in base a come cambiamo i pesi, quindi possiamo ridefinirlo come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi $$Err : W \rightarrow \mathbb{R}$$ 
+				 \paragraph{Funzione di errore} Ciò che noi vogliamo minimizzare è l'errore totale, ma per come l'abbiamo definito prima non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come cambiamo i pesi, quindi possiamo ridefinirlo come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi $$Err : W \rightarrow \mathbb{R}$$ 
 				 %$$\Delta \omega(i,\Omega) = \nu \cdot o_i \cdot \delta_{\Omega}.$$
 			\subsection{Backpropagation}
 				
@@ -325,10 +326,31 @@
 				
 				
 	\chapter{Esperimenti} \label{chap:esperimenti}
-		\section{Dataset} %ricordarsi di scrivere che nel dataset è presente "DATA" ma è stata lasciata fuori in quanto era il campo che discriminava maggiormente, e ragionevolmente ha poco senso.
-		\section{Esperimenti di classificazione}
-		\section{Reingegnerizzazione dei dati}
-		\section{Data augmentation}
+		In questo capitolo verranno trattati alcuni esperimenti con le \textbf{reti neurali} utilizzando le tecniche viste nel capitolo 2. L'idea di questo lavoro è stata quella di familiarizzare inizialmente con i percettroni multistrato attraverso \texttt{MLPClassifier} di sklearn \cite{sklearn}. Si è poi passati a cercare di massimizzare l'accuratezza del classificatore tramite delle tecniche di \textbf{preprocessing} e \textbf{model selection}, per poi infine fare esperimenti sull'aumento dei dati per vedere come crescerebbe ipoteticamente l'accuratezza con l'aumentare della numerosità dell'insieme.
+	
+	\section{Dataset} 
+		In questa sezione verrà fatta una panoramica sui dataset utilizzati durante gli esperimenti.
+		\subsection{Iris dataset}
+			Il primo dataset utilizzato per fare esperimenti e familiarizzare con \texttt{MLPClassifier} è stato \textbf{iris dataset}. Questo insieme di dati raccoglie 150 istanze, 50 per ciascuna specie dei tre fiori iris presenti: \textit{iris setosa, iris virginica} e \textit{iris versicolor}. Per ogni campione, oltre all'etichetta, sono presenti la lunghezza e la larghezza del sepalo e del petalo in centimetri. Questo dataset è ampiamente utilizzato come primo esempio nel mondo del machine learning in quanto, come vedremo, presenta dei dati che praticamente non hanno bisogno di essere preelaborati. 
+			\begin{table}[h]
+			\noindent\makebox[\textwidth]{
+			\begin{tabular}{rrrrl}
+			\toprule
+			sepal length &  sepal width &  petal length &  petal width &        type \\
+			\midrule
+			4.8 &               3.4 &                1.6 &               0.2 &      setosa \\
+			6.5 &               3.0 &                5.5 &               1.8 &   virginica \\
+			6.1 &               2.8 &                4.0 &               1.3 &  versicolor \\
+			\bottomrule
+			\end{tabular}}
+			\caption{\label{tab:iris}Iris dataset.}
+			\end{table}
+		\subsection{Dataset sugli incidenti stradali}
+			Il dataset sugli incidenti stradali è stato l'insieme di dati su cui è stato svolto il lavoro principale di questo tirocinio. Sono presenti 130 campioni riguardanti incidenti stradali in cui sono stati coinvolti dei pedoni. Ogni riga è identificata da un \textit{verbale}, e sono presenti la data in cui è avvenuto l'incidente, i dati personali della vittima e dei dati sulle lesioni occasionate in 20 aree diverse del corpo. I dati personali sono \textit{sesso, anni, peso, altezza} e \textit{BMI}, mentre i dati sulle lesioni sono relativi a 4 macroaree quali \textit{testa, torace, addome} e \textit{scheletro}. Per ognuna di esse sono presenti 5 aree specifiche con un valore di gravità della lesione che va da 0 a 4. Sono inoltre presenti anche i totali per ogni macroarea che sono la somma delle 5 aree specifiche, più un totale per tutto il corpo che è una somma complessiva dei 20 dati.
+			
+	\section{Esperimenti di classificazione}
+	\section{Reingegnerizzazione dei dati}
+	\section{Data augmentation}
 
 	\chapter*{Conclusione}	\addcontentsline{toc}{chapter}{Conclusione}  
 	
