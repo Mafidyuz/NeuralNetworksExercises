@@ -1,6 +1,6 @@
 \documentclass[12pt, twoside, letterpaper]{report}
-\usepackage[top=2cm,bottom=4cm,left=3cm,right=3cm,asymmetric]{geometry}
 
+\usepackage[top=2cm,bottom=4cm,left=3cm,right=3cm,asymmetric]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyfoot[C]{}    
@@ -9,7 +9,8 @@
 \fancyhead[LE]{\slshape\leftmark}      
 \fancyhead[RE,LO]{}
 
-\usepackage{color}   
+%pacchetti
+\usepackage{color, xcolor}   
 \usepackage{hyperref}
 \usepackage[utf8x]{inputenc}
 \usepackage[italian]{babel}
@@ -24,15 +25,55 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{graphicx}
+
+%Formattazione codice
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%Immagini
 \graphicspath{ {./img/} }
 \newcommand{\img}[4] {
 	\begin{figure}
 		\centering
 		\includegraphics[scale=#2]{#3}\\
 		\caption{#1}
-		\label{#4}
+		\label{fig:#4}
 	\end{figure}
 }
+\newcommand{\imgh}[4] {
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=#2]{#3}\\
+		\caption{#1}
+		\label{fig:#4}
+	\end{figure}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Uso di reti neurali per la classificazione di dati in problemi di medicina legale}
 \author{Mario Petruccelli \cr Università degli studi di Milano}
@@ -52,7 +93,7 @@
 
 		\newpage		
 	\chapter{Reti neurali}
-		Le \textbf{reti neurali artificiali} sono un modello matematico molto importante del \textit{machine learning} che prende ispirazione dalle reti neurali biologiche presenti nel cervello animale. In questo capitolo vedremo le componenti e il funzionamento delle reti neurali artificiali, ma prima facciamo un'overview su cosa sia il machine learning.
+		Le \textbf{reti neurali artificiali} sono un modello matematico molto importante del \textit{machine learning} che prende ispirazione dalle reti neurali biologiche presenti nel cervello animale. In questo Capitolo vedremo le componenti e il funzionamento delle reti neurali artificiali, ma prima facciamo un'overview su cosa sia il machine learning.
 
 		\section{Paradigma del machine learning}
 			Il machine learning è una branca dell'intelligenza artificiale ed è una di quelle in più rapida espansione; negli ultimi decenni è diventato di uso comune in moltissime applicazioni che richiedono l'estrazione di informazioni dai dati. Lo scopo del machine learning è quello di riassumere tante istanze di un problema, che difficilmente sarebbero riconoscibili con l'uso tradizionale della programmazione \textit{(per esempio riconoscere la razza di un cane partendo da una foto)}.   
@@ -237,7 +278,11 @@
 				\img{Discesa del gradiente di una funzione a due dimensioni. \cite{kriesel}}{0.5}{gradient_descent_2d.png}{gradient_descent}
 
 				\paragraph{Gradiente} Sia $g$ un gradiente. Allora $g$ è il vettore con $n$ componenti che è definito in ogni punto derivabile di una funzione a $n$ dimensioni $f(x_1, x_2, \dots, x_n)$. L'operatore gradiente è definito come $$g(x_1, x_2, \dots, x_n) = \triangledown f(x_1, x_2, \dots, x_n),$$
+<<<<<<< HEAD
+					$g$ punta da ogni punto derivabile di $f$ verso la salita più ripida, con una pendenza pari a $|g|$. \cite{kriesel}
+=======
 					$g$ punta da ogni punto derivabile di $f$ verso la salita più ripida, con una pendenza pari a $||g||$ (norma di $g$). \cite{kriesel}
+>>>>>>> 9ef490d2c85f06d9458073c47c3901da5ea75882
 				
 				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ dimensioni e $s=(s_1, s_2, \dots, s_n)$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(s)$ in direzione di $-g$, con passi di dimensione $||g||$ verso valori sempre minori di $f$. \cite{kriesel}
 				
@@ -257,84 +302,92 @@
 			\subsection{Backpropagation}
 				
 				
+				
 	\chapter{Tecniche utilizzate}
-		In questo capitolo verrà fatta una panoramica sulle tecniche di \textbf{preprocessing}, \textbf{model selection} e \textbf{over-sampling} utilizzate negli esperimenti svolti. Questo aiuterà a capire con più facilità ciò di cui si parlerà nel capitolo \ref{chap:esperimenti}.
+		In questo Capitolo verrà fatta una panoramica sulle tecniche di \textbf{preprocessing}, \textbf{model selection} e \textbf{over-sampling} utilizzate negli esperimenti svolti. Questo aiuterà a capire con più facilità ciò di cui si parlerà nel Capitolo \ref{chap:esperimenti}.
 		\section{Preprocessing}
-			Nel machine learning, il preprocessing dei dati è uno step facoltativo in cui si trasformano e/o codificano i dati con l'idea di renderli più facili da \say{digerire} da parte del modello di apprendimento. In un dataset, i dati sono rappresentati da delle \textbf{feature}; esse possono acquisire diverse tipologie tra cui: 
+			Nel machine learning, il preprocessing dei dati è uno step facoltativo (anche se solitamente aumenta notevolmente le performance) in cui si trasformano e/o codificano i dati con l'idea di renderli più facili da elaborare da parte dell'algoritmo di apprendimento utilizzato. In un dataset, i dati sono rappresentati da delle \textbf{feature}; esse possono essere di vari tipologie, tra cui quelle: 
 			
 			\begin{itemize}
-				\item \textbf{categoriche:} sono quelle caratteristiche i cui valori fanno parte di un insieme ben definito in cui il numero di valori è solitamente fissato \textit{(ad esempio i valori booleani: true, false; i colori: rosso, verde, blu, ecc...)},
-				\item \textbf{numeriche:} sono quelle caratteristiche i cui valori sono rappresentati da numeri (interi o continui) con cui è possibile fare calcoli \textit{(ad esempio i numeri reali, i numeri naturali, ecc...)}.
+				\item \textbf{categoriche:} rappresentano quelle caratteristiche i cui valori descrivono una qualità, e fanno solitamente parte di un insieme ben definito in cui il numero di valori è solitamente fissato \textit{(ad esempio i valori booleani: true, false; i colori: rosso, verde, blu, ecc...)},
+				\item \textbf{numeriche:} rappresentano quelle caratteristiche i cui valori sono rappresentati da numeri con cui è possibile fare calcoli \textit{(ad esempio i numeri reali, i numeri naturali, ecc...)}.
 			\end{itemize}
-			Esistono diverse tecniche di preprocessing, ma qui ci concentreremo solo su quelle che useremo durante gli esperimenti.
+			Esistono diverse tecniche di preprocessing, ma nel seguito ci concentreremo solo su quelle che useremo durante gli esperimenti.
 			
-			\subsection{Riduzione della dimensionalità} In un dataset la dimensionalità è il numero di feature presenti. Con riduzione della dimensionalità si intende quell'insieme di tecniche che mirano a ridurre questo valore producendo una versione più compressa dei dati o eliminando delle feature. Queste tecniche vengono spesso utilizzate per visualizzare un insieme di dati in dimensionalità comode per noi umani (solitamente 2 o 3 dimensioni) o per aiutare un modello predittivo ad essere più efficiente e ad ignorare informazioni ridondanti o pressoché inutili che non aiutano particolarmente. 
+			\subsection{Riduzione della dimensionalità} In un dataset la dimensionalità è il numero di feature presenti. Con riduzione della dimensionalità si intende quell'insieme di tecniche che mirano a ridurre questo valore producendo una versione più compressa dei dati o eliminando delle feature. Queste tecniche vengono spesso utilizzate per visualizzare un insieme di dati in dimensionalità comode per le persone (solitamente 2 o 3 dimensioni) o per aiutare un modello predittivo a essere più efficiente e ad ignorare informazioni ridondanti o pressoché inutili che non aiutano, o peggio rendono più difficile, il processo di apprendimento. 
 			
-				\subsubsection{Feature selection} La feature selection è quel sottoinsieme di tecniche di riduzione della dimensionalità che include la completa rimozione di alcune feature dall'intero dataset. I modi in cui scegliere quali feature filtrare sono diversi, variano dalle analisi statistiche \textit{(ad esempio eliminare la feature con varianza minore)} ad analisi sull'accuratezza del modello predittivo. Una buona feature selection, oltre a rendere più veloce la fase di apprendimento, potrebbe aumentare l'accuratezza del modello.
+				\subsubsection{Feature selection e feature engineering} La feature selection è quel sottoinsieme di tecniche di riduzione della dimensionalità che include la completa rimozione di alcune feature dall'intero dataset. I modi in cui scegliere quali feature filtrare sono diversi: variano dalle analisi statistiche \textit{(ad esempio eliminare le feature con varianza minore)} ad analisi sull'accuratezza del modello predittivo. Una buona feature selection, oltre a rendere più veloce la fase di apprendimento, tende ad aumentare l'accuratezza del modello. %aggiungi una frase sulla feature engineering, spiegando che ti sei concentrato solo su quest'ultima, e in particolare sulle tecniche descritte subito dopo.
 				
-				\subsubsection{Analisi delle componenti principali} L'analisi delle componenti o \textbf{PCA} \textit{(da Principal Component Analysis)} è una tecnica di riduzione della dimensionalità dei dati che punta a ridurre le feature in una loro versione più compressa, evidenziandone le componenti principali massimizzandone la varianza. Il tutto avviene tramite una \textbf{trasformazione lineare} dei dati che vengono proiettati su una dimensione uguale o inferiore.
+				\subsubsection{Analisi delle componenti principali} L'analisi delle componenti principali o \textbf{PCA} \textit{(da Principal Component Analysis)} è una tecnica di riduzione della dimensionalità dei dati che punta a ridurre le feature in una loro versione più compressa, evidenziandone le cosiddette componenti principali (caratterizzate dal fatto di massimizzare la varianza). Il tutto avviene tramite una \textbf{trasformazione lineare} dei dati, il cui risultato viene proiettato su una dimensione uguale o inferiore.
 				\img{Proiezione dei dati da due a una dimensione con PCA \cite{bitsofdna}}{0.3}{pca.jpg}{pca}
-				Sia $X$ una matrice con $n$ righe e $m$ colonne in cui ogni riga $x_i$ corrisponde a una misurazione diversa di un esperimento.  Si calcola la media delle righe 
-				$$\overline{x}= \frac{1}{n} \sum_{j=1}^n x_j$$ 
-				e si crea una matrice $\overline{X}$ con $n$ righe in cui ogni riga è $\overline{x}$, si sottraggono le matrici $X$ e $\overline{X}$ ottenendo così una matrice $B$ in cui la media di ogni riga è centrata in zero
+				Sia $X$ una matrice con $n$ righe e $m$ colonne in cui ogni riga $x_i$ corrisponde a una misurazione diversa di un esperimento.  Per applicare la sopra menzionata trasformazione lineare, si calcola inizialmente la media delle righe 
+				$$\overline{x}= \frac{1}{m} \sum_{j=1}^m x_j$$ 
+				e si crea una matrice $\overline{X}$ con $n$ righe, ognuna delle quali è uguale a $\overline{x}$. Si sottraggono le matrici $X$ e $\overline{X}$ ottenendo così una matrice $B$ in cui la media di ogni riga è centrata in zero
 				$$B = X - \overline{X}.$$
-					 Si calcola la matrice di covarianza $C$ delle righe di $B$
+					 Si calcola successivamente la matrice di covarianza $C$ delle righe di $B$
 					 $$C = B^\top B$$
-					 e da $C$ si ricavano gli autovalori e gli autovettori $e_1, \dots, e_n$ che vengono ordinati in ordine non crescente in una matrice $E$; si ottengono così le direzioni degli assi in cui la varianza è massima. Il prodotto $B \cdot E$ trova le coordinate di ogni punto nel nuovo spazio vettoriale e avendo riordinato $E$, se vogliamo ridurre le dimensioni a un numero fissato $k$, allora dovremo eliminare da $E$ le ultime $m-k$ colonne, ottenendo così una matrice con le $k$ componenti principali.  	 
+					 e da $C$ si ricavano gli autovalori e gli autovettori $e_1, \dots, e_m$ che vengono allineati in ordine non crescente rispetto ai corrispondenti autovettori al fine di formare una matrice $E$; si ottengono così le direzioni dello spazio in cui è via via più alta la varianza dei dati osservati, e si considerano tali direzioni per costruire un nuovo sistema di assi cartesiani. Il prodotto $B \cdot E$ permette di ottenere la descrizione dei punti del dataset rispetto a questo nuovo sistema di assi e tenuto conto di come sono state ordinate le colonne di E, se vogliamo ridurre le dimensioni a un numero fissato $k$, allora dovremo eliminare da $E$ le ultime $m-k$ colonne, ottenendo così una matrice con le $k$ componenti principali.  	 
 				
-				\subsubsection{t-Distributed Stochastic Neighbor Embedding} t-Distributed Stochastic Neighbor Embedding (\textbf{t-SNE}) è una tecnica non lineare di riduzione della dimensionalità. È stato presentato per la prima volta nel 2008 da  L.J.P. van der Maaten e G.E. Hinton \cite{maaten_hinton}. Tale algoritmo permette la visualizzazione di dati su dimensioni ridotte di varietà topologiche non lineari.
+				\subsubsection{t-Distributed Stochastic Neighbor Embedding} t-Distributed Stochastic Neighbor Embedding (\textbf{t-SNE}) è una tecnica non lineare di riduzione della dimensionalità, presentata per la prima volta nel 2008 da  L.J.P. van der Maaten e G.E. Hinton \cite{maaten_hinton}. Tale algoritmo, introdotto per permettere la visualizzazione bi- o tridimensionale di dati complessi, può anche essere usato come metodo per la riduzione della dimensionalità.
+				
 					\img{Visualizzazione di varietà topologiche non lineari con t-SNE utilizzando diverse perplessità. \cite{sklearn}}{0.35}{tsne.png}{tsne}
 				
-					Dato un insieme di dati $X$, per ogni punto $x_i \in X$ si centra una distribuzione gaussiana e si misura la densità di ogni altro punto $x_j \in X \setminus x_i$. Ricaviamo così un insieme di probabilità $P_{i,j}$ per ogni punto che rappresenta la similarità che ha con gli altri punti. La varianza che determina quanto sia grande il range in cui considerare due punti simili è detta \textbf{perplessità}. Si definisce poi una \textbf{distribuzione di Student} da cui ricaviamo un nuovo insieme di probabilità $Q_{i,j}$ nello spazio dimensionale ridotto. Finalmente si misura la differenza tra le due distribuzioni di probabilità  minimizzando la divergenza di Kullback-Liebler tramite la discesa del gradiente. 
+					Considerato un insieme di dati $X$, su ogni punto $x_i \in X$ si centra una distribuzione gaussiana gaussiana multivariata, e rispetto a questa distribuzione si misura la densità di ogni altro punto $x_j \in X \setminus x_i$. Si ricava così un insieme di valori di probabilità $P_{i,j}$ che si può interpretare come la similarità che ogni punto ha con i rimanenti punti. La varianza che determina quanto sia grande il range in cui considerare due punti simili è detta \textbf{perplessità}. Si definisce poi una \textbf{distribuzione t di Student} da cui ricaviamo un nuovo insieme di probabilità $Q_{i,j}$ nello spazio dimensionale ridotto. e procedendo in modo analogo si ricava un nuovo insieme di valori di probabilità, ma in uno spazio a dimensionalità ridotta. I punti in quest'ultimo spazio , che rappresentano la versione compressa dei dati originali, vengono determinati minimizzando la differenza tra le due distribuzioni di probabilità.
 					
 			\subsection{Feature encoding} 
-				Abbiamo visto che le feature possono essere categoriche o numeriche, però i modelli di machine learning possono elaborare solo dati numerici. Ovviamente, questo porta a una limitazione per tutti quei dataset in cui sono presenti feature categoriche, ed è qui che entra in gioco la \textbf{feature encoding}. Questo processo serve a trasformare le variabili categoriche in variabile numeriche, e anche qua esistono numerose tecniche. Quando si applica questa procedura bisogna essere cauti a come si procede. Nel rendere numeriche delle variabili categoriche si rischia di creare un ordine inesistente, ma che il modello di apprendimento potrebbe comunque interpretare; ad esempio se dovessimo applicare la tecnica di \textbf{label encoding} su un insieme di colori $\{rosso, blu, verde\}$, essi verrebbero trasformati in $\{0,1,2\}$, e di conseguenza rischieremmo di creare un ordine di importanza per il nostro modello che in realtà esiste: $rosso < blu < verde$.
+				Abbiamo visto che le feature possono essere categoriche o numeriche, però i modelli di machine learning possono elaborare solo dati numerici. Ovviamente, questo porta a una limitazione per tutti quei dataset in cui sono presenti feature categoriche, ed è qui che entra in gioco la \textbf{feature encoding}. Questo processo serve a trasformare le variabili categoriche in variabili numeriche, e anche in questo caso esistono numerose tecniche. Quando si applica questa procedura bisogna essere cauti a come si procede. Nel rendere numeriche delle variabili categoriche si rischia di creare un ordine inesistente, ma che il modello di apprendimento potrebbe erroneamente interpretare; ad esempio se dovessimo applicare la tecnica di \textbf{label encoding} su un insieme di colori $\{rosso, blu, verde\}$, essi verrebbero trasformati in $\{0,1,2\}$, e di conseguenza rischieremmo di creare un ordine di importanza per il nostro modello che in realtà non esiste: $rosso < blu < verde$.
 				
-			\subsection{Scalatura dei dati} La scalatura dei dati è una procedura utilizzata per normalizzare i dati presenti in un dataset. Molti modelli di machine learning potrebbero attribuire un valore di importanza maggiore a quelle feature i cui dati variano su ordini di grandezza superiori rispetto ad altri, nonostante non sia sempre ciò che intendiamo trasmettere \textit{(ad esempio se volessimo classificare se un paese è ricco, la popolazione rischierebbe di avere un'influenza maggiore rispetto a un dato come il PIL, che è sicuramente più indicativo)}. Possiamo scalare i dati in diversi modi, qua mostreremo in esempio i metodi presi in considerazione durante gli esperimenti.
+			\subsection{Scalatura dei dati} La scalatura dei dati è una procedura utilizzata per standardizzare le osservazioni. Molti modelli di machine learning potrebbero attribuire un valore di importanza maggiore a quelle feature i cui dati variano su ordini di grandezza superiori rispetto ad altre, nonostante non sia sempre ciò che intendiamo trasmettere \textit{(ad esempio se volessimo classificare se un paese è ricco, la popolazione rischierebbe di avere un'influenza maggiore rispetto a un dato come il PIL, che è sicuramente più indicativo)}. Esistono molti modi per scalare i dati: di seguito mostreremo in esempio i metodi presi in considerazione durante gli esperimenti.
 			
-				\paragraph{Scalatura standard} La scalatura standard viene calcolata per ogni feature $x$ del dataset, centrando la media in zero e dividendo per la deviazione standard. $$z = \frac{x - \overline{x}}{\sigma}.$$
+				\paragraph{Scalatura standard} La scalatura standard viene calcolata centrando rispetto alla media e dividendo per la deviazione standard: in questo modo i dati scalati hanno media nulla e varianza unitaria. $$z = \frac{x - \overline{x}}{\sigma}.$$
 				
-				\paragraph{Scalatura min-max} La scalatura min-max viene calcolata per ogni feature $x$ del dataset, scalando i dati in un range compreso tra 0 e 1. $$z = \frac{x - \min(x)}{\max(x) - \min(x)}.$$
+				\paragraph{Scalatura min-max} La scalatura min-max viene calcolata per ogni feature $x$ del dataset, riportando i dati in un range compreso tra 0 e 1. $$z = \frac{x - \min(x)}{\max(x) - \min(x)}.$$
 			
 		\section{Model Selection} 
-			Nel machine learning, un iperparametro è un parametro il cui valore viene usato per controllare un processo di apprendimento. Alcuni esempi tra quelli che abbiamo visto sono: 
+			Nel machine learning, un iperparametro è un parametro il cui valore viene impostato prima di un processo di apprendimento per influire su di esso. Alcuni esempi tra quelli che abbiamo visto sono: 
 			\begin{itemize}
-				\item il numero di neuroni e il numero di strati nascosti in un percettrone multistrato,
-				\item le funzioni di ingresso, attivazione e uscita, 
+				\item il numero di strati nascosti e il numero di neuroni in ognuno di questi strati in un percettrone multistrato,
+				\item le funzioni di ingresso, attivazione e uscita dei neuroni, 
 				\item il learning rate,
-				\item il numero di epoche.
+				\item il numero di epoche in un processo di backpropagation.
 			\end{itemize}
-			Quando si affronta un esperimento in cui si utilizza una rete neurale o più in generale un modello di machine learning, non è quasi mai immediato capire quale sia la scelta migliore degli iperparametri, ed è per questo che esiste la \textbf{model selection}. Essa rappresenta tutte quelle tecniche che ci guidano verso la scelta degli iperparametri una volta forniti i dati. Quando la quantità di dati è elevata solitamente si dividono i dati in tre insiemi: \textbf{train}, \textbf{validation} e \textbf{test}. L'insieme di training viene usato per allenare il modello con le diverse combinazioni di iperparametri, che poi vengono valutati con l'insieme di validation. Una volta trovato il miglior modello, lo si allena nuovamente con i dati di training e validation e lo si testa con l'insieme di test. Se la generalizzazione è simile a quella ottenuta con l'insieme di validation, essa si considera buona. La distribuzione dei dati deve essere la stessa per ogni insieme, altrimenti si rischia di compromettere i risultati. Con un insieme di dati sblilanciato si deve far particolarmente attenzione a questo problema e risolverlo utilizzando tecniche come l'allocazione ottima di Neyman \textit{(stratified sampling)} o l'oversampling/undersampling. 
+			Quando si affronta un esperimento in cui si utilizza una rete neurale o più in generale un modello di machine learning, per capire quale sia la scelta migliore degli iperparametri si fa riferimento a un procedimento che prende il nome di \textbf{model selection}. Essa rappresenta tutte quelle tecniche che ci guidano verso la scelta degli iperparametri una volta forniti i dati. Quando la quantità di dati è elevata solitamente si dividono i dati in tre insiemi: \textbf{train}, \textbf{validation} e \textbf{test}. L'insieme di train viene usato per allenare il modello con le diverse combinazioni di iperparametri, che poi vengono valutati con l'insieme di validation. Una volta trovata la migliore combinazione, la si utilizza per allenare un modello a partire dai dati di train e di validation, e successivamente lo si valuta utilizzando l'insieme di test. Se la stima della performance fatta sul test set è accettabile, essa si considera buona. La distribuzione dei dati deve essere la stessa per ogni insieme, altrimenti si rischia di compromettere i risultati. La presenza di dati sbilanciati deve essere considerata con particolare attenzione, risolvendola utilizzando tecniche come l'allocazione ottima di Neyman \textit{(stratified sampling)} \cite{neyman} o l'oversampling/undersampling. 
 			
 			\subsection{Cross validation}
-				Purtroppo nel mondo reale non sempre si hanno a disposizione un'elevatà quantità di dati \textit{(come vedremo anche nel dataset che utilizzeremo negli esperimenti)}, e quindi fare la divisione introdotta prima potrebbe pregiudicare il nostro modello in quanto avremmo troppi pochi dati per allenarlo e fornire un'accuratezza attendibile. La \textbf{cross validation} ci permette di eludere questo problema in pochi passi; dato un insieme di dati, esso viene diviso in $k$ sottoinsiemi (considerando sempre il giusto bilanciamento dei dati). Iterativamente, si lascia fuori un sottoinsieme alla volta per testare il modello e si utilizzano i $k-1$ sottoinsiemi rimanenti come insieme di training. L'accuratezza viene calcolata facendo una media delle $k$ accuratezze ricavate alla fine di questo processo. 
+				Purtroppo nel mondo reale non sempre si ha a disposizione un'elevata quantità di dati \textit{(come vedremo anche nel dataset che utilizzeremo negli esperimenti)}, e quindi suddividere i dati come indicato nel paragrafo precedente potrebbe pregiudicare il nostro modello in quanto avremmo troppi pochi dati per allenarlo e fornire un'accuratezza attendibile. La \textbf{cross validation} ci permette di eludere questo problema in pochi passi; dato un insieme di dati, esso viene diviso in $k$ sottoinsiemi contenente approssimativamente lo stesso numero di elementi (considerando sempre il giusto bilanciamento dei dati). Iterativamente, si esclude un sottoinsieme alla volta per formare l'insieme di train, utilizzandolo successivamente per valutare il modello appreso. La performance finale viene calcolata facendo una media dei $k$ risultati ricavati alla fine di questo processo. 
 				\img{Cross validation con $k = 5$.}{0.5}{cv.png}{cv}
 				
 				\subsubsection{GridSearchCV}
-					La cross validation può essere usata anche per fare model selection. Esiste un tool ideato da sklearn \cite{sklearn} chiamato \texttt{GridSearchCV} che serve proprio per questo scopo: dopo aver fornito un classificatore, il numero $k$ di sottoinsiemi per la cross validation e una serie di iperparametri che si vogliono testare, essi vengono provati in tutte le loro combinazioni utilizzando la cross validation. Una volta finita tale procedura, ci verranno restituiti gli iperparametri che hanno portato l'accuratezza media migliore.
+					La cross validation può essere usata anche per fare model selection. Esiste un tool ideato da sklearn \cite{sklearn} chiamato \texttt{GridSearchCV} che serve proprio per questo scopo: dopo aver fornito un classificatore, il numero $k$ di sottoinsiemi per la cross validation e una serie di valori per gli iperparametri che si vogliono considerare, tutte le possibili combinazioni di questi valori vengono considerate, valutando la corrispondente performance tramite un procedimento di cross validation. Una volta finita tale procedura, ci verranno restituiti i valori per gli iperparametri che hanno portato la performance migliore.
 				
 				\subsubsection{Cross validation annidata}	
-					La cross validation ci consente di avere un'accuratezza più obiettiva in quanto utilizziamo il nostro intero insieme di dati per testare il classificatore. Nel momento in cui la utilizziamo per fare model selection, dobbiamo però fare attenzione. Utilizzare lo stesso insieme di test per scegliere il modello migliore e darne una valutazione, può influenzare la scelta degli iperparametri. Per questo motivo se utilizziamo un insieme di test per regolare i parametri, serve un insieme \textbf{diverso} per avere una valutazione imparziale. La \textbf{cross validation annidata} ci permette di superare questo ostacolo: applichiamo la cross validation su tutto l'insieme; iterativamente lasciamo fuori uno dei $k$ sottoinsiemi e applichiamo la \texttt{GridSearchCV} sui $k-1$ sottoinsiemi rimanenti. Questo ci permette di utilizzare i $k-1$ sottoinsiemi per selezionare il modello migliore, e l'insieme lasciato fuori per darne una valutazione neutrale.
+					La cross validation ci consente di avere un'accuratezza più obiettiva in quanto utilizziamo il nostro intero insieme di dati per testare e addestrare il classificatore. Nel momento in cui la utilizziamo anche per fare model selection, dobbiamo però fare attenzione. Utilizzare lo stesso insieme di test per scegliere il modello migliore e darne una valutazione può portare a una sovrastima della bontà di generalizzazione. Per questo motivo se utilizziamo un insieme di test per regolare i parametri, serve un insieme \textbf{diverso} per avere una valutazione imparziale della sua performance. La \textbf{cross validation annidata} ci permette di superare questo ostacolo: applichiamo la cross validation su tutto l'insieme; iterativamente escludiamo uno dei $k$ sottoinsiemi e applichiamo la \texttt{GridSearchCV} sui $k-1$ sottoinsiemi rimanenti. Questo ci permette di utilizzare questi ultimi sottoinsiemi per selezionare il modello migliore e l'insieme escluso per darne una valutazione obiettiva.
 				
 	
 		\section{Oversampling}
-			L'oversampling è un insieme di tecniche che mira ad aggiustare la distribuzione tra le classi dato un insieme di dati sbilanciato. Quando ci troviamo in una situazione di questo tipo è importante provvedere; immaginiamo di avere un dataset in cui sono presenti i dati dei pazienti di un ospedale. Ci chiedono di predire quando un paziente ha una grave malattia rarissima. Nel dataset, che contiene 10000 dati, sono presenti solo 10 pazienti che presentano questa malattia. Se allenassimo il nostro classificatore a predire la malattia senza preoccuparci di questo squilibrio tra le classi, otterremmo con molta probabilità l'equivalente di una funzione che ritorna sempre \texttt{false}, e nonostante questo, avrebbe un'accuratezza del $99.9\%$. È chiaro che ci sia bisogno di trattare il dataset in qualche modo; un primo approccio potrebbe essere quello di riprodurre più volte i dati \say{rari} finchè non si ottiene un bilanciamento accettabile. Questa pratica porta molto spesso all'\textbf{overfitting}, in quanto il classificatore impara a riconoscere i pochi dati riprodotti più volte.
+			L'oversampling è un insieme di tecniche che mira a riequilibrare la distribuzione tra le classi dato un insieme di dati sbilanciato. Quando ci troviamo in una situazione di questo tipo è importante provvedere a trovare un equilibrio accettabile; immaginiamo di avere un dataset in cui sono presenti i dati dei pazienti di un ospedale. Ci chiedono di predire quando un paziente ha una grave malattia rarissima. Nel dataset, che contiene 10000 dati, sono presenti solo 10 pazienti che presentano questa malattia. Se allenassimo il nostro classificatore a predire la malattia senza preoccuparci di questo squilibrio tra le classi, otterremmo con molta probabilità l'equivalente di una funzione che ritorna sempre \texttt{false} che, nonostante questo, avrebbe un'accuratezza del $99.9\%$. È chiaro che ci sia bisogno di trattare il dataset in qualche modo; un primo approccio potrebbe essere quello di riprodurre più volte i dati \say{rari} finché non si ottiene un bilanciamento accettabile. Questa pratica porta molto spesso all'\textbf{overfitting}, in quanto il classificatore impara a riconoscere i pochi dati riprodotti più volte.
+						
+			\begin{figure}
+				\centering
+				\includegraphics[scale=0.25]{smote.png}\\
+				\caption{Creazione di un nuovo dato sintetico con SMOTE}
+				\label{smote_fig}
+			\end{figure}
 			
 			\subsection{Synthetic Minority Oversampling Technique}
-				SMOTE (Synthetic Minority Oversampling Technique) è una tecnica di oversampling che invece di replicare gli stessi dati più volte ne crea di nuovi basandosi sulle feature di dati già esistenti. Preso in modo casuale un dato $x$ appartenente alla classe che si vuole aumentare, gli si applica l'algoritmo \textbf{k-nearest neighbors} che trova i $k$ campioni più vicini a $x$ nello spazio dimensionale. Si ricava il vettore tra $x$ e uno dei $k$ vicini e si produce un nuovo dato sintetico in un punto casuale tra i due punti. \cite{smote}
-				\img{Creazione di un nuovo dato sintetico con SMOTE}{0.3}{smote.png}{smote}
+				SMOTE (Synthetic Minority Oversampling Technique) è una tecnica di oversampling che invece di replicare gli stessi dati più volte ne crea di nuovi basandosi sulle feature di dati già esistenti \cite{smote}. Preso in modo casuale un dato $x$ appartenente alla classe che si vuole aumentare, gli si applica l'algoritmo \textbf{k-nearest neighbors} che trova i $k$ campioni più vicini a $x$ nel dataset. Come si può osservare in figura 2.4 si genera un nuovo punto in modo che questo giaccia sul segmento che congiunge $x$ e uno dei $k$ vicini. %\ref{fig:smote_fig} < non funziona.
+
+
 				
 				
 	\chapter{Esperimenti} \label{chap:esperimenti}
-		In questo capitolo verranno trattati alcuni esperimenti con le \textbf{reti neurali} utilizzando le tecniche viste nel capitolo 2. L'idea di questo lavoro è stata quella di familiarizzare inizialmente con i percettroni multistrato attraverso \texttt{MLPClassifier} di sklearn \cite{sklearn}. Si è poi passati a cercare di massimizzare l'accuratezza del classificatore tramite delle tecniche di \textbf{preprocessing} e \textbf{model selection}, per poi infine fare esperimenti sull'aumento dei dati per vedere come crescerebbe ipoteticamente l'accuratezza con l'aumentare della numerosità dell'insieme.
+		In questo Capitolo verranno trattati alcuni esperimenti con le \textbf{reti neurali} utilizzando le tecniche viste nel Capitolo 2. L'idea di questo lavoro è stata quella di familiarizzare inizialmente con i percettroni multistrato attraverso \texttt{MLPClassifier} di sklearn \cite{sklearn}. Si è poi passati a cercare di massimizzare l'accuratezza del classificatore tramite delle tecniche di \textbf{preprocessing} e \textbf{model selection}, per poi infine fare esperimenti sull'aumento dei dati per vedere come crescerebbe ipoteticamente l'accuratezza con l'aumentare della numerosità del dataset.
 	
 	\section{Dataset} 
-		In questa sezione verrà fatta una panoramica sui dataset utilizzati durante gli esperimenti.
-		\subsection{Iris dataset}
-			Il primo dataset utilizzato per fare esperimenti e familiarizzare con \texttt{MLPClassifier} è stato \textbf{iris dataset}. Questo insieme di dati raccoglie 150 istanze, 50 per ciascuna specie dei tre fiori iris presenti: \textit{iris setosa, iris virginica} e \textit{iris versicolor}. Per ogni campione, oltre all'etichetta, sono presenti la lunghezza e la larghezza del sepalo e del petalo in centimetri. Questo dataset è ampiamente utilizzato come primo esempio nel mondo del machine learning in quanto, come vedremo, presenta dei dati che praticamente non hanno bisogno di essere preelaborati. 
-			\begin{table}[h]
+		In questo paragrafo verrà fatta una panoramica sui dataset utilizzati durante gli esperimenti. Prima di entrare nei dettagli con gli esperimenti di classificazione, reingegnerizzazione dei dati e data augmentation verrà fatta un'analisi visiva dei dati per avere un'idea di come essi siano composti e quali tecniche di preprocessing necessitino.  Le tecniche di visualizzazioni principali utilizzate saranno il \textbf{box plot} e lo \textbf{scatter plot}. 
+		\begin{table}[h]
 			\noindent\makebox[\textwidth]{
-			\begin{tabular}{rrrrl}
+			\begin{tabular}{ccccc}
 			\toprule
 			sepal length &  sepal width &  petal length &  petal width &        type \\
 			\midrule
@@ -343,13 +396,107 @@
 			6.1 &               2.8 &                4.0 &               1.3 &  versicolor \\
 			\bottomrule
 			\end{tabular}}
-			\caption{\label{tab:iris}Iris dataset.}
-			\end{table}
-		\subsection{Dataset sugli incidenti stradali}
-			Il dataset sugli incidenti stradali è stato l'insieme di dati su cui è stato svolto il lavoro principale di questo tirocinio. Sono presenti 130 campioni riguardanti incidenti stradali in cui sono stati coinvolti dei pedoni. Ogni riga è identificata da un \textit{verbale}, e sono presenti la data in cui è avvenuto l'incidente, i dati personali della vittima e dei dati sulle lesioni occasionate in 20 aree diverse del corpo. I dati personali sono \textit{sesso, anni, peso, altezza} e \textit{BMI}, mentre i dati sulle lesioni sono relativi a 4 macroaree quali \textit{testa, torace, addome} e \textit{scheletro}. Per ognuna di esse sono presenti 5 aree specifiche con un valore di gravità della lesione che va da 0 a 4. Sono inoltre presenti anche i totali per ogni macroarea che sono la somma delle 5 aree specifiche, più un totale per tutto il corpo che è una somma complessiva dei 20 dati.
+			\caption{\label{tab:iris}Tre misurazioni appartenenti all'iris dataset.}
+		\end{table}
 			
-	\section{Esperimenti di classificazione}
-	\section{Reingegnerizzazione dei dati}
+		\subsection{Iris dataset}
+			Il primo dataset utilizzato per fare esperimenti e familiarizzare con \texttt{MLPClassifier} è stato \textbf{iris dataset}. Questo insieme di dati raccoglie 150 istanze, 50 per ciascuna specie dei tre fiori iris presenti: \textit{iris setosa, iris virginica} e \textit{iris versicolor}. Per ogni campione oltre all'etichetta sono presenti la lunghezza e la larghezza del sepalo e del petalo in centimetri. Questo dataset è ampiamente utilizzato come primo esempio nel mondo del machine learning in quanto presenta dei dati che praticamente non hanno bisogno di essere preelaborati. I box plot in figura \ref{fig:boxplot_iris} ci permettono di osservare le distribuzioni di ogni feature e gli outlier; i dati si distribuiscono tutti su un range abbastanza simile, quindi in questo caso non c'è la necessità di standardizzare i dati. Nella feature \textit{sepal width} gli outlier non sono troppo distanti dalla mediana, quindi non sono da considerarsi fastidiosi. È interessante vedere anche i diagrammi di dispersione che ci sono tra le diverse combinazioni di attributi: essi ci aiutano a capire quanto due feature siano correlate tra di loro, e potrebbe tornare utile per
+			\begin{itemize}
+				\item aiutare a predire un attributo da un altro (ottimo modo per imputare valori mancanti o errati),
+				\item indicare (non sempre) la presenza di relazioni di causa-effetto.
+			\end{itemize}
+			Inoltre distinguendo per colore la classe di appartenenza di ogni dato come in figura \ref{fig:scatter_iris}  ci si può accorgere se i dati sono separabili linearmente e si potrebbe decidere di utilizzare una funzione lineare invece che un modello di machine learning. Ad esempio, se volessimo discriminare solo gli \textit{iris setosa} dagli altri due fiori ci basterebbe tracciare una retta che separa i dati. In questo dataset avendo solo 4 feature ridurre le dimensionalità con PCA e t-SNE non porta grossi vantaggi, come si può notare in figura \ref{fig:pca_tsne_iris} i grafici ottenuti non sono tanto diversi da quelli che si potevano vedere in precedenza.
+			
+			\img{Box plot dei dati dell'iris dataset}{0.5}{boxplot.png}{boxplot_iris}
+			\img{Scatter plot di ogni combinazione di feature dell'iris dataset. Nella diagonale della matrice è tracciata la distribuzione della feature divisa per classe.}{0.6}{scatter.png}{scatter_iris}
+			
+			\begin{figure}
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=.9\linewidth]{iris_pca.png}
+					\caption{PCA}
+					\label{fig:iris_pca}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=.9\linewidth]{iris_tsne.png}
+					\caption{t-SNE}
+					\label{fig:iris_tsne}
+				\end{subfigure}
+				
+				\caption{Riduzione della dimensionalità dell'iris dataset}
+				\label{fig:pca_tsne_iris}
+			\end{figure}	
+
+			
+		\subsection{Dataset sugli incidenti stradali}
+			Il dataset sugli incidenti stradali è l'insieme di dati su cui è stato svolto il lavoro principale di questo tirocinio. Sono presenti 130 campioni riguardanti incidenti stradali in cui sono stati coinvolti dei pedoni. Ogni riga è identificata da un \textit{verbale} e sono presenti la data in cui è avvenuto l'incidente, i dati personali della vittima, dei dati sulle lesioni occasionate in 20 aree diverse del corpo e infine, la tipologia di mezzo che ha occasionato l'incidente che può essere 0 \textit{(leggero)} o 1 \textit{(pesante)}. I dati personali sono \textit{sesso, anni, peso, altezza} e \textit{BMI}, mentre i dati sulle lesioni sono relativi a 4 macroaree quali \textit{testa, torace, addome} e \textit{scheletro}. Per ognuna di esse sono presenti 5 aree specifiche con un valore di gravità della lesione che va da 0 a 4. Sono inoltre presenti anche i totali per ogni macroarea che sono la somma delle loro 5 aree specifiche, più un totale per tutto il corpo che è una somma complessiva dei 20 dati sulle lesioni. 
+			\begin{table}[h]
+			\begin{tabular}{lccccccc}
+			\toprule
+			VERBALE & DATA &  SESSO &  ANNI & $\dots$ &  Tot Addome &  Tot Scheletro &  Totale \\
+			\midrule
+			85567 & 1999-10-29 &      0 &    81 &  $\dots$ &         3 &              9 &      14 \\
+			85829 & 2000-01-14 &      1 &    69 &  $\dots$ &         1 &              4 &      32 \\
+			85977 & 2000-03-10 &      1 &    71 &  $\dots$ &         0 &              4 &      10 \\
+			86220 & 2000-06-14 &      1 &    54 &  $\dots$ &         2 &              4 &      14 \\
+			86247 & 2000-06-22 &      1 &    78 &  $\dots$ &         2 &              4 &       8 \\
+			\bottomrule
+			\end{tabular}
+			\caption{\label{tab:incidenti}Prime 5 righe del dataset sugli incidenti stradali.}
+			\end{table}
+			
+			Come possiamo vedere dalla tabella \ref{tab:incidenti} la data non è un dato numerico, va quindi convertito tramite feature encoding: in questo caso si è scelto semplicemente di trasformare la data nel numero di giorni passati dall'epoca \texttt{unix} (01/01/1970). Osservando i diagrammi di dispersione in figura~\ref{fig:scatter_incidenti} si può notare come i dati con etichetta diversa siano molto più mischiati rispetto al dataset visto in precedenza (figura \ref{fig:scatter_iris}). Una cosa che salta all'occhio osservando gli scatter plot in cui è convolta la data (figura \ref{fig:scatter_data}) è che c'è un cluster di dati in cui il mezzo è pesante quando la data assume valori bassi. Infatti, se si ordinano i dati in base alla data, si può notare che le prime 24 righe hanno come etichetta \texttt{Mezzo} un valore pari a 1 \textit{(eccetto la prima riga, nella figura \ref{fig:scatter_data} questo dato corrisponde al pallino blu più basso)}. Ovviamente questo potrebbe essere un problema per la rete neurale, in quanto il dato che sembra discriminare meglio l'etichetta è quello relativo a una variabile che in realtà non dovrebbe dirci niente sul tipo di mezzo che ha causato l'incidente. Durante gli esperimenti si terrà conto di questo fatto, e nella maggior parte di essi si eliminerà l'intera colonna. 
+			
+			\img{Scatter plot di DATA e BMI}{0.4}{scatter_data.png}{scatter_data}
+			
+			Come possiamo vedere in figura \ref{fig:pca_tsne_incidenti}, riducendo la dimensionalità dei dati con PCA e t-SNE i dati restano molto mischiati, quindi possiamo aspettarci di non avere delle performance altissime, soprattuto data la numerosità del dataset.
+			
+			\begin{figure}[h]
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=.7\linewidth]{pca_incidenti.png}
+					\caption{PCA}
+					\label{fig:pca_incidenti}
+				\end{subfigure}
+				\hfill
+				\begin{subfigure}[]{.5\textwidth}
+					\centering
+					\includegraphics[width=.7\linewidth]{tsne_incidenti.png}
+					\caption{t-SNE}
+					\label{fig:tsne_incidenti}
+				\end{subfigure}
+				
+				\caption{Riduzione della dimensionalità del dataset sugli incidenti}
+				\label{fig:pca_tsne_incidenti}
+			\end{figure}	
+			\imgh{Scatter plot di ogni combinazione di feature dataset sugli incidenti. Nella diagonale della matrice è tracciata la distribuzione della feature divisa per classe.}{0.25}{scatter_incidenti.png}{scatter_incidenti}
+ 				
+	\section{Classificazione e reingegnerizzazione dei dati} 
+		Dopo aver dato uno sguardo generale ai dati con cui avremo a che fare possiamo iniziare a fare esperimenti di classificazione e reingegnerizzazione dei dati. Inizialmente mostreremo i primi esperimenti utilizzati per familiarizzare con \texttt{MLPClassifier} con l'iris dataset, per poi passare al dataset sugli incidenti stradali. 
+		
+		\subsection{Iris Dataset}
+			Il primo esperimento di classificazione fatto con questo dataset è stato quello di provare a creare un percettrone multistrato con degli iperparametri messi casualmente, di allenarlo con un insieme di train per poi testarlo con un insieme di test. Non avendo 			
+
+\begin{lstlisting}[language=Python, caption=Primo esperimento con l'iris dataset]
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
+
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+
+nn = MLPClassifier(activation='logistic', hidden_layer_sizes=(2), learning_rate_init=0.5, max_iter=500)
+
+nn.fit(X_train, y_train)
+
+print("Accuracy: %0.2f" % nn.score(X_test, y_test))
+\end{lstlisting}
+\texttt{Accuracy: 0.26}
+
+		\subsection{Dataset sugli incidenti stradali}
+	
+	%\section{Reingegnerizzazione dei dati}
+	
 	\section{Data augmentation}
 
 	\chapter*{Conclusione}	\addcontentsline{toc}{chapter}{Conclusione}  
@@ -359,7 +506,7 @@
 
 		\bibitem{shwartz} Shai Shalev-Shwartz, Shai Ben-David, 2014, \textit{Understanding Machine Learning: From Theory to Algorithms}, Cambridge University Press.
 		
-		\bibitem{mcculloch_pitts} Warren S. McCulloch, Walter Pitts, 1943, \textit{A logical calculus of the ideas immanent in nervous activity}, The bulletin of mathematical biophysics volume 5, pages 115–133.		
+		\bibitem{mcculloch_pitts} Warren S. McCulloch, Walter Pitts, 1943, \textit{A logical calculus of the ideas immanent in nervous activity}, The bulletin of mathematical biophysics volume 5.		
 		
 		\bibitem{minsky_papert} Marvin Minsky, Seymour Papert, 1969,  \textit{Perceptrons: an introduction to computational geometry}, Information and control 17, 501-522- 
 		
@@ -371,7 +518,7 @@
 		
 		\bibitem{smote} Nitesh V. Chawla, Kevin W. Bowyer, Lawrence O. Hall, W. Philip Kegelmeyer, 2002, \textit{SMOTE: Synthetic Minority Over-sampling Technique}, Journal of Artificial Intelligence Research 16, 321–357.
 		
-
+		\bibitem{neyman} Jerzy Neyman, 1934, \textit{On the Two Different Aspects of the Representative Method: The Method of Stratified Sampling and the Method of Purposive Selection}, Journal of the Royal Statistical Society Vol. 97, No. 4.
 		
 	\end{thebibliography}
 	
