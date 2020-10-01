@@ -73,6 +73,8 @@
 	\end{figure}
 }
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title{Uso di reti neurali per la classificazione di dati in problemi di medicina legale}
@@ -274,33 +276,38 @@
 				\end{figure}
 				
 			\subsection{Discesa del gradiente}
-				Quando smettiamo di apprendere? Non è una domanda dalla risposta facile, e per capire questo fondamentale passaggio bisogna avere un'idea chiara di cosa sia la discesa del gradiente. È una procedura che viene utilizzata per massimizzare o minimizzare una funzione. Il gradiente è un vettore $g$ definito in ogni punto derivabile di una funzione ed esso punta verso la salita più ripida. Di conseguenza $-g$ punterà verso la discesa più ripida.
+				Quando smettiamo di apprendere? Non è una domanda dalla risposta facile, e per capire questo fondamentale passaggio bisogna avere un'idea chiara di cosa sia la discesa del gradiente (figura \ref{fig:gradient_descent}). È una procedura che viene utilizzata per massimizzare o minimizzare una funzione. Con \say{discesa} e \say{salita} si intendono le direzioni che determinano il massimo aumento e la massima diminuzione di tale funzione. Il gradiente è un vettore $g$ definito in ogni punto derivabile di una funzione ed esso punta verso la salita più ripida. Di conseguenza $-g$ punterà verso la discesa più ripida.
+				
 				\img{Discesa del gradiente di una funzione a due dimensioni. \cite{kriesel}}{0.5}{gradient_descent_2d.png}{gradient_descent}
+				
+				\paragraph{Gradiente} Sia $f$ una funzione di $n$ argomenti, e $(x_1, \dots, x_n)$ un punto in cui essa è derivabile. Il gradiente di $f$ in $(x_1, \dots, x_n)$, indicato come $\nabla f(x_1, \dots, x_n)$, è il vettore di $n$ componenti ognuna delle quali è uguale a una delle derivate parziali di $f$: 
+					$$\nabla f_i(x_1, \dots, x_n) = \frac{\partial f(x_1, \dots, x_n)}{\partial x_i}.$$
+					In generale, $\nabla f(x_1, \dots, x_n)$ rappresenta la direzione verso cui spostarsi a partire da $(x_1, \dots, x_n)$ per massimizzare $f$, o, equivalentemente, per identificare la salita più ripida nel suo grafico. La norma $||\nabla f(x_1, \dots, x_n)||$ indica la pendenza di questa salita.
+					
+				%Anche dopo, quando parli della discesa del gradiente, è meglio continuare a fare riferimento a (x_1, \dots, x_n); inoltre attento a non confondere "dimensioni" con "argomenti". Attento anche che non è assolutamente detto che spostarsi nella direzione del'anti-gradiente garantisca ogni volta di avere valori minori di f, appunto per i problemi di cui tu stesso parli. In ogni caso non dire che il passo da fare a ogni iterazione è uguale alla norma del gradiente, quello è il miglior modo per divergere :-) Normalmente si usano dei passi di piccola ampiezza.
 
-				\paragraph{Gradiente} Sia $g$ un gradiente. Allora $g$ è il vettore con $n$ componenti che è definito in ogni punto derivabile di una funzione a $n$ dimensioni $f(x_1, x_2, \dots, x_n)$. L'operatore gradiente è definito come $$g(x_1, x_2, \dots, x_n) = \triangledown f(x_1, x_2, \dots, x_n),$$
-<<<<<<< HEAD
-					$g$ punta da ogni punto derivabile di $f$ verso la salita più ripida, con una pendenza pari a $|g|$. \cite{kriesel}
-=======
-					$g$ punta da ogni punto derivabile di $f$ verso la salita più ripida, con una pendenza pari a $||g||$ (norma di $g$). \cite{kriesel}
->>>>>>> 9ef490d2c85f06d9458073c47c3901da5ea75882
+				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ argomenti e $x_1, \dots, x_n$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(x_1, \dots, x_n)$ in direzione di $-g$. L'idea è quella di andare verso valori sempre minori di $f$, anche se purtroppo questo non succede sempre.
+								
+				\img{Problemi della tecnica della discesa del gradiente \cite{kriesel}}{0.4}{gradient_descent.png}{gradient_descent_problemi}
 				
-				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ dimensioni e $s=(s_1, s_2, \dots, s_n)$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(s)$ in direzione di $-g$, con passi di dimensione $||g||$ verso valori sempre minori di $f$. \cite{kriesel}
-				
-				\img{Problemi della tecnica della discesa del gradiente \cite{kriesel}}{0.4}{gradient_descent.png}{gradient_descent}
-				
-				Questa tecnica purtroppo non è priva di problemi, potremmo cadere in diverse \say{trappole} senza accorgercene. Alcuni esempi sono: 
+				I motivi per cui questa tecnica potrebbe fallire sono diversi, alcuni esempi sono: 
 				\begin{itemize}
-				 	\item Incagliarsi su un minimo locale non soddisfacente (Figura \ref{gradient_descent}a).
-				 	\item Rallentare la ricerca del minimo a causa di un \textit{plateau} (Figura \ref{gradient_descent}b).
-				 	\item Trovare un \say{canyon stretto} e continuare ad oscillare a causa dell'elevato contrasto tra i gradienti (Figura \ref{gradient_descent}c).
-				 	\item Saltare un buon minimo a causa di una pendenza elevata (Figura \ref{gradient_descent}d).
+				 	\item incagliarsi su un minimo locale non soddisfacente (Figura \ref{fig:gradient_descent}a),
+				 	\item rallentare la ricerca del minimo a causa di un \textit{plateau} (Figura \ref{fig:gradient_descent}b),
+				 	\item trovare un \say{canyon stretto} e continuare ad oscillare a causa dell'elevato contrasto tra i gradienti (Figura \ref{fig:gradient_descent}c),
+				 	\item saltare un buon minimo a causa di una pendenza elevata (Figura \ref{fig:gradient_descent}d).
 				 \end{itemize} 
 				 
 				 
-				 \paragraph{Funzione di errore} Ciò che noi vogliamo minimizzare è l'errore totale, ma per come l'abbiamo definito prima non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come cambiamo i pesi, quindi possiamo ridefinirlo come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi $$Err : W \rightarrow \mathbb{R}$$ 
-				 %$$\Delta \omega(i,\Omega) = \nu \cdot o_i \cdot \delta_{\Omega}.$$
 			\subsection{Backpropagation}
-				
+				%Io propongo di spostare la parte "funzione di errore" dentro a 1.4.3 e di spiegare che un modo per indurre da dati etichettati una rete neurale è quello di inizializzare in qualche modo i pesi delle sue connessioni, poi presentarle alcuni esempi e calcolare l'errore corrispondente: l'algoritmo di backpropagation permette di legare il valore di errore contenuto al gradiente della funzione Err, così da poter applicare l'algoritmo della discesa del gradiente. In questo modo è possibile modificare per passi successivi i pesi delle connessioni, procedendo via via a diminuire l'errore. Quando questo è sotto una soglia accettabile, ciò significa che la rete neurale ottenuta classifica abbastanza bene gli esempi che le abbiamo fornito.
+
+				%Ci sarebbe da spiegare poi, senza entrare in dettagli matematici ma facendo riferimento alla letteratura, che l'algoritmo di discesa del gradiente viene applicato in fasi successive: prima in modo da aggiornare i pesi delle connessioni che arrivano allo strato di output, e poi procedendo a ritroso nei vari strati (è per questo che si chiama backpropagation: l'errore viene propagato al contrario rispetto al verso di esecuzione della rete neurale).
+
+					
+				\paragraph{Funzione di errore} Ciò che noi vogliamo minimizzare è l'errore totale, ma per come l'abbiamo definito prima non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come cambiamo i pesi, quindi possiamo ridefinirlo come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi $$Err : W \rightarrow \mathbb{R}$$ 
+				 %$$\Delta \omega(i,\Omega) = \nu \cdot o_i \cdot \delta_{\Omega}.$$
+
 				
 				
 	\chapter{Tecniche utilizzate}
@@ -430,7 +437,7 @@
 			\end{figure}	
 
 			
-		\subsection{Dataset sugli incidenti stradali}
+		\subsection{Dataset sugli incidenti stradali} \label{sec:incidenti}
 			Il dataset sugli incidenti stradali è l'insieme di dati su cui è stato svolto il lavoro principale di questo tirocinio. Sono presenti 130 campioni riguardanti incidenti stradali in cui sono stati coinvolti dei pedoni. Ogni riga è identificata da un \textit{verbale} e sono presenti la data in cui è avvenuto l'incidente, i dati personali della vittima, dei dati sulle lesioni occasionate in 20 aree diverse del corpo e infine, la tipologia di mezzo che ha occasionato l'incidente che può essere 0 \textit{(leggero)} o 1 \textit{(pesante)}. I dati personali sono \textit{sesso, anni, peso, altezza} e \textit{BMI}, mentre i dati sulle lesioni sono relativi a 4 macroaree quali \textit{testa, torace, addome} e \textit{scheletro}. Per ognuna di esse sono presenti 5 aree specifiche con un valore di gravità della lesione che va da 0 a 4. Sono inoltre presenti anche i totali per ogni macroarea che sono la somma delle loro 5 aree specifiche, più un totale per tutto il corpo che è una somma complessiva dei 20 dati sulle lesioni. 
 			\begin{table}[h]
 			\begin{tabular}{lccccccc}
@@ -471,30 +478,101 @@
 				\caption{Riduzione della dimensionalità del dataset sugli incidenti}
 				\label{fig:pca_tsne_incidenti}
 			\end{figure}	
-			\imgh{Scatter plot di ogni combinazione di feature dataset sugli incidenti. Nella diagonale della matrice è tracciata la distribuzione della feature divisa per classe.}{0.25}{scatter_incidenti.png}{scatter_incidenti}
+			\img{Scatter plot di ogni combinazione di feature dataset sugli incidenti. Nella diagonale della matrice è tracciata la distribuzione della feature divisa per classe.}{0.25}{scatter_incidenti.png}{scatter_incidenti}
  				
 	\section{Classificazione e reingegnerizzazione dei dati} 
-		Dopo aver dato uno sguardo generale ai dati con cui avremo a che fare possiamo iniziare a fare esperimenti di classificazione e reingegnerizzazione dei dati. Inizialmente mostreremo i primi esperimenti utilizzati per familiarizzare con \texttt{MLPClassifier} con l'iris dataset, per poi passare al dataset sugli incidenti stradali. 
+		Dopo aver dato uno sguardo generale ai dati su cui si dovrà lavorare, si può iniziare a fare esperimenti di classificazione e reingegnerizzazione dei dati. Inizialmente verranno mostrati i primi esperimenti utilizzati per familiarizzare con \texttt{MLPClassifier} e l'iris dataset, per poi passare agli esperimenti sul dataset degli incidenti stradali. 
 		
 		\subsection{Iris Dataset}
-			Il primo esperimento di classificazione fatto con questo dataset è stato quello di provare a creare un percettrone multistrato con degli iperparametri messi casualmente, di allenarlo con un insieme di train per poi testarlo con un insieme di test. Non avendo 			
+			Il primo esperimento di classificazione fatto con questo dataset è stato quello di provare a creare un percettrone multistrato impostando alcuni iperparametri in modo casuale per poi allenarlo con un insieme di train e testarlo con un insieme di test. Il tutto è stato fatto senza fare nessun tipo di preprocessing e model selection, infatti l'accuracy ottenuta è molto bassa. Confrontando le etichette predette con quelle che ci si aspettava di ottenere (codice \ref{lst:iris_1}) ci si accorge presto che c'è stato un problema nella fase di apprendimento. 
 
-\begin{lstlisting}[language=Python, caption=Primo esperimento con l'iris dataset]
-from sklearn.model_selection import train_test_split
-from sklearn.neural_network import MLPClassifier
-
-X_train, X_test, y_train, y_test = train_test_split(X, y)
-
-nn = MLPClassifier(activation='logistic', hidden_layer_sizes=(2), learning_rate_init=0.5, max_iter=500)
-
-nn.fit(X_train, y_train)
-
-print("Accuracy: %0.2f" % nn.score(X_test, y_test))
-\end{lstlisting}
-\texttt{Accuracy: 0.26}
-
+			\begin{lstlisting}[language=Python, caption=Primo esperimento con l'iris dataset, captionpos=t, gobble=8, label={lst:iris_1}]
+				from sklearn.model_selection import train_test_split
+				from sklearn.neural_network import MLPClassifier
+				
+				X_train, X_test, y_train, y_test = train_test_split(X, y)
+				
+				nn = MLPClassifier(activation='logistic', hidden_layer_sizes=(2), learning_rate_init=0.5, max_iter=500)
+				
+				nn.fit(X_train, y_train)
+				
+				print("Accuracy: %0.2f" % nn.score(X_test, y_test))
+			\end{lstlisting}
+			\texttt{Accuracy: 0.26}
+			
+			 
+			\begin{lstlisting}[language=Python, gobble=8]
+				nn.predict(X_test)
+			\end{lstlisting}
+			\texttt{array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])}
+			
+			\begin{lstlisting}[language=Python, gobble=8]
+				y_test
+			\end{lstlisting}
+			\texttt{array([1, 1, 0, 2, 1, 1, 2, 2, 1, 2, 1, 2, 2, 2, 2, 0, 2, 0, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 1, 2])}\\\\
+			Osservando i dati ci si è accorti che essi hanno poco bisogno di essere preelaborati, quindi si è subito provata una tecnica di model selection. Si è deciso di fissare come funzione di attivazione la funzione logistica e 500 come numero massimo di iterazioni, per poi applicare la \texttt{GridSearchCV} con $k=5$ per la cross validation, testando le combinazioni dei seguenti iperparametri:
+			\begin{itemize}
+				\item \texttt{hidden\_layer\_sizes: [(10,2), (10), (5,5)]} \textit{(L'i-esimo elemento di una tupla rappresenta il numero di neuroni nello strato nascosto i)},
+	    		\item \texttt{learning\_rate\_init: [0.2, 0.1, 0.01]} \textit{(learning rate \textbf{iniziale}, in quanto esistono tecniche in cui esso varia durante la fase di apprendimento)}
+			\end{itemize}
+			In questo modo si è ottenuta una rete neurale in cui la combinazione di iperparametri migliore è risultata essere quella con 10 neuroni in un singolo strato nascosto e un learning rate pari a 0.2. L'accuratezza conseguita sul test set con questi iperparametri è  stata del 99\%. Si è poi utilizzata una cross validation annidata con $k = 3$ esterno e $k' = 5$  interno per testare la bontà di generalizzazione in modo più imparziale, e si è ottenuta una accuratezza pari al 97\% con una deviazione standard di +/- 0.05. Questi risultati confermano che questo	dataset non necessiti di una fase di preprocessing.
+			
 		\subsection{Dataset sugli incidenti stradali}
-	
+			Come abbiamo già visto nel paragrafo \ref{sec:incidenti}, i dati sulle lesioni sono diversi e quindi nel dataset è presente un totale per ogni macroarea. Quando si è andati a fare i primi esperimenti di classificazione, si è notato che mantenendo sia il totale che le singole lesioni la accuratezza del classificatore era più bassa rispetto a quando si lasciava fuori una delle due informazioni. Probabilmente questo è dovuto alla ridondanza dei dati, quindi sono stati fatti degli esperimenti testando l'accuratezza di diversi percettroni multistrato per capire se fosse meglio mantenere i totali o le 20 singole lesioni. I risultati hanno dimostrato che conservare solo i totali aumentasse leggermente le prestazioni, pertanto nei seguenti esperimenti si è stabilito di mantenere solo la somma delle lesioni per le diverse macroaree e poi di provare tecniche di riduzione della dimensionalità diverse dalla somma.
+			
+			\subsubsection{Data o non data?}			
+				È già stato spiegato nel paragrafo \ref{sec:incidenti} perchè l'elemento \texttt{DATA} si ritenga debba essere lasciato fuori, ma è curioso osservare quanto cambi l'accuratezza di un percettrone multistrato con e senza questa feature. Sono stati considerati due insiemi \texttt{X} e \texttt{X\_no\_data} in cui erano presenti tutte le righe del dataset, in \texttt{X} è presente la feature \texttt{DATA} mentre nell'altro insieme no. La preelaborazione fatta sui dati dei due insiemi per questo esperimento è stata: 
+				\begin{itemize}
+					\item eliminare i dati delle singole lesioni,
+					\item applicare una scalatura standard sui dati.
+				\end{itemize}
+				La scalatura standard è stata applicata poichè i dati sono distribuiti in modo molto diverso tra di loro; basti pensare alla differenza che c'è tra la data \textit{(dopo la procedura di feature encoding)} e i dati sulle singole lesioni. Ad esempio nella Tabella \ref{tab:differenza_data} vi è una comparazione tra la media, la deviazione standard, il valore minimo, massimo e alcuni percentili tra la colonna contenente le date e le lesioni al cuore.
+				
+				\begin{table}
+				\centering
+				\begin{tabular}{lrr}
+				\toprule
+				{} &          DATA &  Torace:Cuore \\
+				\midrule
+				count &    130.0 &    130.0 \\
+				mean  &  14945.8 &      0.5 \\
+				std   &   1880.8 &      0.9 \\
+				min   &  10893.0 &      0.0 \\
+				25\%   &  13453.7 &      0.0 \\
+				50\%   &  15198.0 &      0.0 \\
+				75\%   &  16282.5 &      1.0 \\
+				max   &  18030.0 &      4.0 \\
+				\bottomrule
+				\end{tabular}
+				\caption{Comparazione dei dati di due colonne del dataset}
+				\label{tab:differenza_data}
+				\end{table}
+				
+				Dopo la preelaborazione dei dati è stata svolta una fase di model selection per trovare il miglior classificatore per ognuno dei due insiemi e per compararne le prestazioni. Si è eseguita una cross validation annidata per testare diverse combinazioni di iperparametri, tra cui: 
+			\begin{itemize}
+				\item \texttt{max\_iter: [100,1000,5000,10000],}
+	          	\item \texttt{hidden\_layer\_sizes: [[2], [4], [6], [10], [20], [4, 4], [10, 10]],}
+	          	\item \texttt{learning\_rate\_init : [0.01, 0.2, 0.001],}
+	          	\item \texttt{activation: [identity, logistic, tanh, relu].}
+			\end{itemize}
+			Come ci si poteva aspettare, lo score ottenuto con la feature \texttt{DATA} presente è leggermente più alta (Tabella \ref{tab:score_con_e_senza_data}). 
+
+			\begin{table}
+				\centering
+				\begin{tabular}{llrlrrr}
+				\toprule
+				 & Activation &  Learning rate & Hidden layer sizes &  Max iter &    Best score &  Test score \\
+				\midrule
+				X &       tanh &               0.010 &                [2] &       100 &  0.756 &    0.727 \\
+				X\_no\_data &      tanh &               0.001 &                [2] &      5000 &  0.749 &    0.697 \\
+				\bottomrule
+				\end{tabular}
+				\caption{Comparazione delle accuratezze ottenute con e senza la feature \texttt{DATA}. La colonna \textit{Best score} rappresenta il miglior score ottenuto nella cross validation interna, mentre \textit{Test score} rappresenta lo score ottenuto con la cross validation esterna.}
+				\label{tab:score_con_e_senza_data}
+			\end{table}	
+			
+			\subsubsection{PCA come totale delle lesioni invece che la somma}		
+		
 	%\section{Reingegnerizzazione dei dati}
 	
 	\section{Data augmentation}
