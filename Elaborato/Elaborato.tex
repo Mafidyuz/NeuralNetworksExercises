@@ -381,7 +381,7 @@
 				\label{smote_fig}
 			\end{figure}
 			
-			\subsection{Synthetic Minority Oversampling Technique}
+			\subsection{Synthetic Minority Oversampling Technique} \label{sec:smote}
 				SMOTE (Synthetic Minority Oversampling Technique) è una tecnica di oversampling che invece di replicare gli stessi dati più volte ne crea di nuovi basandosi sulle feature di dati già esistenti \cite{smote}. Preso in modo casuale un dato $x$ appartenente alla classe che si vuole aumentare, gli si applica l'algoritmo \textbf{k-nearest neighbors} che trova i $k$ campioni più vicini a $x$ nel dataset. Come si può osservare in figura 2.4 si genera un nuovo punto in modo che questo giaccia sul segmento che congiunge $x$ e uno dei $k$ vicini. %\ref{fig:smote_fig} < non funziona.
 
 
@@ -518,10 +518,10 @@
 			In questo modo si è ottenuta una rete neurale in cui la combinazione di iperparametri migliore è risultata essere quella con 10 neuroni in un singolo strato nascosto e un learning rate pari a 0.2. L'accuratezza conseguita sul test set con questi iperparametri è  stata del 99\%. Si è poi utilizzata una cross validation annidata con $k = 3$ esterno e $k' = 5$  interno per testare la bontà di generalizzazione in modo più imparziale, e si è ottenuta una accuratezza pari al 97\% con una deviazione standard di +/- 0.05. Questi risultati confermano che questo	dataset non necessiti di una fase di preprocessing.
 			
 		\subsection{Dataset sugli incidenti stradali}
-			Come abbiamo già visto nel paragrafo \ref{sec:incidenti}, i dati sulle lesioni sono diversi e quindi nel dataset è presente un totale per ogni macroarea. Quando si è andati a fare i primi esperimenti di classificazione, si è notato che mantenendo sia il totale che le singole lesioni la accuratezza del classificatore era più bassa rispetto a quando si lasciava fuori una delle due informazioni. Probabilmente questo è dovuto alla ridondanza dei dati, quindi sono stati fatti degli esperimenti testando l'accuratezza di diversi percettroni multistrato per capire se fosse meglio mantenere i totali o le 20 singole lesioni. I risultati hanno dimostrato che conservare solo i totali aumentasse leggermente le prestazioni, pertanto nei seguenti esperimenti si è stabilito di mantenere solo la somma delle lesioni per le diverse macroaree e poi di provare tecniche di riduzione della dimensionalità diverse dalla somma.
+			Come abbiamo già visto nel paragrafo \ref{sec:incidenti}, i dati sulle lesioni sono diversi e quindi nel dataset è presente un totale per ogni macroarea. Quando si è andati a fare i primi esperimenti di classificazione, si è notato che mantenendo sia il totale che le singole lesioni la accuratezza del classificatore era più bassa rispetto a quando si escludeva una delle due informazioni. Probabilmente questo è dovuto alla ridondanza dei dati, quindi sono stati fatti degli esperimenti testando l'accuratezza di diversi percettroni multistrato per capire se fosse meglio mantenere i totali o le 20 singole lesioni. I risultati hanno dimostrato che conservare solo i totali aumentasse leggermente le prestazioni, pertanto nei seguenti esperimenti si è stabilito di mantenere solo la somma delle lesioni per le diverse macroaree e poi di provare tecniche di riduzione della dimensionalità diverse dalla somma.
 			
 			\subsubsection{Data o non data?}			
-				È già stato spiegato nel paragrafo \ref{sec:incidenti} perchè l'elemento \texttt{DATA} si ritenga debba essere lasciato fuori, ma è curioso osservare quanto cambi l'accuratezza di un percettrone multistrato con e senza questa feature. Sono stati considerati due insiemi \texttt{X} e \texttt{X\_no\_data} in cui erano presenti tutte le righe del dataset, in \texttt{X} è presente la feature \texttt{DATA} mentre nell'altro insieme no. La preelaborazione fatta sui dati dei due insiemi per questo esperimento è stata: 
+				È già stato spiegato nel paragrafo \ref{sec:incidenti} perchè l'elemento \texttt{DATA} si ritenga debba essere escluso, ma è curioso osservare quanto cambi l'accuratezza di un percettrone multistrato con e senza questa feature. Sono stati considerati due insiemi \texttt{X} e \texttt{X\_no\_data} in cui erano presenti tutte le righe del dataset, in \texttt{X} era presente la feature \texttt{DATA} mentre nell'altro insieme no. La preelaborazione fatta sui dati dei due insiemi per questo esperimento è stata: 
 				\begin{itemize}
 					\item eliminare i dati delle singole lesioni,
 					\item applicare una scalatura standard sui dati.
@@ -550,16 +550,16 @@
 				
 				Dopo la preelaborazione dei dati è stata svolta una fase di model selection per trovare il miglior classificatore per ognuno dei due insiemi e per compararne le prestazioni. Si è eseguita una cross validation annidata per testare diverse combinazioni di iperparametri, tra cui: 
 			\begin{itemize}
-				\item \texttt{max\_iter: [100,1000,5000,10000],}
+				\item \texttt{max\_iter: [100,1000,5000],}
 	          	\item \texttt{hidden\_layer\_sizes: [[2], [4], [6], [10], [20], [4, 4], [10, 10]],}
 	          	\item \texttt{learning\_rate\_init : [0.01, 0.2, 0.001],}
-	          	\item \texttt{activation: [identity, logistic, tanh, relu].}
+	          	\item \texttt{activation: [logistic, tanh, relu].}
 			\end{itemize}
-			Come ci si poteva aspettare, lo score ottenuto con la feature \texttt{DATA} presente è leggermente più alta (Tabella \ref{tab:score_con_e_senza_data}). 
+			I classificatori ottenuti tramite la feature selection sono abbastanza simili, ma come ci si poteva aspettare, lo score ottenuto con la feature \texttt{DATA} presente è leggermente più alto (Tabella \ref{tab:score_con_e_senza_data}). 
 
 			\begin{table}
 				\centering
-				\begin{tabular}{llrlrrr}
+				\begin{tabular}{lcccccc}
 				\toprule
 				 & Activation &  Learning rate & Hidden layer sizes &  Max iter &    Best score &  Test score \\
 				\midrule
@@ -571,11 +571,54 @@
 				\label{tab:score_con_e_senza_data}
 			\end{table}	
 			
-			\subsubsection{PCA come totale delle lesioni invece che la somma}		
-		
-	%\section{Reingegnerizzazione dei dati}
+			\subsubsection{Utilizzo di tecniche di riduzione della dimensionalità come totali}
+				Un altro esperimento svolto è stato quello di utilizzare gli algoritmi di riduzione della dimensionalità \textbf{PCA} e \textbf{t-SNE} per provare a ridurre le singole lesioni in un numero minore di colonne con una tecnica che fosse diversa dalla somma, sostituendo così i totali. Con t-SNE si sono ottenuti risultati molto simili a quelli già avuti in precedenza, mentre riducendo a 2 dimensioni le lesioni per ogni macroarea del corpo con PCA si sono ottenute performance leggermente migliori. Anche in questo esperimento sono stati esclusi l'attributo \texttt{DATA} e i dati sulle singole lesioni che sono stati utilizzati per calcolare la PCA. Non è stata fatta una vera e propria model selection, bensì sono stati fissati un \textit{learning rate} pari a 0.001 e un numero massimo di iterazioni pari a 5000, per poi osservare l'accuracy cross validata con $k=5$ di tutte le combinazioni di: 
+				\begin{itemize}
+					\item \texttt{activations: [relu, logistic, tanh],}
+    				\item \texttt{hidden\_layers = [(2), (3,3), (5), (6,3), (5,5), (6), (8), (10), (2,2,2)].}
+				\end{itemize}
+				Sono state disposte su una tabella tutte le accuratezze della cross validation, l'accuratezza media e la deviazione standard per ogni combinazione tra funzione di attivazione e neuroni negli strati nascosti, ordinandoli in ordine crescente. Come è possibile vedere nelle Tabelle \ref{tab:totali_somma} e \ref{tab:totali_pca} l'accuratezza media passa da un massimo di 0.70 a 0.73. È interessante notare che in entrambi i casi, la funzione di attivazione logistica sembra avere la meglio in quanto compare molto più spesso delle altre due tra i primi 5 risultati.
+				\begin{table}
+					\begin{tabular}{lllrr}
+					\toprule
+					Activation & Hidden layer sizes &                               Scores &  Mean score &  Scores std \\
+					\midrule
+					logistic &                  5 &  [0.654, 0.731, 0.769, 0.808, 0.538] &       0.700 &       0.095 \\
+					tanh &             (6, 3) &  [0.654, 0.692, 0.769, 0.769, 0.538] &       0.685 &       0.086 \\
+					logistic &                  8 &    [0.615, 0.692, 0.769, 0.808, 0.5] &       0.677 &       0.110 \\
+					logistic &                  6 &  [0.654, 0.731, 0.808, 0.654, 0.538] &       0.677 &       0.090 \\
+					logistic &             (6, 3) &  [0.654, 0.769, 0.577, 0.808, 0.577] &       0.677 &       0.096 \\
+					\bottomrule
+					\end{tabular}
+					\caption{Primi 5 risultati ottenuti con la somma come totali.}
+					\label{tab:totali_somma}
+				\end{table}
+				\begin{table}
+					\begin{tabular}{lllrr}
+					\toprule
+					Activation & Hidden layer sizes &                               Scores &  Mean score &  Scores std \\
+					\midrule
+					logistic &                  6 &  [0.769, 0.577, 0.769, 0.808, 0.731] &       0.731 &       0.081 \\
+					logistic &                  5 &  [0.692, 0.654, 0.769, 0.808, 0.654] &       0.715 &       0.062 \\
+					logistic &                  8 &  [0.731, 0.654, 0.731, 0.769, 0.654] &       0.708 &       0.046 \\
+					tanh &             (6, 3) &  [0.615, 0.654, 0.731, 0.769, 0.731] &       0.700 &       0.057 \\
+					logistic &                 10 &  [0.654, 0.615, 0.769, 0.769, 0.692] &       0.700 &       0.062 \\
+					\bottomrule
+					\end{tabular}
+					\caption{Primi 5 risultati ottenuti con PCA come totali.}
+					\label{tab:totali_pca}
+				\end{table}
 	
 	\section{Data augmentation}
+		Tutti gli esperimenti di questa sezione sono stati svolti sul dataset degli incidenti stradali. Dopo aver svolto diversi esperimenti sulla reingegnerizzazione dei dati osservando la variazione dell'accuratezza del classificatore per ognuno di essi, si è notato che sopra un certo limite $(\sim 0.75)$ l'accuratezza non sale. Una rete neurale per generalizzare bene dei dati deve avere a disposizione un'elevata quantità di dati, soprattutto se essi appartengono a un dataset in cui i dati appartenenti alle diverse classi sono mischiati come in questo caso.  Si è deciso di provare a fare degli esperimenti di \textbf{data augmentation} per avere un'idea di come l'accuratezza potrebbe ipoteticamente variare in caso si disponesse di più dati.
+		
+		\subsection{Data augmentation con SMOTE}
+			Il primo esperimento di data augmentation è stato svolto con la tecnica di over sampling \textbf{SMOTE} spiegata nel paragrafo \ref{sec:smote}. L'idea alla base di questo esperimento era quella di vedere come aumenterebbe l'accuratezza massima raggiungibile all'aumentare della cardinalità del dataset. Sono stati creati diversi insiemi di dati, ognuno di cardinalità diversa, per poi applicare un processo di model selection ad ogni insieme. I modelli ricavati da questo processo, essendo stati allenati con dati fittizi non sono applicabili nella pratica. 
+			
+			Anche in questo caso ai dati sono state rimosse le feature \texttt{DATA} e le singole lesioni, 
+			
+			\img{Accuracy smote}{0.35}{accuracy_smote_1.png}{accuracy_smote_1}
+			\img{Accuracy smote}{0.35}{accuracy_smote_2.png}{accuracy_smote_2}
 
 	\chapter*{Conclusione}	\addcontentsline{toc}{chapter}{Conclusione}  
 	
