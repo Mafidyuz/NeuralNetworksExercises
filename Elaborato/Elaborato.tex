@@ -571,7 +571,7 @@
 				\label{tab:score_con_e_senza_data}
 			\end{table}	
 			
-			\subsubsection{Utilizzo di tecniche di riduzione della dimensionalità come totali}
+			\subsubsection{Utilizzo di tecniche di riduzione della dimensionalità per il calcolo dei totali} \label{par:pca_totali}
 				Un altro esperimento svolto è stato quello di utilizzare gli algoritmi di riduzione della dimensionalità \textbf{PCA} e \textbf{t-SNE} per provare a ridurre le singole lesioni in un numero minore di colonne con una tecnica che fosse diversa dalla somma, sostituendo così i totali. Con t-SNE si sono ottenuti risultati molto simili a quelli già avuti in precedenza, mentre riducendo a 2 dimensioni le lesioni per ogni macroarea del corpo con PCA si sono ottenute performance leggermente migliori. Anche in questo esperimento sono stati esclusi l'attributo \texttt{DATA} e i dati sulle singole lesioni che sono stati utilizzati per calcolare la PCA. Non è stata fatta una vera e propria model selection, bensì sono stati fissati un \textit{learning rate} pari a 0.001 e un numero massimo di iterazioni pari a 5000, per poi osservare l'accuracy cross validata con $k=5$ di tutte le combinazioni di: 
 				\begin{itemize}
 					\item \texttt{activations: [relu, logistic, tanh],}
@@ -610,16 +610,56 @@
 				\end{table}
 	
 	\section{Data augmentation}
-		Tutti gli esperimenti di questa sezione sono stati svolti sul dataset degli incidenti stradali. Dopo aver svolto diversi esperimenti sulla reingegnerizzazione dei dati osservando la variazione dell'accuratezza del classificatore per ognuno di essi, si è notato che sopra un certo limite $(\sim 0.75)$ l'accuratezza non sale. Una rete neurale per generalizzare bene dei dati deve avere a disposizione un'elevata quantità di dati, soprattutto se essi appartengono a un dataset in cui i dati appartenenti alle diverse classi sono mischiati come in questo caso.  Si è deciso di provare a fare degli esperimenti di \textbf{data augmentation} per avere un'idea di come l'accuratezza potrebbe ipoteticamente variare in caso si disponesse di più dati.
+		Tutti gli esperimenti di questa sezione sono stati svolti sul dataset degli incidenti stradali. Dopo aver svolto diversi esperimenti sulla reingegnerizzazione dei dati osservando l'accuratezza del classificatore per ognuno di essi, si è notato che sopra un certo limite $(\sim 0.75)$ l'accuratezza non sale. Una rete neurale per generalizzare bene dei dati deve avere a disposizione un'elevata quantità di dati, soprattutto se essi appartengono a un dataset in cui i dati appartenenti alle diverse classi sono mischiati come in questo caso.  Si è deciso di provare a fare degli esperimenti di \textbf{data augmentation} per avere un'idea di come l'accuratezza potrebbe ipoteticamente variare in caso si disponesse di più dati.
 		
-		\subsection{Data augmentation con SMOTE}
-			Il primo esperimento di data augmentation è stato svolto con la tecnica di over sampling \textbf{SMOTE} spiegata nel paragrafo \ref{sec:smote}. L'idea alla base di questo esperimento era quella di vedere come aumenterebbe l'accuratezza massima raggiungibile all'aumentare della cardinalità del dataset. Sono stati creati diversi insiemi di dati, ognuno di cardinalità diversa, per poi applicare un processo di model selection ad ogni insieme. I modelli ricavati da questo processo, essendo stati allenati con dati fittizi non sono applicabili nella pratica. 
+		\subsection{Data augmentation con SMOTE} \label{sec:data_aug_smote}
+			Il primo esperimento di data augmentation è stato svolto con la tecnica di over sampling \textbf{SMOTE} spiegata nel paragrafo \ref{sec:smote}. A partire dall'insieme originale sono stati creati diversi insiemi di dati sintetici, aumentando sempre di più la cardinalità, per poi applicare un processo di model selection ad ogni insieme. I modelli ricavati da questo processo, essendo stati allenati con dati fittizi non sono applicabili nella pratica. 
 			
-			Anche in questo caso ai dati sono state rimosse le feature \texttt{DATA} e le singole lesioni, 
+			Anche in questo caso ai dati sono state rimosse le feature \texttt{DATA} e le 20 lesioni singole prima di applicare SMOTE. I dati sono stati incrementati da 130 a 200, 300, $\dots,$ 2000 sempre con uno step di 100. Raggiunta una certa cardinalità, l'accuratezza tendeva a stabilizzarsi, quindi dopo i 2000 si è deciso di crescere in modo esponenziale (fino a $2^{16}$). Per ogni insieme si è applicata la seguente procedura:
+				\begin{itemize}
+				 \item sono stati standardizzati i dati tramite la scalatura standard,
+				 \item si è fatta una model selection tramite \texttt{GridSearchCV}, fissando il \textit{learning rate} a 0.001 e il numero massimo di iterazioni a 5000, dividendo l'insieme in 5 parti per la cross validation e testando gli iperparametri:
+				 	\begin{itemize}
+					\item \texttt{activations: [relu, logistic, tanh],}
+    				\item \texttt{hidden\_layers = [(2), (3,3), (5), (6,3), (5,5), (6), (8), (10).}
+					\end{itemize}
+				 \end{itemize}
+			In questo procedimento, per quasi ogni insieme la rete migliore ottenuta con il processo di model selection è stata quella con funzione di attivazione \texttt{tanh} e 10 neuroni in un singolo strato nascosto. Le accuratezze ottenute con gli insiemi più numerosi sono arrivate oltre lo 0.96 (Figura \ref{fig:accuracy_smote}). Si è notato che i neuroni nello strato nascosto di tutte le reti che hanno avuto i risultati migliori erano 10, che è il numero massimo di neuroni messi per la model selection. Si è quindi deciso di provare ad aumentare questo numero fino a 50, ottenendo risultati migliori (si è arrivati ad ottenere accuratezze oltre lo 0.99 per gli insiemi più numerosi), ma avere un rapporto così diverso tra neuroni di ingresso, che nel nostro caso sono 9 dato che stiamo lavorando con 9 colonne, e neuroni nello strato nascosto potrebbe portare all'\textbf{overfitting} molto più facilmente.
+			\imgh{Grafico che mostra il crescere dell'accuratezza all'aumentare della numerosità dell'insieme con SMOTE. Il grafico sotto è un ingrandimento del primo.}{0.35}{accuracy_smote_1.png}{accuracy_smote}
 			
-			\img{Accuracy smote}{0.35}{accuracy_smote_1.png}{accuracy_smote_1}
-			\img{Accuracy smote}{0.35}{accuracy_smote_2.png}{accuracy_smote_2}
+		\subsection{Data augmentation con perturbazione sui dati personali} \label{sec:data_aug_pers}
+			Un altro esperimento di data augmentation svolto è stato quello di creare nuovi dati basandosi su campioni già esistenti nel dataset originale perturbando solo i dati personali con distribuzione normale, ovvero \texttt{ANNI}, \texttt{PESO} e \texttt{ALTEZZA}, ricalcolando il BMI a partire dai nuovi dati generati secondo la formula \texttt{BMI = PESO / ALTEZZA$^2$} e lasciando fissi i dati sulle lesioni. I dati sono stati perturbati nel seguente modo: 
+			\begin{itemize}
+			\item ad \texttt{ANNI} è stata aggiunta una perturbazione estratta da una distribuzione normale con media pari a 0 e deviazione standard pari a 1, arrotondata al numero intero più vicino,
+			\item a \texttt{PESO} (kg) è stata aggiunta una perturbazione estratta da una distribuzione normale con media pari a 0 e deviazione standard pari a 2 kg,
+			\item ad \texttt{ALTEZZA} (m) è stata aggiunta una perturbazione estratta da una distribuzione normale con media pari a 0 e deviazione standard pari a 1 cm.
+			\end{itemize}
+			Dal dataset è stata eliminata la feature \texttt{DATA}, le lesioni singole e i totali, per poi ricalcolarli con PCA come spiegato nel sottoparagrafo \textit{\say{Utilizzo di tecniche di riduzione della dimensionalità per il calcolo dei totali}} presente nel paragrafo \ref{par:pca_totali}. Per ogni insieme si è applicata la seguente procedura:
+				\begin{itemize}
+				\item sono stati ricalcolati i totali con PCA passando a 2 dimensioni,
+				\item sono stati standardizzati i dati tramite la scalatura standard,
+				\item si è fatta una model selection tramite \texttt{GridSearchCV}, fissando il \textit{learning rate} a 0.001 e il numero massimo di iterazioni a 5000, dividendo l'insieme in 5 parti per la cross validation e testando gli iperparametri:
+				 	\begin{itemize}
+					\item \texttt{activations: [relu, logistic, tanh],}
+    				\item \texttt{hidden\_layers = [(2), (3,3), (5), (6,3), (5,5), (6), (8), (10), (20).}
+					\end{itemize}
+				 \end{itemize}
+			Con questo esperimento di data augmentation la rete che ottiene più comunemente i risultati migliori ha come funzione di attivazione la \texttt{tanh} e questa volta 20 neuroni in un singolo strato nascosto, che nell'esperimento di prima erano assenti. In questo caso va fatto notare che avendo calcolato i totali con PCA riducendo a 2 le dimensioni per ogni macroarea delle lesioni, si ha un dataset con 13 colonne, quindi si hanno 13 neuroni di ingresso. Le accuratezze raggiunte con questo esperimento sono più alte, già con 700 dati si raggiunge un'accuratezza molto vicina a 1 (Figura \ref{fig:accuracy_data_aug_pers}).
+			
+			\img{Grafico che mostra il crescere dell'accuratezza all'aumentare della numerosità dell'insieme perturbando i dati personali. Il grafico sotto è un ingrandimento del primo.}{0.35}{accuracy_data_aug_pers.png}{accuracy_data_aug_pers}
+			
+			\paragraph{Feature selection} Dopo aver aumentato i dati è stata svolta un'attività di feature selection sui dati personali per vedere se tutti i dati fossero essenziali. 
 
+		\subsection{Data augmentation con perturbazione sui dati appartenenti alle lesioni} \label{sec:data_aug_les}
+			Dopo aver aumentato i dati basandosi su campioni già esistenti perturbando i dati personali continui, si è provato a ripetere l'esperimento ma questa volta perturbando i dati sulle lesioni e lasciando invariati i dati personali. I dati relativi alle lesioni sono più sensibili in quanto è difficile stabilire se una perturbazione sia stata fatta in modo corretto, si è quindi deciso di perturbare i dati in modo leggero, applicando casualmente a solo 3 tra le 20 colonne relative alle lesioni una perturbazione di $-2, -1, 0, 1, 2$ con rispettiva probabilità $0.1, 0.2, 0.4, 0.2, 0.1$, sempre restando nel range accettabile dalle singole lesioni $[0,4]$. Il preprocesing dei dati e la model selection sono stati eseguiti esattamente come nell'esperimento prima (Paragrafo \ref{sec:data_aug_pers}) e anche in questo caso la rete migliore più più frequente ha come funzione di attivazione la \texttt{tanh} e 20 neuroni in un singolo strato nascosto. Anche in questo esperimento le accuratezze tendono a incrementare con l'aumentare della numerosità del dataset, con la differenza che oltre un certo numero tende a decrescere per poi crescere nuovamente (Figura \ref{fig:accuracy_data_aug_lesioni}). 
+			\img{Grafico che mostra il variare dell'accuratezza all'aumentare della numerosità dell'insieme perturbando i dati sulle lesioni. Il grafico sotto è un ingrandimento del primo.}{0.35}{accuracy_data_aug_lesioni.png}{accuracy_data_aug_lesioni}
+			
+		\subsection{Data augmentation con perturbazione sui dati personali e sui dati appartenenti alle lesioni}
+			Dopo aver svolto i due esperimenti di data augmentation in cui sono stati creati nuovi dati a partire da elementi già esistenti nel dataset perturbando prima i dati personali (Paragrafo \ref{sec:data_aug_pers}) e poi le lesioni (Paragrafo \ref{sec:data_aug_les}), si è deciso di unire i due esperimenti per osservarne i risultati. Il processo di preprocessing e model selection è il medesimo degli esperimenti sopracitati, così come anche la miglior rete più frequente. Anche in questo caso si può notare in figura \ref{fig:acc_data_aug_both} una decrescita dell'accuratezza dopo aver raggiunto un certo numero di dati (intorno agli 800/1000).
+			\img{Grafico che mostra il variare dell'accuratezza all'aumentare della numerosità dell'insieme perturbando i dati personali e i dati sulle lesioni. Il grafico sotto è un ingrandimento del primo.}{0.35}{acc_data_aug_both_.png}{acc_data_aug_both}
+			
+			
+			
 	\chapter*{Conclusione}	\addcontentsline{toc}{chapter}{Conclusione}  
 	
 	\begin{thebibliography}{9}
