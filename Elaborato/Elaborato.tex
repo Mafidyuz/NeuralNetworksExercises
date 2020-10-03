@@ -91,7 +91,15 @@
 	\end{titlepage}
 
 	\chapter*{Introduzione} \markboth{Introduzione}{}  \addcontentsline{toc}{chapter}{Introduzione}  \pagenumbering{arabic}
-		Qua ci andrà l'introduzione
+		L'intelligenza artificiale è uno dei rami dell'informatica in più forte sviluppo. Si sente  parlare sempre più spesso delle cosiddette reti neurali e del machine learning, con cui si raggiungono traguardi sempre più importanti come i veicoli con la guida autonoma, il rilevamento del cancro nelle fasi iniziali, il riconoscimento facciale, ecc... 
+
+		Alla base di questa tesi vi è la comprensione di come funzionino le sopracitate reti neurali e di alcune tecniche fondamentali di elaborazione dei dati e model selection per cercare di massimizzare le performance di tali modelli. Una volta acquisite queste conoscenze, le si sono applicate per cercare di classificare al meglio dei dati appartenenti a delle vittime di incidenti stradali, con lo scopo di dedurre la tipologia del mezzo che ha causato l'episodio. L'obiettivo di questo lavoro è quello di aiutare i medici legali nelle fasi preliminari di un'indagine ad avere un parere su come restringere il campo di ricerca di chi ha causato un incidente in cui non c'è un colpevole. 
+
+		Le motivazione principale che mi ha spinto ad approfondire questo tema è l'interesse per questo campo in continua evoluzione, nel quale vengono fatti progressi ogni giorno e in cui c'è ancora tanto da scoprire.
+
+		Questo elaborato è diviso in tre capitoli: il primo è un capitolo introduttivo in cui viene fornita una panoramica di quello che sono le reti neurali, concentrandosi sulle reti neurali feed-forward spiegandone la loro struttura e il loro funzionamento. Il secondo capitolo aiuta a comprendere le tecniche di preelaborazione dei dati, selezione di modelli di reti neurali e aumento dei dati utilizzate durante la fase sperimentale del tirocinio. Nel terzo capitolo si familiarizza inizialmente con i dati su cui sono stati svolti gli esperimenti, per poi fare una carrellata dei traguardi raggiunti. 
+
+		
 
 		\newpage		
 	\chapter{Reti neurali}
@@ -287,9 +295,7 @@
 				%Anche dopo, quando parli della discesa del gradiente, è meglio continuare a fare riferimento a (x_1, \dots, x_n); inoltre attento a non confondere "dimensioni" con "argomenti". Attento anche che non è assolutamente detto che spostarsi nella direzione del'anti-gradiente garantisca ogni volta di avere valori minori di f, appunto per i problemi di cui tu stesso parli. In ogni caso non dire che il passo da fare a ogni iterazione è uguale alla norma del gradiente, quello è il miglior modo per divergere :-) Normalmente si usano dei passi di piccola ampiezza.
 
 				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ argomenti e $x_1, \dots, x_n$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(x_1, \dots, x_n)$ in direzione di $-g$. L'idea è quella di andare verso valori sempre minori di $f$, anche se purtroppo questo non succede sempre.
-								
 				\img{Problemi della tecnica della discesa del gradiente \cite{kriesel}}{0.4}{gradient_descent.png}{gradient_descent_problemi}
-				
 				I motivi per cui questa tecnica potrebbe fallire sono diversi, alcuni esempi sono: 
 				\begin{itemize}
 				 	\item incagliarsi su un minimo locale non soddisfacente (Figura \ref{fig:gradient_descent}a),
@@ -299,13 +305,16 @@
 				 \end{itemize} 
 				 
 				 
-			\subsection{Backpropagation}
 				%Io propongo di spostare la parte "funzione di errore" dentro a 1.4.3 e di spiegare che un modo per indurre da dati etichettati una rete neurale è quello di inizializzare in qualche modo i pesi delle sue connessioni, poi presentarle alcuni esempi e calcolare l'errore corrispondente: l'algoritmo di backpropagation permette di legare il valore di errore contenuto al gradiente della funzione Err, così da poter applicare l'algoritmo della discesa del gradiente. In questo modo è possibile modificare per passi successivi i pesi delle connessioni, procedendo via via a diminuire l'errore. Quando questo è sotto una soglia accettabile, ciò significa che la rete neurale ottenuta classifica abbastanza bene gli esempi che le abbiamo fornito.
 
 				%Ci sarebbe da spiegare poi, senza entrare in dettagli matematici ma facendo riferimento alla letteratura, che l'algoritmo di discesa del gradiente viene applicato in fasi successive: prima in modo da aggiornare i pesi delle connessioni che arrivano allo strato di output, e poi procedendo a ritroso nei vari strati (è per questo che si chiama backpropagation: l'errore viene propagato al contrario rispetto al verso di esecuzione della rete neurale).
 
-					
-				\paragraph{Funzione di errore} Ciò che noi vogliamo minimizzare è l'errore totale, ma per come l'abbiamo definito prima non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come cambiamo i pesi, quindi possiamo ridefinirlo come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi $$Err : W \rightarrow \mathbb{R}$$ 
+			\subsection{Backpropagation}
+				La maniera principale per controllare la capacità di generalizzazione di una rete neurale è osservare l'errore totale, e lo scopo dell'apprendimento è minimizzare tale valore. Per come è stato definito non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come si cambiano i pesi, quindi si può ridefinire come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi 
+				$$Err : W \rightarrow \mathbb{R}.$$
+				Un modo per indurre da dati etichettati una rete neurale è quello di inizializzare in qualche modo i pesi delle sue connessioni, poi presentarle alcuni esempi e calcolare l'errore corrispondente: l'algoritmo di \textbf{backpropagation} permette di legare il valore di errore contenuto al gradiente della funzione Err, così da poter applicare l'algoritmo della discesa del gradiente. In questo modo è possibile modificare per passi successivi i pesi delle connessioni, procedendo via via a diminuire l'errore. Quando questo è sotto una soglia accettabile, ciò significa che la rete neurale ottenuta classifica abbastanza bene gli esempi che le abbiamo fornito. L'algoritmo di discesa del gradiente viene applicato in fasi successive: prima in modo da aggiornare i pesi delle connessioni che arrivano allo strato di output, e poi procedendo a ritroso nei vari strati (è per questo che si chiama backpropagation: l'errore viene propagato al contrario rispetto al verso di esecuzione della rete neurale).
+				
+				
 				 %$$\Delta \omega(i,\Omega) = \nu \cdot o_i \cdot \delta_{\Omega}.$$
 
 				
@@ -667,7 +676,10 @@
 			
 			
 	\chapter*{Conclusione}	\addcontentsline{toc}{chapter}{Conclusione}  
-	
+		Questo lavoro è stato svolto con l'idea di concentrare l'utilizzo delle reti neurali per il problema di classificare la tipologia di mezzo coinvolto in incidenti stradali con vittime pedonali. I risultati, nonostante siano state trovate delle tecniche per aumentare l'accuratezza delle reti neurali, hanno dimostrato che l'insieme di dati che si ha a disposizione non è sufficiente per arrivare ad avere performance di particolare rilievo; si è quindi passati a sperimentare l'aumento dei dati per ipotizzare su come potrebbe variare l'accuratezza con un dataset più numeroso. Tutti gli esperimenti di aumento dei dati hanno portato a un incremento nelle prestazioni, facendo supporre che molto probabilmente con un insieme di cardinalità superiore si otterrebbe una classificazione molto più attendibile. È importante tenere conto del fatto che i modelli ricavati con l'apprendimento di insiemi di dati sintetici non sono applicabili sulla pratica, in quanto quei dati sono frutto di ipotesi.
+		
+		L'esperimento potrebbe essere portato avanti testando nuove tecniche di riduzione della dimensionalità sulle lesioni e provando a fare uno studio più profondo sulla distribuzione delle lesioni per aumentare i dati. Sarebbe interessante anche vedere la differenza delle prestazioni tra diversi modelli di machine learning con i dati aumentati.
+		
 	\begin{thebibliography}{9}
 		\bibitem{kriesel} David Kriesel, 2007, \textit{A Brief Introduction to Neural Networks}, available at \texttt{http://www.dkriesel.com}.
 
