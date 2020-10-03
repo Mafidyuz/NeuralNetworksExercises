@@ -91,15 +91,13 @@
 	\end{titlepage}
 
 	\chapter*{Introduzione} \markboth{Introduzione}{}  \addcontentsline{toc}{chapter}{Introduzione}  \pagenumbering{arabic}
-		L'intelligenza artificiale è uno dei rami dell'informatica in più forte sviluppo. Si sente  parlare sempre più spesso delle cosiddette reti neurali e del machine learning, con cui si raggiungono traguardi sempre più importanti come i veicoli con la guida autonoma, il rilevamento del cancro nelle fasi iniziali, il riconoscimento facciale, ecc... 
+		L'intelligenza artificiale è uno dei rami dell'informatica in più forte sviluppo. Si sente parlare sempre più spesso delle cosiddette reti neurali e del machine learning, con cui si raggiungono traguardi sempre più importanti come i veicoli dalla guida autonoma, il rilevamento del cancro nelle sue fasi iniziali, il riconoscimento facciale, ecc... 
 
-		Alla base di questa tesi vi è la comprensione di come funzionino le sopracitate reti neurali e di alcune tecniche fondamentali di elaborazione dei dati e model selection per cercare di massimizzare le performance di tali modelli. Una volta acquisite queste conoscenze, le si sono applicate per cercare di classificare al meglio dei dati appartenenti a delle vittime di incidenti stradali, con lo scopo di dedurre la tipologia del mezzo che ha causato l'episodio. L'obiettivo di questo lavoro è quello di aiutare i medici legali nelle fasi preliminari di un'indagine ad avere un parere su come restringere il campo di ricerca di chi ha causato un incidente in cui non c'è un colpevole. 
+		Alla base di questo lavoro vi è la comprensione di come funzionino le sopracitate reti neurali e di alcune tecniche fondamentali di elaborazione dei dati e model selection per cercare di massimizzare le performance di tali modelli. Una volta acquisite queste conoscenze, le si sono applicate per cercare di classificare al meglio dei dati appartenenti a delle vittime d'incidenti stradali, con lo scopo di dedurre la tipologia del mezzo che ha causato l'episodio. L'obiettivo di questo lavoro è quello di aiutare i medici legali nelle fasi preliminari di un'indagine ad avere un parere su come restringere il campo di ricerca di chi ha causato un incidente in cui non c'è un colpevole. 
 
-		Le motivazione principale che mi ha spinto ad approfondire questo tema è l'interesse per questo campo in continua evoluzione, nel quale vengono fatti progressi ogni giorno e in cui c'è ancora tanto da scoprire.
+		La motivazione principale che mi ha spinto ad approfondire questo tema è l'interesse per questo campo in continua evoluzione, nel quale vengono fatti progressi ogni giorno e in cui c'è ancora tanto da scoprire.
 
-		Questo elaborato è diviso in tre capitoli: il primo è un capitolo introduttivo in cui viene fornita una panoramica di quello che sono le reti neurali, concentrandosi sulle reti neurali feed-forward spiegandone la loro struttura e il loro funzionamento. Il secondo capitolo aiuta a comprendere le tecniche di preelaborazione dei dati, selezione di modelli di reti neurali e aumento dei dati utilizzate durante la fase sperimentale del tirocinio. Nel terzo capitolo si familiarizza inizialmente con i dati su cui sono stati svolti gli esperimenti, per poi fare una carrellata dei traguardi raggiunti. 
-
-		
+		Questo elaborato è diviso in tre capitoli: il primo è un capitolo introduttivo in cui viene fornita una panoramica di quello che sono le reti neurali, concentrandosi sulle feed-forward spiegandone la loro struttura e il loro funzionamento. Il secondo capitolo aiuta a comprendere le tecniche di preelaborazione e aumento dei dati e le tecniche di selezione dei modelli di reti neurali utilizzate durante la fase sperimentale del tirocinio. Nel terzo capitolo si familiarizza inizialmente con i dati su cui sono stati svolti gli esperimenti, per poi fare una carrellata dei traguardi raggiunti. 
 
 		\newpage		
 	\chapter{Reti neurali}
@@ -257,7 +255,7 @@
 				\end{itemize}
 				Esiste anche una via di mezzo in cui i dati vengono divisi in \textbf{mini-batch}, ovvero sottoinsiemi dell'insieme di training. Dati $h$ dati di training e una dimensione di batch $b$, in ogni epoca i pesi vengono ricalcolati $\lceil h/b \rceil$ volte.
 			
-			\subsection{Monitorare l'apprendimento di una rete neurale}
+			\subsection{Monitorare l'apprendimento di una rete neurale} \label{sec:monitor_appr}
 				Un modo spesso usato per monitorare l'apprendimento di una rete neurale è quello di tracciare \textbf{curva di apprendimento}. Essa traccia il progresso dell'errore e ci aiuta a capire se la nostra rete stia facendo progressi o meno. Per questo scopo normalizziamo l'errore in modo tale che sia sempre un valore positivo. Il modo più comune è quello di calcolare il valore efficace tra il vettore di uscita desiderato $t$ e il vettore di uscita $y$. 
 
 				Siano $\Omega$ i neuroni di uscita, $O$ l'insieme dei neuroni di uscita e $P$ l'insieme di training. Il valore efficace del singolo elemento di training $p$ si calcola nel seguente modo: $$Err_p = \sqrt{\frac{\sum_{\Omega \in O} (t_{\Omega} - y_{\Omega})^2}{|O|}}.$$
@@ -310,14 +308,11 @@
 				%Ci sarebbe da spiegare poi, senza entrare in dettagli matematici ma facendo riferimento alla letteratura, che l'algoritmo di discesa del gradiente viene applicato in fasi successive: prima in modo da aggiornare i pesi delle connessioni che arrivano allo strato di output, e poi procedendo a ritroso nei vari strati (è per questo che si chiama backpropagation: l'errore viene propagato al contrario rispetto al verso di esecuzione della rete neurale).
 
 			\subsection{Backpropagation}
-				La maniera principale per controllare la capacità di generalizzazione di una rete neurale è osservare l'errore totale, e lo scopo dell'apprendimento è minimizzare tale valore. Per come è stato definito non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come si cambiano i pesi, quindi si può ridefinire come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi 
+				La maniera principale per controllare la capacità di generalizzazione di una rete neurale è osservare l'errore totale. Lo scopo dell'apprendimento è minimizzare tale valore, ma per come è stato definito nel sottoparagrafo \ref{sec:monitor_appr}, esso non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come si cambiano i pesi, quindi si può ridefinire come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi 
 				$$Err : W \rightarrow \mathbb{R}.$$
-				Un modo per indurre da dati etichettati una rete neurale è quello di inizializzare in qualche modo i pesi delle sue connessioni, poi presentarle alcuni esempi e calcolare l'errore corrispondente: l'algoritmo di \textbf{backpropagation} permette di legare il valore di errore contenuto al gradiente della funzione Err, così da poter applicare l'algoritmo della discesa del gradiente. In questo modo è possibile modificare per passi successivi i pesi delle connessioni, procedendo via via a diminuire l'errore. Quando questo è sotto una soglia accettabile, ciò significa che la rete neurale ottenuta classifica abbastanza bene gli esempi che le abbiamo fornito. L'algoritmo di discesa del gradiente viene applicato in fasi successive: prima in modo da aggiornare i pesi delle connessioni che arrivano allo strato di output, e poi procedendo a ritroso nei vari strati (è per questo che si chiama backpropagation: l'errore viene propagato al contrario rispetto al verso di esecuzione della rete neurale).
+				Un modo per far apprendere a una rete neurale come generalizzare dei dati etichettati è quello di inizializzare i pesi delle sue connessioni in modo casuale, per poi presentarle alcuni esempi e calcolare l'errore corrispondente: l'algoritmo di \textbf{backpropagation} permette di legare il valore di errore contenuto al gradiente della funzione Err, così da poter applicare l'algoritmo della discesa del gradiente. In questo modo è possibile modificare per passi successivi i pesi delle connessioni, procedendo via via a diminuire l'errore. Quando questo è sotto una soglia accettabile, ciò significa che la rete neurale ottenuta classifica abbastanza bene gli esempi che le sono stati forniti. L'algoritmo di discesa del gradiente viene applicato in fasi successive: prima in modo da aggiornare i pesi delle connessioni che arrivano allo strato di output, e poi procedendo a ritroso nei vari strati. Da questo processo l'algoritmo prende il nome, in quanto l'errore viene propagato al contrario rispetto al verso di esecuzione della rete neurale. 
 				
-				
-				 %$$\Delta \omega(i,\Omega) = \nu \cdot o_i \cdot \delta_{\Omega}.$$
-
-				
+				In questa spiegazione dell'algoritmo sono stati omessi i passaggi matematici, per i quali si rimanda alla lettura del libro \textit{A Brief Introduction to Neural Networks} di David Kriesel \cite{kriesel}.
 				
 	\chapter{Tecniche utilizzate}
 		In questo Capitolo verrà fatta una panoramica sulle tecniche di \textbf{preprocessing}, \textbf{model selection} e \textbf{over-sampling} utilizzate negli esperimenti svolti. Questo aiuterà a capire con più facilità ciò di cui si parlerà nel Capitolo \ref{chap:esperimenti}.
