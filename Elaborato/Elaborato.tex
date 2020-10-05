@@ -1,9 +1,10 @@
-\documentclass[12pt, twoside, letterpaper]{report}
+\documentclass[12pt, twoside, letterpaper, cleardoublepage=empty]{report}
 
 \usepackage[top=2cm,bottom=4cm,left=3cm,right=3cm,asymmetric]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyfoot[C]{}    
+\usepackage{emptypage}
 \fancyfoot[LE,RO]{\thepage}        
 \fancyhead[RO]{\slshape \rightmark}
 \fancyhead[LE]{\slshape\leftmark}      
@@ -87,10 +88,30 @@
 	\begin{titlepage}
 		\includepdf{img/FRONTESPIZIO.pdf}
 		\newpage
-		\tableofcontents
 		\thispagestyle{empty}
 	\end{titlepage}
-	\chapter*{Ringraziamenti}\thispagestyle{empty}
+	%\cleardoublepage
+	\thispagestyle{empty}
+	\vspace*{\stretch{1}}
+	\begin{flushright}
+	\itshape Ai miei genitori,\\
+	che hanno avuto il coraggio di abbandonare\\la loro vita in Perù per darmi questa possibilità.
+	\end{flushright}
+	\vspace{\stretch{2}}
+	%\cleardoublepage
+	\chapter*{Ringraziamenti} \pagenumbering{roman} \addcontentsline{toc}{chapter}{Ringraziamenti}
+		Vorrei dedicare questa pagina a tutti coloro che mi hanno supportato lungo questo percorso durato 3 anni.
+
+		Ringrazio di cuore il mio relatore Dario Malchiodi nonché mio professore. Lui mi ha trasmesso la sua passione per la statistica e la data science, motivo per cui ho deciso di realizzare questo lavoro. È stato davvero un relatore impeccabile, mi ha aiutato moltissimo quando ero in difficoltà sia durante il tirocinio che durante la stesura di questo testo.
+
+		Ringrazio anche alla mia correlatrice Anna Maria Zanaboni, i cui consigli mi sono serviti per prendere la giusta strada e migliorare la qualità del mio lavoro.
+
+		Un ringraziamento speciale va fatto anche alla mia famiglia, senza il loro supporto non avrei mai avuto la possibilità di raggiungere questo traguardo.
+
+		Infine ringrazio le mie pecore, un gruppo di amici fantastico con cui ho condiviso questi 3 anni nei momenti difficili e nel divertimento. 
+		
+		\tableofcontents
+		
 	\chapter*{Introduzione} \markboth{Introduzione}{}  \addcontentsline{toc}{chapter}{Introduzione}  \pagenumbering{arabic}
 		L'intelligenza artificiale è uno dei rami dell'informatica in più forte sviluppo. Si sente parlare sempre più spesso delle cosiddette reti neurali e del machine learning, che contribuiscono allo sviluppo di importanti applicazioni come i veicoli a guida autonoma, il rilevamento del cancro nelle sue fasi iniziali, il riconoscimento facciale, ecc... 
 
