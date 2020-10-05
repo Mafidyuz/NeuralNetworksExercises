@@ -18,6 +18,7 @@
 \usepackage{blindtext}
 \usepackage{dirtytalk}
 \usepackage{cite}
+\usepackage{adjustbox}
 \usepackage[breakable]{tcolorbox}
 \usepackage{pdfpages}
 \usepackage{booktabs}
@@ -89,7 +90,7 @@
 		\tableofcontents
 		\thispagestyle{empty}
 	\end{titlepage}
-
+	\chapter*{Ringraziamenti}\thispagestyle{empty}
 	\chapter*{Introduzione} \markboth{Introduzione}{}  \addcontentsline{toc}{chapter}{Introduzione}  \pagenumbering{arabic}
 		L'intelligenza artificiale è uno dei rami dell'informatica in più forte sviluppo. Si sente parlare sempre più spesso delle cosiddette reti neurali e del machine learning, che contribuiscono allo sviluppo di importanti applicazioni come i veicoli a guida autonoma, il rilevamento del cancro nelle sue fasi iniziali, il riconoscimento facciale, ecc... 
 
@@ -101,7 +102,7 @@
 
 		\newpage		
 	\chapter{Reti neurali}
-		Le \textbf{reti neurali artificiali} sono un modello matematico molto importante del \textit{machine learning} che prende ispirazione dalle reti neurali biologiche presenti nel cervello animale. In questo Capitolo si vedrannno le componenti e il funzionamento delle reti neurali artificiali, ma prima si farà un'overview su cosa sia il machine learning.
+		Le \textbf{reti neurali artificiali} sono un modello matematico molto importante del \textit{machine learning} che prende ispirazione dalle reti neurali biologiche presenti nel cervello animale. In questo Capitolo si vedranno le componenti e il funzionamento delle reti neurali artificiali, ma prima si farà un'overview su cosa sia il machine learning.
 
 		\section{Paradigma del machine learning}
 			Il machine learning è una branca dell'intelligenza artificiale ed è una di quelle in più rapida espansione; negli ultimi decenni è diventato di uso comune in moltissime applicazioni che richiedono l'estrazione di informazioni dai dati. Lo scopo del machine learning è quello di riassumere tante istanze di un problema, che difficilmente sarebbero riconoscibili con l'uso tradizionale della programmazione \textit{(per esempio riconoscere la razza di un cane partendo da una foto)}.   
@@ -110,7 +111,7 @@
 			
 			\subsection{Tipi di apprendimento} Il machine learning è diviso in diversi sottocampi in cui si hanno più paradigmi di apprendimento. La principale distinzione che si può fare è la differenza tra l'apprendimento \textbf{supervisionato}, \textbf{non supervisionato} e \textbf{per rinforzo}. Per quanto riguarda ciò che si vedrà nei prossimi capitoli, ci si può concentrare solo sulla differenza tra l'apprendimento supervisionato e non supervisionato.
 			
-				\paragraph{Apprendimento supervisionato} Si consideri di dover classificare tre specie di fiori leggermente diversi tra loro appartenenti alla stessa famiglia \textit{(esperimento che riprenderemo più avanti)}. Per imparare a riconoscerli, si potrebbero ricevere un insieme di dati \textit{(per esempio la larghezza dei petali, lunghezza del gambo, ecc...)} che descrivono i fiori e cercare di predire la specie. Una figura d'insegnante (\textit{teacher}) da una \textbf{risposta d'apprendimento} per ogni tentativo che si fa di indovinare l'\textbf{etichetta}, ovvero la classe di cui fa parte quel fiore. Dopo questa fase di \textbf{allenamento}, si potrebbe aver trovato un pattern tra i dati per etichettare nuovi fiori, questa volta privi di etichetta e non appartenenti all'insieme dato in precedenza. 
+				\paragraph{Apprendimento supervisionato} Si consideri di dover classificare tre specie di fiori leggermente diversi tra loro appartenenti alla stessa famiglia \textit{(esperimento che verrà ripreso anche più avanti)}. Per imparare a riconoscerli, si potrebbero ricevere un insieme di dati \textit{(per esempio la larghezza dei petali, lunghezza del gambo, ecc...)} che descrivono i fiori e cercare di predire la specie. Una figura d'insegnante (\textit{teacher}) da una \textbf{risposta d'apprendimento} per ogni tentativo che si fa di indovinare l'\textbf{etichetta}, ovvero la classe di cui fa parte quel fiore. Dopo questa fase di \textbf{allenamento}, si potrebbe aver trovato un pattern tra i dati per etichettare nuovi fiori, questa volta privi di etichetta e non appartenenti all'insieme dato in precedenza. 
 										
 					In maniera più astratta, si può vedere questo come un processo di \textit{utilizzo dell'esperienza passata per acquisire competenza}. L'apprendimento supervisionato descrive uno scenario in cui si deve utilizzare l'esperienza acquisita tramite il processo di apprendimento con un insieme di dati (\textbf{insieme di training}) per \textbf{predire} un'informazione mancante. La bontà di questo processo la si può testare con un altro insieme (\textbf{insieme di test}) calcolando l'errore in base a quante etichette vengono predette in modo corretto. 
 				
@@ -231,7 +232,7 @@
 				\img{Percettrone multistrato \cite{kriesel}.}{0.5}{nn-feed-forward.png}{feedforward}
 		
 		\section{Apprendimento di una rete neurale}
-			Si è vista la struttura delle reti neurali ma ancora non si sa come esse apprendano. In una rete feed-forward ogni neurone è collegato tramite degli archi pesati a tutti i neuroni dello strato successivo, ma si è visto che i pesi vengono inizializzati e in base a cosa vengono modificati. In realtà il processo di apprendimento può essere descritto in pochi passi: 
+			Si è vista la struttura delle reti neurali ma ancora non si sa come esse apprendano. In una rete feed-forward ogni neurone è collegato tramite degli archi pesati a tutti i neuroni dello strato successivo, ma non si è visto come i pesi vengono inizializzati e in base a cosa vengono modificati. In realtà il processo di apprendimento può essere descritto in pochi passi: 
 			\begin{enumerate}
 				\item si inizializzano i pesi della rete neurale in modo casuale,
 				\item si da in input alla rete un vettore d'ingresso $p$ di cui si sa l'etichetta,
@@ -240,7 +241,7 @@
 				\item si correggono i pesi con lo scopo di ridurre al minimo $E_p$,
 				\item si reitera 2-5 finchè non si raggiunge un errore accettabile.
 			\end{enumerate}
-			Questo è un processo iterativo su due dimensioni: si itera su tutti i dati e per più passate, finchè non si raggiunge un errore considerato accettabile, cioè inferiore di una soglia prefissata. Nonostante abbia imparato a generalizzare, sia in grado cioè di rispondere correttamente anche a fronte di input mai visti prima; al contrario, la rete potrebbe essersi specializzata soltato sui dati utilizzati per l'addestramento. Questo fenomeno è chiamato \textbf{overfitting} e per accorgersi di questo problema è buona prassi dividere in due insiemi i dati che si usano per allenare la rete neurale in: 
+			Questo è un processo iterativo su due dimensioni: si itera su tutti i dati e per più passate, finchè non si raggiunge un errore considerato accettabile, cioè inferiore di una soglia prefissata. Nonostante abbia imparato a generalizzare, sia in grado cioè di rispondere correttamente anche a fronte di input mai visti prima; al contrario, la rete potrebbe essersi specializzata soltanto sui dati utilizzati per l'addestramento. Questo fenomeno è chiamato \textbf{overfitting} e per accorgersi di questo problema è buona prassi dividere in due insiemi i dati che si usano per allenare la rete neurale in: 
 			%fondere curva di apprendimento e altro (in monitorare) e aggiungere la parte qua sopra dopo che ci si pone il problema se ha generalizzato
 			\begin{itemize}
 				\item un insieme di \textbf{training} utilizzato per allenare la rete,
@@ -251,18 +252,18 @@
 			\paragraph{Apprendimento online e offline} Oltre alla principale distinzione vista in precedenza tra i tipi di apprendimento (supervisionato e non supervisionato), c'è un'altra distinzione importante sulla frequenza della modifica dei pesi. L'apprendimento può essere:
 				\begin{itemize}
 					\item \textbf{online}: la rete calcola l'errore in corrispondenza di ogni dato e i pesi vengono modificati ad ogni passo,
-					\item \textbf{offline}: la rete calcola l'errore in corrispondenza di ogni dato e anche un errore cumulato, in base al quale i pesi vengono modificati dopo aver processato l'intero insieme di dati. La procedura di apprendimento dell'intero insieme viene detta \textbf{epoca}.
+					\item \textbf{offline}: la rete calcola l'errore in corrispondenza di ogni dato e anche un errore cumulato, in base al quale i pesi vengono modificati dopo aver processato l'intero insieme di dati. Il lotto di dati utilizzato viene detto \textbf{batch}, e la procedura di apprendimento dell'intero batch viene detta \textbf{epoca}.
 				\end{itemize}
-				Esiste anche una via di mezzo in cui i dati vengono divisi in \textbf{mini-batch}, ovvero sottoinsiemi dell'insieme di training. Dati $h$ dati di training e una dimensione di batch $b$, in ogni epoca i pesi vengono ricalcolati $\lceil h/b \rceil$ volte.
+				Esiste anche una via di mezzo in cui i dati vengono divisi in \textbf{mini-batch}, ovvero sottoinsiemi dell'insieme di training. Dati $h$ dati di training e una dimensione di batch $b$, in ogni epoca i pesi vengono aggiornati $\lceil h/b \rceil$ volte.
 			
 			\subsection{Monitorare l'apprendimento di una rete neurale} \label{sec:monitor_appr}
 				Un metodo spesso usato per monitorare l'apprendimento di una rete neurale è quello di tracciare una \textbf{curva di apprendimento} come in Figura \ref{fig:curve_di_apprendimento}. Essa mostra l'andamento dell'errore e aiuta a capire se la rete stia facendo progressi o meno. Per questo scopo si normalizza l'errore in modo tale che sia sempre un valore positivo. Il modo più comune è quello di calcolare il valore efficace tra il vettore di uscita desiderato $t$ e il vettore di uscita $y$. 
 
 				Siano $\Omega$ i neuroni di uscita, $O$ l'insieme dei neuroni di uscita e $P$ l'insieme di training. Il valore efficace del singolo elemento di training $p$ si calcola nel seguente modo: $$Err_p = \sqrt{\frac{\sum_{\Omega \in O} (t_{\Omega} - y_{\Omega})^2}{|O|}}.$$
 				Per quanto riguarda l'apprendimento offline, l'\textbf{errore totale} di un'epoca si calcola nel seguente modo: $$Err = \sum_{p \in P} \frac{Err_p}{|P|}.$$ 
-				La curva di apprendimento va tracciata per i due insiemi di training e test, in questo modo ci si può accorgere se si è in un caso di overfitting guardando solo l'andamento delle due curve: se la curva di training decresce velocemente mentre quella di test comincia a risalire si sta chiaramente perdendo la generalizzazione dei dati che acquisita, l'ideale sarebbe fermarsi appena prima che la curva di test cominci a risalire (\textbf{early stopping}). Solitamente la curva di training avrà comunque un errore minore rispetto quella di test. %TODO spiegare meglio
+				La curva di apprendimento va tracciata per i due insiemi di training e test, in questo modo ci si può accorgere se si è in un caso di overfitting guardando solo l'andamento delle due curve: se la curva di training decresce velocemente, ovvero la rete impara a ridurre l'errore degli esempi che le sono stati forniti, mentre la curva di test passa da una fase di decrescita a una fase di crescita, questo significa che si sta perdendo la generalizzazione dei dati che si era acquisita e che si sta imparando a riprodurre solo gli output dell'insieme di training (Figura \ref{fig:overfitting}). L'ideale sarebbe arrestare l'apprendimento appena prima che la curva di test cominci a risalire (\textbf{early stopping}). Solitamente la curva di training avrà comunque un errore minore rispetto quella di test.
 
-				\begin{figure}
+				\begin{figure}[h]
 				\begin{subfigure}[]{.5\textwidth}
 					\centering
 					\includegraphics[width=\linewidth]{learning_curve.png}
@@ -287,7 +288,7 @@
 				\img{Discesa del gradiente di una funzione a due dimensioni. \cite{kriesel}}{0.5}{gradient_descent_2d.png}{gradient_descent}
 				
 				\paragraph{Gradiente} Sia $f$ una funzione di $n$ argomenti, e $(x_1, \dots, x_n)$ un punto in cui essa è derivabile. Il gradiente di $f$ in $(x_1, \dots, x_n)$, indicato come $\nabla f(x_1, \dots, x_n)$, è il vettore di $n$ componenti ognuna delle quali è uguale a una delle derivate parziali di $f$: 
-					$$\nabla f_i(x_1, \dots, x_n) = \frac{\partial f(x_1, \dots, x_n)}{\partial x_i}.$$
+					$$\nabla f(x_1, \dots, x_n) = \frac{\partial f(x_1, \dots, x_n)}{\partial x_i}.$$
 					In generale, $\nabla f(x_1, \dots, x_n)$ rappresenta la direzione verso cui spostarsi a partire da $(x_1, \dots, x_n)$ per massimizzare $f$, o, equivalentemente, per identificare la salita più ripida nel suo grafico. La norma $||\nabla f(x_1, \dots, x_n)||$ indica la pendenza di questa salita.
 					
 				\paragraph{Discesa del gradiente} Sia $f$ una funzione a $n$ argomenti e $x_1, \dots, x_n$ il dato punto di partenza. \textbf{Discesa del gradiente} significa andare da $f(x_1, \dots, x_n)$ in direzione di $-g$. L'idea è quella di andare verso valori sempre minori di $f$, anche se purtroppo questo non succede sempre.
@@ -300,8 +301,8 @@
 				 	\item saltare un buon minimo a causa di una pendenza elevata (Figura \ref{fig:gradient_descent_problemi}d).
 				 \end{itemize} 
 				 
-			\subsection{Backpropagation} %TODO correzione zanaboni
-				La maniera principale per controllare la capacità di generalizzazione di una rete neurale è osservare l'errore totale che questa compie nell'elaborare nuovi dati. Lo scopo dell'apprendimento è minimizzare tale valore, ma per come è stato definito nel Paragrafo \ref{sec:monitor_appr}, esso non è una funzione, quindi non sarebbe applicabile la discesa del gradiente. L'errore totale cresce o decresce in base a come si cambiano i pesi, quindi si può ridefinire come una \textbf{funzione di errore} che calcola l'errore normalizzato in funzione dei pesi 
+			\subsection{Backpropagation}
+				La maniera principale per controllare la capacità di generalizzazione di una rete neurale è osservare l'errore totale che questa compie nell'elaborare nuovi dati. Lo scopo dell'apprendimento è minimizzare tale valore, considerato come funzione dei pesi che sono le variabili del problema di apprendimento (infatti l’errore totale cresce o decresce a seconda di come si cambiano i pesi). Quindi la funzione di errore è una funzione dallo spazio dei pesi in $\mathbb{R}$ 
 				$$Err : W \rightarrow \mathbb{R}.$$
 				Un modo per far apprendere a una rete neurale come generalizzare dei dati etichettati è quello di inizializzare i pesi delle sue connessioni in modo casuale, per poi presentarle alcuni esempi e calcolare l'errore corrispondente: l'algoritmo di \textbf{backpropagation} permette di legare il valore di errore contenuto al gradiente della funzione Err, così da poter applicare l'algoritmo della discesa del gradiente. In questo modo è possibile modificare per passi successivi i pesi delle connessioni, procedendo via via a diminuire l'errore. Quando questo è sotto una soglia accettabile, ciò significa che la rete neurale ottenuta classifica abbastanza bene gli esempi che le sono stati forniti. Il parametro che determina la grandezza dei passi della discesa, ovvero la sensibilità con cui si modificano i pesi viene detto \textbf{learning rate}. L'algoritmo di discesa del gradiente viene applicato in fasi successive: prima in modo da aggiornare i pesi delle connessioni che arrivano allo strato di output, e poi procedendo a ritroso nei vari strati. Da questo processo l'algoritmo prende il nome, in quanto l'errore viene propagato al contrario rispetto al verso di esecuzione della rete neurale. 
 				
@@ -320,7 +321,7 @@
 			
 			\subsection{Riduzione della dimensionalità} In un dataset la dimensionalità è il numero di feature presenti. Con riduzione della dimensionalità si intende quell'insieme di tecniche che mirano a ridurre questo valore producendo una versione più compressa dei dati o eliminando delle feature. Queste tecniche vengono spesso utilizzate per visualizzare un insieme di dati in dimensionalità facilmente interpretabili da un essere umano (solitamente 2 o 3 dimensioni) o per aiutare un modello predittivo a essere più efficiente e ad ignorare informazioni ridondanti o pressoché inutili che non aiutano, anzi possono rendere più difficile il processo di apprendimento. 
 			
-				\subsubsection{Feature selection e feature engineering} La feature selection è quel sottoinsieme di tecniche di riduzione della dimensionalità che include la completa rimozione di alcune feature dall'intero dataset. I modi in cui scegliere quali feature filtrare sono diversi: variano dalle analisi statistiche \textit{(ad esempio eliminare le feature con varianza minore)} ad analisi sull'accuratezza del modello predittivo. Una buona feature selection, oltre a rendere più veloce la fase di apprendimento, tende ad aumentare l'accuratezza del modello. %aggiungi una frase sulla feature engineering, spiegando che ti sei concentrato solo su quest'ultima, e in particolare sulle tecniche descritte subito dopo.
+				\subsubsection{Feature selection e feature engineering} La feature selection è quel sottoinsieme di tecniche di riduzione della dimensionalità che include la completa rimozione di alcune feature dall'intero dataset. I modi in cui scegliere quali feature filtrare sono diversi: variano dalle analisi statistiche \textit{(ad esempio eliminare le feature con varianza minore)} ad analisi sull'accuratezza del modello predittivo. Una buona feature selection, oltre a rendere più veloce la fase di apprendimento, tende ad aumentare l'accuratezza del modello. La feature engineering consiste in tutti quei processi di reingegnerizzazione dei dati che mirano a rendere le feature compatibili per i modelli di machine learning e a migliorarne le performance. 
 				
 				\subsubsection{Analisi delle componenti principali} L'analisi delle componenti principali o \textbf{PCA} \textit{(da Principal Component Analysis)} è una tecnica di riduzione della dimensionalità dei dati che punta a ridurre le feature in una loro versione più compressa, evidenziandone le cosiddette componenti principali (caratterizzate dal fatto di massimizzare la varianza). Come si può vedere in Figura \ref{fig:pca}, il tutto avviene tramite una \textbf{trasformazione lineare} dei dati, il cui risultato viene proiettato su una dimensione uguale o inferiore.
 				\img{Proiezione dei dati da due a una dimensione con PCA \cite{bitsofdna}.}{0.3}{pca.jpg}{pca}
@@ -334,7 +335,7 @@
 				
 				\subsubsection{t-Distributed Stochastic Neighbor Embedding} t-Distributed Stochastic Neighbor Embedding (\textbf{t-SNE}) è una tecnica non lineare di riduzione della dimensionalità, presentata per la prima volta nel 2008 da  L.J.P. van der Maaten e G.E. Hinton \cite{maaten_hinton}. Tale algoritmo, introdotto per permettere la visualizzazione bi- o tridimensionale di dati complessi, può anche essere usato come metodo per la riduzione della dimensionalità.
 				
-					\img{Visualizzazione di varietà topologiche non lineari con t-SNE utilizzando diverse perplessità. \cite{sklearn}}{0.35}{tsne.png}{tsne}
+					\img{Visualizzazione di varietà topologiche non lineari con t-SNE utilizzando diverse perplessità \cite{sklearn}.}{0.35}{tsne.png}{tsne}
 				
 					Considerato un insieme di dati $X$, su ogni punto $x_i \in X$ si centra una distribuzione gaussiana multivariata, e rispetto a questa distribuzione si misura la densità in ogni altro punto $x_j \in X \setminus x_i$. Si ricava così un insieme di valori di probabilità $P_{i,j}$ che si può interpretare come la similarità che ogni punto ha con i rimanenti punti. La varianza che determina quanto sia grande il range in cui considerare due punti simili è detta \textbf{perplessità}. Si definisce poi una \textbf{distribuzione t di Student} da cui ricaviamo un nuovo insieme di probabilità $Q_{i,j}$ nello spazio dimensionale ridotto, e procedendo in modo analogo si ricava un nuovo insieme di valori di probabilità, ma in uno spazio a dimensionalità ridotta. I punti in quest'ultimo spazio, che rappresentano la versione compressa dei dati originali, vengono determinati minimizzando la differenza tra le due distribuzioni di probabilità.
 					
@@ -348,7 +349,7 @@
 				\paragraph{Scalatura min-max} La scalatura min-max viene calcolata per ogni feature $x$ del dataset, riportando i dati in un range compreso tra 0 e 1. $$z = \frac{x - \min(x)}{\max(x) - \min(x)}.$$
 			
 		\section{Model Selection} 
-			Nel machine learning, un iperparametro è un parametro il cui valore viene impostato prima di un processo di apprendimento per influire su di esso. Alcuni esempi tra quelli che visti sono: 
+			Nel machine learning un iperparametro è un parametro il cui valore viene impostato prima di un processo di apprendimento per influire su di esso. Alcuni esempi tra quelli che visti sono: 
 			\begin{itemize}
 				\item il numero di strati nascosti e il numero di neuroni in ognuno di questi strati in un percettrone multistrato,
 				\item le funzioni di ingresso, attivazione e uscita dei neuroni, 
@@ -407,7 +408,7 @@
 				\item aiutare a predire un attributo in dipendenza di un altro (ottimo modo per imputare valori mancanti o errati),
 				\item indicare (ove sensato) la presenza di relazioni di causa-effetto.
 			\end{itemize}
-			Inoltre distinguendo per colore la classe di appartenenza di ogni dato come in figura \ref{fig:scatter_iris}  ci si può accorgere se i dati sono separabili linearmente e si potrebbe decidere di utilizzare una funzione lineare per separarli invece di un modello più complesso. Dalla figura si evince, ad esempio, che se volessimo discriminare solo gli \textit{iris setosa} dagli altri due tipi di fiori ci basterebbe tracciare una retta che separa i dati. Avendo questo dataset solo 4 feature, ridurre le dimensionalità con PCA e t-SNE non porta grossi vantaggi, come si può notare in figura \ref{fig:pca_tsne_iris} i grafici ottenuti estraendo due componenti non sono tanto diversi da quelli che si potevano vedere in precedenza.
+			Inoltre distinguendo per colore la classe di appartenenza di ogni dato come in Figura \ref{fig:scatter_iris}  ci si può accorgere se i dati sono separabili linearmente e si potrebbe decidere di utilizzare una funzione lineare per separarli invece di un modello più complesso. Dalla figura si evince, ad esempio, che se volessimo discriminare solo gli \textit{iris setosa} dagli altri due tipi di fiori ci basterebbe tracciare una retta che separa i dati. Avendo questo dataset solo 4 feature, ridurre le dimensionalità con PCA e t-SNE non porta grossi vantaggi, come si può notare in Figura \ref{fig:pca_tsne_iris} i grafici ottenuti estraendo due componenti non sono tanto diversi da quelli che si potevano vedere in precedenza.
 			
 			\img{Box plot dei dati dell'iris dataset}{0.5}{boxplot.png}{boxplot_iris}
 			\img{Scatter plot di ogni coppia di feature dell'iris dataset. Nella diagonale della matrice è tracciata la distribuzione della feature divisa per classe.}{0.6}{scatter.png}{scatter_iris}
@@ -435,6 +436,7 @@
 		\subsection{Dataset sugli incidenti stradali} \label{sec:incidenti}
 			Il lavoro principale di questo tirocinio ha riguardato l'analisi di un dataset sugli incidenti stradali messo a disposizione dall'Università degli Studi di Milano. Sono presenti 130 campioni riguardanti incidenti stradali in cui sono stati coinvolti dei pedoni. Ogni riga è identificata da un numero di \texttt{VERBALE} e sono presenti la \texttt{DATA} in cui è avvenuto l'incidente, alcuni dati personali della vittima, una valutazione delle lesioni occasionate in 20 aree diverse del corpo e, infine, la tipologia di mezzo che ha occasionato l'incidente, che può essere 0 \textit{(leggero)} o 1 \textit{(pesante)}. I dati personali sono \texttt{SESSO, ANNI, PESO, ALTEZZA} e \texttt{BMI}, mentre i dati sulle lesioni sono relativi a 4 macroaree quali \textit{testa, torace, addome} e \textit{scheletro}. Per ognuna di esse sono presenti 5 aree specifiche con un valore di gravità della lesione che va da 0 a 4. Sono inoltre presenti anche i totali per ogni macroarea che sono la somma delle loro 5 aree specifiche, più un totale per tutto il corpo che è una somma complessiva dei 20 dati sulle lesioni. 
 			\begin{table}[h]
+			\begin{adjustbox}{max width=0.98\textwidth,center}
 			\begin{tabular}{lccccccc}
 			\toprule
 			VERBALE & DATA &  SESSO &  ANNI & $\dots$ &  Tot Addome &  Tot Scheletro &  Totale \\
@@ -446,12 +448,13 @@
 			86247 & 2000-06-22 &      1 &    78 &  $\dots$ &         2 &              4 &       8 \\
 			\bottomrule
 			\end{tabular}
+			\end{adjustbox}
 			\caption{\label{tab:incidenti}Una vista delle prime 5 righe del dataset sugli incidenti stradali.}
 			\end{table}
 			
-			Come possiamo vedere dalla Tabella \ref{tab:incidenti} la data non è un dato numerico, va quindi convertito tramite feature encoding: in questo caso si è scelto semplicemente di trasformare la data nel numero di giorni passati dall'epoca \texttt{unix} (01/01/1970). Osservando i diagrammi di dispersione in figura~\ref{fig:scatter_incidenti} si può notare come i dati con classe diversa siano molto più mischiati rispetto al dataset visto in precedenza (figura \ref{fig:scatter_iris}). Una cosa che salta all'occhio osservando gli scatter plot in cui è convolta la data (ad esempio in figura \ref{fig:scatter_data}) è che c'è un cluster di dati in cui il mezzo è pesante quando la data assume i valori più bassi. Infatti, se si ordinano i dati in base alla data, si può notare che le prime 24 righe hanno come etichetta \texttt{Mezzo} un valore pari a 1 \textit{(eccetto la prima riga, nella figura \ref{fig:scatter_data} questo dato corrisponde al pallino blu più basso)}. Ovviamente questo potrebbe essere un problema per la rete neurale, in quanto il dato che sembra classificare meglio l'etichetta è quello relativo a una variabile che in realtà non dovrebbe dirci niente sul tipo di mezzo che ha causato l'incidente. Durante gli esperimenti si terrà conto di questo fatto, e nella maggior parte di essi si eliminerà l'intera colonna. 
+			Come possiamo vedere dalla Tabella \ref{tab:incidenti} la data non è un dato numerico, va quindi convertito tramite feature encoding: in questo caso si è scelto semplicemente di trasformare la data nel numero di giorni passati dall'epoca \texttt{unix} (01/01/1970). Osservando i diagrammi di dispersione in Figura~\ref{fig:scatter_incidenti} si può notare come i dati con classe diversa siano molto più mischiati rispetto al dataset visto in precedenza (Figura \ref{fig:scatter_iris}). Una cosa che salta all'occhio osservando gli scatter plot in cui è convolta la data (ad esempio in Figura \ref{fig:scatter_data}) è che c'è un cluster di dati in cui il mezzo è pesante quando la data assume i valori più bassi. Infatti, se si ordinano i dati in base alla data, si può notare che le prime 24 righe hanno come etichetta \texttt{Mezzo} un valore pari a 1 \textit{(eccetto la prima riga, nella figura \ref{fig:scatter_data} questo dato corrisponde al pallino blu più basso)}. Ovviamente questo potrebbe essere un problema per la rete neurale, in quanto il dato che sembra classificare meglio l'etichetta è quello relativo a una variabile che in realtà non dovrebbe dirci niente sul tipo di mezzo che ha causato l'incidente. Durante gli esperimenti si terrà conto di questo fatto, e nella maggior parte di essi si eliminerà l'intera colonna. 
 			
-			\img{Scatter plot di DATA e BMI}{0.4}{scatter_data.png}{scatter_data}
+			\img{Scatter plot di DATA e BMI.}{0.4}{scatter_data.png}{scatter_data}
 			
 			Come possiamo vedere in figura \ref{fig:pca_tsne_incidenti}, riducendo la dimensionalità dei dati con PCA e t-SNE i dati restano molto mischiati, quindi possiamo aspettarci di non avere delle performance altissime, soprattutto data la scarsa numerosità del dataset.
 			
@@ -470,7 +473,7 @@
 					\label{fig:tsne_incidenti}
 				\end{subfigure}
 				
-				\caption{Riduzione della dimensionalità del dataset sugli incidenti}
+				\caption{Riduzione della dimensionalità del dataset sugli incidenti.}
 				\label{fig:pca_tsne_incidenti}
 			\end{figure}	
 			\img{Scatter plot di ogni combinazione di feature dataset sugli incidenti. Nella diagonale della matrice è tracciata la distribuzione della feature divisa per classe.}{0.25}{scatter_incidenti.png}{scatter_incidenti}
@@ -479,7 +482,7 @@
 		Dopo aver dato uno sguardo generale ai dati su cui si dovrà lavorare, si può iniziare a fare esperimenti di classificazione e reingegnerizzazione dei dati. Inizialmente verranno mostrati i primi esperimenti fatti con l'iris dataset, per poi passare a quelli fatti sul dataset degli incidenti stradali. 
 		
 		\subsection{Iris Dataset}
-			Il primo esperimento di classificazione fatto con questo dataset è stato quello di provare a creare un percettrone multistrato impostando alcuni iperparametri in modo ragionevole per poi allenarlo con un insieme di train e valutarne le performance utilizzando un insieme di test. Il tutto è stato fatto senza ricorrere a nessun tipo di preprocessing sui dati né model selection, difatti si ottiene un'accuratezza pari a 0.26, che trovata in corrsipondenza di un percettrone che classifica tutti gli oggetti del test set come appartenenti alla classe \textit{iris virginica}. Dunque è necessario scegliere con maggior cura il tipo di rete neurale da utilizzare, così come il corrispondente processo di apprendimento. 
+			Il primo esperimento di classificazione fatto con questo dataset è stato quello di provare a creare un percettrone multistrato impostando alcuni iperparametri in modo ragionevole per poi allenarlo con un insieme di train e valutarne le performance utilizzando un insieme di test. Il tutto è stato fatto senza ricorrere a nessun tipo di preprocessing sui dati né model selection, difatti si ottiene un'accuratezza pari a 0.26, che trovata in corrispondenza di un percettrone che classifica tutti gli oggetti del test set come appartenenti alla classe \textit{iris virginica}. Dunque è necessario scegliere con maggior cura il tipo di rete neurale da utilizzare, così come il corrispondente processo di apprendimento. 
 
 
 
@@ -491,7 +494,7 @@
 			In questo modo si è ottenuta una rete neurale in cui la combinazione di iperparametri migliore è risultata essere quella con 10 neuroni in un singolo strato nascosto e un learning rate pari a 0.2. L'accuratezza conseguita sul test set con questi iperparametri è  stata del 99\%. Si è poi utilizzata una cross validation annidata con $k = 3$ esterno e $k' = 5$  interno per testare la bontà di generalizzazione in modo più imparziale, e si è ottenuta una accuratezza media pari al 97\% con una deviazione standard di +/- 0.05. Questi risultati confermano che questo dataset non necessita di una fase di preprocessing.
 		
 		\subsection{Dataset sugli incidenti stradali}
-			Come si è già visto nel paragrafo \ref{sec:incidenti}, i dati sulle lesioni sono diversi e quindi nel dataset è presente un totale per ogni macroarea. Durante gli esperimenti preliminari di classificazione si è notato che mantenendo sia il totale che le singole lesioni la accuratezza del classificatore era più bassa rispetto a quando si escludeva una delle due informazioni. Probabilmente questo è dovuto alla ridondanza dei dati oltre che al gran numero di colonne per un dataset così poco numeroso. Sono stati fatti degli esperimenti testando l'accuratezza di diversi percettroni multistrato per capire se fosse meglio mantenere i totali o le 20 singole lesioni. I risultati hanno dimostrato che conservare solo i totali aumentasse leggermente le prestazioni, pertanto nei seguenti esperimenti si è stabilito di mantenere solo la somma delle lesioni per le diverse macroaree e poi di provare tecniche di riduzione della dimensionalità diverse dalla somma.
+			Come si è già visto nel Paragrafo \ref{sec:incidenti}, i dati sulle lesioni sono diversi e quindi nel dataset è presente un totale per ogni macroarea. Durante gli esperimenti preliminari di classificazione si è notato che mantenendo sia il totale che le singole lesioni la accuratezza del classificatore era più bassa rispetto a quando si escludeva una delle due informazioni. Probabilmente questo è dovuto alla ridondanza dei dati oltre che al gran numero di colonne per un dataset così poco numeroso. Sono stati fatti degli esperimenti testando l'accuratezza di diversi percettroni multistrato per capire se fosse meglio mantenere i totali o le 20 singole lesioni. I risultati hanno dimostrato che conservare solo i totali aumentasse leggermente le prestazioni, pertanto nei seguenti esperimenti si è stabilito di mantenere solo la somma delle lesioni per le diverse macroaree e poi di provare tecniche di riduzione della dimensionalità diverse dalla somma.
 			
 			\subsubsection{Data o non data?}			
 				È già stato spiegato nel Paragrafo \ref{sec:incidenti} il motivo per cui la colonna \texttt{DATA} si ritenga debba essere escluso, ma è curioso osservare quanto cambi l'accuratezza di un percettrone multistrato con e senza questa feature. Sono stati considerati due insiemi \texttt{X} e \texttt{X\_no\_data} in cui erano presenti tutte le righe del dataset: in \texttt{X} era presente la feature \texttt{DATA} mentre nell'altro insieme no. La preelaborazione fatta sui dati dei due insiemi per questo esperimento è stata: 
@@ -532,6 +535,7 @@
 
 			\begin{table}
 				\centering
+				\begin{adjustbox}{max width=0.98\textwidth,center}
 				\begin{tabular}{lcccccc}
 				\toprule
 				 & Activation &  Learning rate & Hidden layer sizes &  Max iter &    Best score &  Test score \\
@@ -540,6 +544,7 @@
 				X\_no\_data &      tanh &               0.001 &                [2] &      5000 &  0.749 &    0.697 \\
 				\bottomrule
 				\end{tabular}
+				\end{adjustbox}
 				\caption{Comparazione delle accuratezze ottenute con e senza la feature \texttt{DATA}. La colonna \textit{Best score} rappresenta il miglior score ottenuto nella cross validation interna, mentre \textit{Test score} rappresenta lo score ottenuto con la cross validation esterna.}
 				\label{tab:score_con_e_senza_data}
 			\end{table}	
@@ -554,6 +559,7 @@
 				\end{itemize}
 				Sono state disposte su un dataframe tutte le accuratezze ottenute con il processo di cross validation, la loro media e deviazione standard per ogni combinazione, ordinando i risultati in ordine crescente di accuratezza media. Come è possibile vedere nelle Tabelle \ref{tab:totali_somma} e \ref{tab:totali_pca} l'accuratezza media passa da un massimo di 0.70 a 0.73. È interessante notare che in entrambi i casi la funzione di attivazione logistica sembra ottenere risultati migliori in quanto compare molto più spesso delle altre due tra i primi 5 risultati.
 				\begin{table}
+					\begin{adjustbox}{max width=0.98\textwidth,center}
 					\begin{tabular}{lllrr}
 					\toprule
 					Activation & Hidden layer sizes &                               Scores &  Mean score &  Scores std \\
@@ -565,10 +571,12 @@
 					logistic &             (6, 3) &  [0.654, 0.769, 0.577, 0.808, 0.577] &       0.677 &       0.096 \\
 					\bottomrule
 					\end{tabular}
+					\end{adjustbox}
 					\caption{Primi 5 risultati ottenuti con la somma come totali.}
 					\label{tab:totali_somma}
 				\end{table}
 				\begin{table}
+					\begin{adjustbox}{max width=0.98\textwidth,center}
 					\begin{tabular}{lllrr}
 					\toprule
 					Activation & Hidden layer sizes &                               Scores &  Mean score &  Scores std \\
@@ -580,6 +588,7 @@
 					logistic &                 10 &  [0.654, 0.615, 0.769, 0.769, 0.692] &       0.700 &       0.062 \\
 					\bottomrule
 					\end{tabular}
+					\end{adjustbox}
 					\caption{Primi 5 risultati ottenuti con PCA come totali.}
 					\label{tab:totali_pca}
 				\end{table}
@@ -602,7 +611,7 @@
     				\item \texttt{hidden\_layers = [(2), (3,3), (5), (6,3), (5,5), (6), (8), (10).}
 					\end{itemize}
 				 \end{itemize}
-			In questo procedimento, per quasi ogni insieme la rete migliore ottenuta con il processo di model selection è stata quella con funzione di attivazione \texttt{tanh} e 10 neuroni in un singolo strato nascosto. Le accuratezze ottenute con gli insiemi più numerosi sono arrivate oltre lo 0.96 (Figura \ref{fig:accuracy_smote}). Si è notato che il numero di neuroni presenti nello strato nascosto di tutte le reti che hanno avuto i risultati migliori fossero sempre 10, che è il numero massimo di neuroni messi a disposizione per la model selection. Si è quindi deciso di provare ad aumentare questo numero fino a 50, ottenendo risultati migliori (si è arrivati ad ottenere accuratezze oltre lo 0.99 per gli insiemi più numerosi). Avere un rapporto così diverso tra neuroni di ingresso (che in questo caso sono 9 dato che si sta lavorando con 9 colonne del dataset) e neuroni nello strato nascosto potrebbe portare all'\textbf{overfitting} molto facilmente.
+			In questo procedimento, per quasi ogni insieme la rete migliore ottenuta con il processo di model selection è stata quella con funzione di attivazione tangente iperbolica e 10 neuroni in un singolo strato nascosto. Le accuratezze ottenute con gli insiemi più numerosi sono arrivate oltre lo 0.96 (Figura \ref{fig:accuracy_smote}). Si è notato che il numero di neuroni presenti nello strato nascosto di tutte le reti che hanno avuto i risultati migliori fossero sempre 10, che è il numero massimo di neuroni messi a disposizione per la model selection. Si è quindi deciso di provare ad aumentare questo numero fino a 50, ottenendo risultati migliori (si è arrivati ad ottenere accuratezze oltre lo 0.99 per gli insiemi più numerosi). Avere un rapporto così diverso tra neuroni di ingresso (che in questo caso sono 9 dato che si sta lavorando con 9 colonne del dataset) e neuroni nello strato nascosto potrebbe portare all'\textbf{overfitting} molto facilmente.
 			\imgh{Andamento dell'accuratezza all'aumentare della numerosità dell'insieme con SMOTE. Il grafico sottostante rappresenta un ingrandimento rispetto a quello soprastante.}{0.35}{accuracy_smote_1.png}{accuracy_smote}
 			
 		\subsection{Data augmentation con perturbazione sui dati personali} \label{sec:data_aug_pers}
@@ -623,12 +632,12 @@
     				(20).}
 					\end{itemize}
 				 \end{itemize}
-			Con questo esperimento di data augmentation la rete che ottiene i risultati migliori ha come funzione di attivazione la \texttt{tanh} e questa volta 20 neuroni in un singolo strato nascosto (nell'esperimento di prima erano assenti). In questo caso va fatto notare che avendo calcolato i totali con PCA riducendo a 2 le dimensioni per ogni macroarea delle lesioni, si ha un dataset con 13 colonne, quindi si hanno 13 neuroni di ingresso. Le accuratezze raggiunte con questo esperimento sono più alte, già con 700 dati si raggiunge un'accuratezza molto vicina a 1 (Figura \ref{fig:accuracy_data_aug_pers}).
+			Con questo esperimento di data augmentation la rete che ottiene i risultati migliori ha come funzione di attivazione la tangente iperbolica e questa volta 20 neuroni in un singolo strato nascosto (nell'esperimento di prima erano assenti). In questo caso va fatto notare che avendo calcolato i totali con PCA riducendo a 2 le dimensioni per ogni macroarea delle lesioni, si ha un dataset con 13 colonne, quindi si hanno 13 neuroni di ingresso. Le accuratezze raggiunte con questo esperimento sono più alte, già con 700 dati si raggiunge un'accuratezza molto vicina a 1 (Figura \ref{fig:accuracy_data_aug_pers}).
 			
 			\img{Andamento dell'accuratezza all'aumentare della numerosità dell'insieme perturbando i dati personali. Il grafico sottostante rappresenta un ingrandimento rispetto a quello soprastante.}{0.35}{accuracy_data_aug_pers.png}{accuracy_data_aug_pers}
 			
 		\subsection{Data augmentation con perturbazione sui dati appartenenti alle lesioni} \label{sec:data_aug_les}
-			Dopo aver aumentato la cardinalità dell'insieme perturbando i dati personali continui, si è provato a ripetere l'esperimento ma questa volta alterando i dati sulle lesioni e lasciando invariati quelli personali. I dati relativi alle lesioni sono più \say{sensibili} in quanto è difficile stabilire se una perturbazione sia stata fatta in modo corretto, si è quindi deciso di perturbare i dati in modo leggero, applicando casualmente a solo 3 tra le 20 colonne relative alle lesioni una perturbazione estratta da una distribuzione binomiale con valori $[-2, -1, 0, 1, 2]$ e con rispettiva probabilità $[0.1, 0.2, 0.4, 0.2, 0.1]$, sempre restando nel range accettabile dalle singole lesioni $[0,4]$. Il preprocessing dei dati e la model selection sono stati eseguiti esattamente come nell'esperimento descritto nel paragrafo precedente e anche in questo caso le reti migliori tendono ad avere come funzione di attivazione la \texttt{tanh} e 20 neuroni in un singolo strato nascosto. Anche in questo esperimento le accuratezze tendono a incrementare con l'aumentare della numerosità del dataset, con la differenza che oltre un certo numero tende a decrescere per poi crescere nuovamente\footnote{Si è provato a ridurre il range della distribuzione binomiale a [-1, 0, 1] con probabilità [0.3, 0,4, 0.3] ma non si sono riscontrati grossi cambiamenti.} (Figura \ref{fig:accuracy_data_aug_lesioni}). 
+			Dopo aver aumentato la cardinalità dell'insieme perturbando i dati personali continui, si è provato a ripetere l'esperimento ma questa volta alterando i dati sulle lesioni e lasciando invariati quelli personali. I dati relativi alle lesioni sono più \say{sensibili} in quanto è difficile stabilire se una perturbazione sia stata fatta in modo corretto, si è quindi deciso di perturbare i dati in modo leggero, applicando casualmente a solo 3 tra le 20 colonne relative alle lesioni una perturbazione estratta da una distribuzione binomiale con valori $[-2, -1, 0, 1, 2]$ e con rispettiva probabilità $[0.1, 0.2, 0.4, 0.2, 0.1]$, sempre restando nel range accettabile dalle singole lesioni $[0,4]$. Il preprocessing dei dati e la model selection sono stati eseguiti esattamente come nell'esperimento descritto nel paragrafo precedente e anche in questo caso le reti migliori tendono ad avere come funzione di attivazione la tangente iperbolica e 20 neuroni in un singolo strato nascosto. Anche in questo esperimento le accuratezze tendono a incrementare con l'aumentare della numerosità del dataset, con la differenza che oltre un certo numero tende a decrescere per poi crescere nuovamente\footnote{Si è provato a ridurre il range della distribuzione binomiale a [-1, 0, 1] con probabilità [0.3, 0,4, 0.3] ma non si sono riscontrati grossi cambiamenti.} (Figura \ref{fig:accuracy_data_aug_lesioni}). 
 			\img{Andamento dell'accuratezza all'aumentare della numerosità dell'insieme perturbando i dati sulle lesioni. Il grafico sottostante rappresenta un ingrandimento rispetto a quello soprastante.}{0.35}{accuracy_data_aug_lesioni.png}{accuracy_data_aug_lesioni}
 			
 		\subsection{Data augmentation con perturbazione sui dati personali e sui dati appartenenti alle lesioni}
@@ -637,7 +646,6 @@
 			
 		\subsection{Data augmentation con feature selection} Dopo aver aumentato i dati è stata svolta un'attività di feature selection sui dati personali per capire se tutti i dati fossero essenziali per la rete neurale. Iterativamente, si è svolto tutto il procedimento descritto nei sottoparagrafi precedenti escludendo una feature alla volta tra \texttt{SESSO, ANNI, PESO, ALTEZZA} e \texttt{BMI}. Come si può osservare in figura \ref{fig:feature_selection_1}, le accuratezze raggiunte facendo feature selection sugli insiemi ottenuti perturbando i dati personali sono tutte simili, diversamente da ciò che si è ottenuto eseguendo lo stesso esperimento sugli insiemi aumentati perturbando i dati sulle lesioni (Figura \ref{fig:feature_selection_2}). È interessante notare che su quest'ultimo, l'esclusione di \texttt{SESSO} o \texttt{ANNI} abbassi effettivamente le accuratezze, mentre se si escludono \texttt{PESO}, \texttt{ALTEZZA} o \texttt{BMI} esse rimangano simili. Questo è molto probabilmente dovuto al fatto che escludendo uno qualunque dei tre dati non si elimini del tutto l'informazione \textit{(ad esempio escludendo \texttt{PESO}, avendo \texttt{ALTEZZA} e \texttt{BMI} quest'informazione è ancora ricavabile)}. Non trovando grosse differenze tra le accuratezze ottenute facendo feature selection con gli insiemi aumentati perturbando i dati personali si è deciso di provare ad escludere tutte le combinazioni possibili di 2 feature, sempre tra quelle citate. Anche in questo caso le accuratezze non sono cambiate troppo rispetto a quelle originali, ma è curioso osservare che le accuratezze ottenute senza le feature \texttt{PESO} e \texttt{ALTEZZA} siano leggermente migliori di tutte le altre, comprese quelle dei dati senza alcuna feature selection. Questo riscontro potrebbe essere indice del fatto che tenere \texttt{PESO}, \texttt{ALTEZZA} e \texttt{BMI} possa essere ridondante per la rete neurale, e potrebbe quindi abbassarne le performance. 
 
-			%TODO scrivere caption figure
 			\img{Feature selection sui dati aumentati perturbando i dati personali continui.}{0.5}{feature_selection_1.png}{feature_selection_1}
 			\img{Feature selection sui dati aumentati perturbando i dati sulle lesioni.}{0.5}{feature_selection_2.png}{feature_selection_2}
 			\img{Doppia feature selection sui dati aumentati perturbando i dati personali continui.}{0.5}{feature_selection_doppia.png}{feature_selection_doppia}
